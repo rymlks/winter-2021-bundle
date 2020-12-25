@@ -5,11 +5,9 @@ using UnityEngine;
 
 public class PotholeController : MonoBehaviour
 {
-    public int minimumNewHolesPerRound;
-    public int maximumNewHolesPerRound;
-    public float maximumPotholeAngerPerRound;
     public GameObject potholePrefab;
     private GameObject _potholeParent;
+    private BalanceParameters _parameters;
 
     private float WIDTH_OF_PLAY_AREA = 20f;
     private float HEIGHT_OF_PLAY_AREA = 9.5f;
@@ -26,6 +24,11 @@ public class PotholeController : MonoBehaviour
         if (_potholeParent == null)
         {
             _potholeParent = new GameObject("Potholes");
+        }
+
+        if (_parameters == null)
+        {
+            _parameters = FindObjectOfType<BalanceParameters>();
         }
 
     }
@@ -52,7 +55,7 @@ public class PotholeController : MonoBehaviour
 
     private void createNewPotholes()
     {
-        int newPotholesThisRound = new System.Random().Next(minimumNewHolesPerRound, maximumNewHolesPerRound + 1);    //Sysrand is exclusive of the maximum
+        int newPotholesThisRound = new System.Random().Next(_parameters.minimumNewPotholesPerRound, _parameters.maximumNewPotholesPerRound + 1);    //Sysrand is exclusive of the maximum
         for (int i = 0; i < newPotholesThisRound; i++)
         {
             GameObject.Instantiate(potholePrefab, generatePotholeLocation(), Quaternion.identity, _potholeParent.transform);

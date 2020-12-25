@@ -9,7 +9,7 @@ public class Pothole : MonoBehaviour
     
     void Start()
     {
-        this._angerPerRound = Random.value * FindObjectOfType<PotholeController>().maximumPotholeAngerPerRound;
+        this._angerPerRound = Random.value * FindObjectOfType<BalanceParameters>().maximumPotholeAngerPerRound;
     }
 
     public float getAngerCausedPerRound()
