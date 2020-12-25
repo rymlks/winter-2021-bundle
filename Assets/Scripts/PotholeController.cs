@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PotholeController : MonoBehaviour
@@ -8,7 +9,7 @@ public class PotholeController : MonoBehaviour
     public int maximumNewHolesPerRound;
     public float maximumPotholeAngerPerRound;
     public GameObject potholePrefab;
-    private GameObject potholeParent;
+    private GameObject _potholeParent;
 
     private float WIDTH_OF_PLAY_AREA = 20f;
     private float HEIGHT_OF_PLAY_AREA = 9.5f;
@@ -22,9 +23,9 @@ public class PotholeController : MonoBehaviour
             potholePrefab = Resources.Load<GameObject>("Prefabs/Pothole");
         }
 
-        if (potholeParent == null)
+        if (_potholeParent == null)
         {
-            potholeParent = new GameObject("Potholes");
+            _potholeParent = new GameObject("Potholes");
         }
 
     }
@@ -34,8 +35,19 @@ public class PotholeController : MonoBehaviour
     {
         if (roundHasEndedThisFrame())
         {
+            createAngerDueToExistingPotholes();
             createNewPotholes();
         }
+    }
+
+    private void createAngerDueToExistingPotholes()
+    {
+        FindObjectOfType<PlaythroughStatistics>().currentAnger += getTotalAngerFromExistingPotholes();
+    }
+
+    private float getTotalAngerFromExistingPotholes()
+    {
+        return _potholeParent.GetComponentsInChildren<Pothole>().Sum(hole => hole.getAngerCausedPerRound());
     }
 
     private void createNewPotholes()
@@ -43,7 +55,7 @@ public class PotholeController : MonoBehaviour
         int newPotholesThisRound = new System.Random().Next(minimumNewHolesPerRound, maximumNewHolesPerRound + 1);    //Sysrand is exclusive of the maximum
         for (int i = 0; i < newPotholesThisRound; i++)
         {
-            GameObject created = GameObject.Instantiate(potholePrefab, generatePotholeLocation(), Quaternion.identity, potholeParent.transform);
+            GameObject.Instantiate(potholePrefab, generatePotholeLocation(), Quaternion.identity, _potholeParent.transform);
         }
     }
 
