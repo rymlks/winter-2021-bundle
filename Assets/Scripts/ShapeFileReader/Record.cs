@@ -115,12 +115,12 @@ namespace Assets
         }
     }
 
-    public class Record
+    public class GISRecord
     {
         public ShpRecord ShpRecord;
         public DbfRecord DbfRecord;
 
-        public Record(ShpRecord shpRecord, DbfRecord dbfRecord)
+        public GISRecord(ShpRecord shpRecord, DbfRecord dbfRecord)
         {
             ShpRecord = shpRecord;
             DbfRecord = dbfRecord;

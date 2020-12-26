@@ -5,16 +5,20 @@ using System.IO;
 using UnityEngine;
 using UnityEditor;
 using System;
+using UnityEngine.UI;
 
 public class ShapefileImport : MonoBehaviour
 {
-    public bool debugNames;
-    [Range(1, 100)]
-    public int debugNameDensity;
-
     public string city;
 
+    public float cameraMargin;
+
+    public GameObject cityNameLabel;
+    [Range(0.0f, 0.05f)]
+    public float roadWidthMultiplier;
+
     public string shxPath;
+    public GameObject roadPrefab;
 
     private int linesPerFrame = 100;
     private Assets.ShxFile shapeFile;
@@ -22,81 +26,55 @@ public class ShapefileImport : MonoBehaviour
     void Start()
     {
         Debug.Log("Reading " + shxPath);
-
         shapeFile = new Assets.ShxFile(shxPath);
 
-        StartCoroutine(ReadGIS());
-        // -83.2f, 42.6f, 0.0f
-    }
+        cityNameLabel.GetComponent<Text>().text = city;
 
-    void OnDrawGizmos()
-    {
-        if (debugNames && shapeFile != null)
-        {
-            for (int i = 0; i < shapeFile.RecordSet.Count; i+= 1000/debugNameDensity)
-            {
-                Assets.Record record = shapeFile.GetData(i);
-                Assets.DBCharacter community = (Assets.DBCharacter)record.DbfRecord.Record[8];
-                if (record.ShpRecord.Header.Type == Assets.ShapeType.PolyLine)
-                {
-                    Assets.PolyLine pline = (Assets.PolyLine)record.ShpRecord.Contents;
-                    Assets.Point p1 = pline.Points[0];
-                    Handles.Label(new Vector3((float)p1.X, (float)p1.Y, 0), community.Value);
-                }
-            }
-        }
+        // -83.2f, 42.6f, 0.0f
+        StartCoroutine(ReadGIS());
     }
 
     IEnumerator ReadGIS()
     {
+        // Load all the GIS data from file
         shapeFile.Load();
         yield return null;
 
-        int count = 0;
         
-        /*
-        Assets.Record record1 = shapeFile.GetData(0);
+        Assets.GISRecord record1 = shapeFile.GetData(0);
         for (int i=0; i< record1.DbfRecord.Record.Count; i++)
         {
-            Debug.Log("" + i + ": " + record1.DbfRecord.Record[i].discriptor.FieldType);
+            Debug.LogFormat("{0}: {1}, {2}", i, record1.DbfRecord.Record[i].discriptor.FieldName, record1.DbfRecord.Record[i].discriptor.FieldType);
         }
-        */
-        
+
+        // Iterate through the shapefile, instantiating roads that are within this city.
+        int count = 0;
+
         for (int i=0; i<shapeFile.RecordSet.Count; i++)
         {
-            Assets.Record record = shapeFile.GetData(i);
+            Assets.GISRecord record = shapeFile.GetData(i);
             Assets.DBCharacter community = (Assets.DBCharacter)record.DbfRecord.Record[8];
             if (community.Value.ToLower().Contains(city.ToLower()))
             {
+                // Some records aren't polyline and I don't know what they're for
                 if (record.ShpRecord.Header.Type == Assets.ShapeType.PolyLine)
                 {
-                    Assets.DBNumeric aadt = (Assets.DBNumeric)record.DbfRecord.Record[1];
-                    float traffic = Sigmoid((Int32.Parse(new String(aadt.Value)) - 20000)/ 10000.0f);
-                    Color color = Color.Lerp(Color.blue, Color.red, traffic);
-                    Assets.PolyLine pline = (Assets.PolyLine)record.ShpRecord.Contents;
-                    for (int j = 0; j < pline.Points.Length - 1; j++)
-                    {
-                        Assets.Point p1 = pline.Points[j];
-                        Assets.Point p2 = pline.Points[j + 1];
-                        Vector3 v1 = new Vector3((float)p1.X, (float)p1.Y, 0);
-                        Vector3 v2 = new Vector3((float)p2.X, (float)p2.Y, 0);
-                        Debug.DrawLine(v1, v2, color, 3600.0f, false);
-                    }
+                    GameObject road = Instantiate(roadPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+                    road.GetComponent<Road>().roadWidthMultiplier = roadWidthMultiplier;
+                    road.GetComponent<Road>().loadFromGIS(record);
                 }
+                if (count > linesPerFrame)
+                {
+                    count = 0;
+                    yield return null;
+                }
+                count++;
             }
-            if (count > linesPerFrame)
-            {
-                count = 0;
-                //Debug.Log("drew " + i + " lines.");
-                yield return null;
-            }
-            count++;
         }
-        Debug.Log("Done.");
-    }
 
-    public static float Sigmoid(double value)
-    {
-        return 1.0f / (1.0f + (float)Math.Exp(-value));
+        Camera.main.gameObject.GetComponent<CameraController>().JumpTo(new Vector3((Road.MaxX + Road.MinX) * 0.5f, (Road.MaxY + Road.MinY) * 0.5f, -10f));
+        float maxExtent = Mathf.Max(Road.MaxX - Road.MinX, Road.MaxY - Road.MinY);
+        Camera.main.orthographicSize = maxExtent * 0.5f + cameraMargin;
+        Debug.Log("Done.");
     }
 }
