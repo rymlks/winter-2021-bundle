@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO; 
 using UnityEngine;
 using UnityEditor;
-
+using System;
 
 public class ShapefileImport : MonoBehaviour
 {
@@ -53,14 +53,15 @@ public class ShapefileImport : MonoBehaviour
         yield return null;
 
         int count = 0;
+        
         /*
         Assets.Record record1 = shapeFile.GetData(0);
         for (int i=0; i< record1.DbfRecord.Record.Count; i++)
         {
-            Debug.Log("" + i + ": " + record1.DbfRecord.Record[i].discriptor.FieldName);
+            Debug.Log("" + i + ": " + record1.DbfRecord.Record[i].discriptor.FieldType);
         }
         */
-
+        
         for (int i=0; i<shapeFile.RecordSet.Count; i++)
         {
             Assets.Record record = shapeFile.GetData(i);
@@ -69,6 +70,9 @@ public class ShapefileImport : MonoBehaviour
             {
                 if (record.ShpRecord.Header.Type == Assets.ShapeType.PolyLine)
                 {
+                    Assets.DBNumeric aadt = (Assets.DBNumeric)record.DbfRecord.Record[1];
+                    float traffic = Sigmoid((Int32.Parse(new String(aadt.Value)) - 20000)/ 10000.0f);
+                    Color color = Color.Lerp(Color.blue, Color.red, traffic);
                     Assets.PolyLine pline = (Assets.PolyLine)record.ShpRecord.Contents;
                     for (int j = 0; j < pline.Points.Length - 1; j++)
                     {
@@ -76,7 +80,7 @@ public class ShapefileImport : MonoBehaviour
                         Assets.Point p2 = pline.Points[j + 1];
                         Vector3 v1 = new Vector3((float)p1.X, (float)p1.Y, 0);
                         Vector3 v2 = new Vector3((float)p2.X, (float)p2.Y, 0);
-                        Debug.DrawLine(v1, v2, Color.red, 3600.0f, false);
+                        Debug.DrawLine(v1, v2, color, 3600.0f, false);
                     }
                 }
             }
@@ -89,5 +93,10 @@ public class ShapefileImport : MonoBehaviour
             count++;
         }
         Debug.Log("Done.");
+    }
+
+    public static float Sigmoid(double value)
+    {
+        return 1.0f / (1.0f + (float)Math.Exp(-value));
     }
 }

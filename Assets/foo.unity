@@ -152,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugNames: 0
   debugNameDensity: 1
-  city: romulus
+  city: detroit
   shxPath: Assets/GIS/Traffic_Volume-shp/Traffic_Volume.shx
 --- !u!4 &552371044
 Transform:
