@@ -184,7 +184,7 @@ namespace Assets
             }
         }
 
-        public Record GetData(int index)
+        public GISRecord GetData(int index)
         {
             if(ContentsFile != null)
             {
@@ -192,7 +192,7 @@ namespace Assets
                 ShpRecord shpRecord = (ShpRecord)ContentsFile.GetData(ShpType, shxRecord.Offset, shxRecord.Length);
                 //DbfRecord dbfRecord = (DbfRecord)DatabseFile.GetData(shxRecord.Offset, shxRecord.Length);
                 DbfRecord dbfRecord = DatabseFile.RecordSet[index];
-                return new Record(shpRecord, dbfRecord);
+                return new GISRecord(shpRecord, dbfRecord);
             }
             else
             {
