@@ -275,6 +275,11 @@ PrefabInstance:
       propertyPath: UIScale
       value: 1.49
       objectReference: {fileID: 0}
+    - target: {fileID: 1271797627224870740, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1271797627224870741, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: m_AnchorMax.x

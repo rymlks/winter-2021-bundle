@@ -23,6 +23,9 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         if (Input.GetMouseButton(0))
         {
              targetPosition += cameraComponent.ScreenToWorldPoint(prevMousePosition) - cameraComponent.ScreenToWorldPoint(Input.mousePosition);

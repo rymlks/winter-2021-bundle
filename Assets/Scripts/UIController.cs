@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
@@ -8,17 +9,20 @@ public class UIController : MonoBehaviour
 
     public GameObject toolTipPanel;
     public GameObject pausePanel;
+    public GameObject UIScalePanel;
     public Texture2D toolTipTexture;
-    public static string roadNameToolTipText = "";
 
+    public static string roadNameToolTipText = "";
     [Range(0.5f, 5.0f)]
-    public float UIScale;
+    public static float UIScale;
+
     private bool paused = false;
 
     void Start()
     {
         toolTipPanel.SetActive(false);
         pausePanel.SetActive(false);
+        UIScale = 1;
     }
 
     void Update()
@@ -27,40 +31,13 @@ public class UIController : MonoBehaviour
         {
             TogglePause();
         }
-        if (paused)
-        {
-            return;
-        }
-        // Render road name tooltip
         if (roadNameToolTipText != "")
         {
-            // Make it visible
-            toolTipPanel.SetActive(true);
-
-            // Move it to the correct location
-            RectTransform rt = toolTipPanel.GetComponent<RectTransform>();
-            var x = Input.mousePosition.x;
-            var y = Input.mousePosition.y;
-            rt.anchoredPosition = new Vector2(x, y);
-
-            // Get the correct size based on the text
-            Text guiText = toolTipPanel.GetComponentInChildren<Text>();
-            TextGenerator textGen = new TextGenerator();
-            TextGenerationSettings generationSettings = guiText.GetGenerationSettings(toolTipPanel.GetComponent<RectTransform>().rect.size);
-            int width = (int)Mathf.Round(textGen.GetPreferredWidth(roadNameToolTipText, generationSettings) + 24);
-            int height = toolTipTexture.height;
-            guiText.text = roadNameToolTipText;
-            rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width * UIScale);
-            rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height * UIScale);
-            guiText.rectTransform.localScale = new Vector3(UIScale, UIScale, 1.0f);
-
-            // Update the background image to scale properly
-            Texture bg = FrameTex(width, height);
-            toolTipPanel.GetComponent<RawImage>().texture = bg;
+            ShowRoadSign(roadNameToolTipText);
         }
         else
         {
-            toolTipPanel.SetActive(false);
+            HideRoadSign();
         }
     }
 
@@ -68,18 +45,21 @@ public class UIController : MonoBehaviour
     {
         paused = true;
         pausePanel.SetActive(true);
+        roadNameToolTipText = "";
     }
 
     public void UnPause()
     {
         paused = false;
         pausePanel.SetActive(false);
+        roadNameToolTipText = "";
     }
 
     public void TogglePause()
     {
         paused = !paused;
         pausePanel.SetActive(paused);
+        roadNameToolTipText = "";
     }
 
     public void ExitGame()
@@ -89,6 +69,54 @@ public class UIController : MonoBehaviour
 #else
          Application.Quit();
 #endif
+    }
+
+    public void UpdateUIScale(System.Single scale)
+    {
+        if (scale == 0)
+            return;
+
+        UIScale = scale;
+        RectTransform rt = UIScalePanel.GetComponent<RectTransform>();
+        rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 100 * UIScale);
+        rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 24 * UIScale);
+        Text guiText = UIScalePanel.GetComponentInChildren<Text>();
+        guiText.rectTransform.localScale = new Vector3(UIScale, UIScale, 1.0f);
+    }
+
+    public void HideRoadSign()
+    {
+        toolTipPanel.SetActive(false);
+    }
+
+    private void ShowRoadSign(string text)
+    {
+        // Make it visible
+        toolTipPanel.SetActive(true);
+
+        // Move it to the correct location
+        RectTransform rt = toolTipPanel.GetComponent<RectTransform>();
+        var x = Input.mousePosition.x + 3;
+        var y = Input.mousePosition.y - 3;
+        rt.anchoredPosition = new Vector2(x, y);
+
+        // Get the correct size based on the text
+        Text guiText = toolTipPanel.GetComponentInChildren<Text>();
+        guiText.fontSize = 12;
+        TextGenerator textGen = new TextGenerator();
+        TextGenerationSettings generationSettings = guiText.GetGenerationSettings(rt.rect.size);
+        int width = (int)Mathf.Round(textGen.GetPreferredWidth(roadNameToolTipText, generationSettings) + 24);
+        //int height = (int)Mathf.Round(textGen.GetPreferredHeight(roadNameToolTipText, generationSettings) + 6 * UIScale);
+        int height = 24;
+        guiText.fontSize = (int)(12 * UIScale);
+        guiText.text = text;
+        rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width * UIScale);
+        rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height * UIScale);
+        //guiText.rectTransform.localScale = new Vector3(UIScale, UIScale, 1.0f);
+
+        // Update the background image to scale properly
+        Texture bg = FrameTex(width, height);
+        toolTipPanel.GetComponent<RawImage>().texture = bg;
     }
 
     /**
@@ -102,18 +130,20 @@ public class UIController : MonoBehaviour
         for (int i = 0; i < width; i++)
             for (int j = 0; j < height; j++)
             {
+                int pixX;
                 // Keep left and right border pixels identical, including the rivet
                 if (i <= 10)
                 {
-                    texture.SetPixel(i, j, toolTipTexture.GetPixel(i, j));
+                    pixX = i;
                 } else if (i >= width - 10)
                 {
-                    int fromRight = width - i;
-                    texture.SetPixel(i, j, toolTipTexture.GetPixel(toolTipTexture.width - fromRight, j));
+                    pixX = 100 - (width - i);
                 } else // Copy the middle pixels using the 11th column in the source image
                 {
-                    texture.SetPixel(i, j, toolTipTexture.GetPixel(11, j));
+                    pixX = 11;
                 }
+
+                texture.SetPixel(i, j, toolTipTexture.GetPixel(pixX, j));
             }
 
         texture.filterMode = FilterMode.Point;

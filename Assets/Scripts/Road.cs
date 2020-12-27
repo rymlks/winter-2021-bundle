@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.EventSystems;
 
 public class Road : MonoBehaviour
 {
@@ -39,7 +40,10 @@ public class Road : MonoBehaviour
 
     void OnMouseOver()
     {
-        UIController.roadNameToolTipText = roadName;
+        if(!EventSystem.current.IsPointerOverGameObject())
+        {
+            UIController.roadNameToolTipText = roadName;
+        }
     }
 
     void OnMouseExit()
