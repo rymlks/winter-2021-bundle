@@ -45,14 +45,14 @@ public class UIController : MonoBehaviour
 
             // Get the correct size based on the text
             Text guiText = toolTipPanel.GetComponentInChildren<Text>();
-            guiText.rectTransform.localScale = new Vector3(UIScale, UIScale, 1.0f);
             TextGenerator textGen = new TextGenerator();
             TextGenerationSettings generationSettings = guiText.GetGenerationSettings(toolTipPanel.GetComponent<RectTransform>().rect.size);
-            int width = (int)Mathf.Round(textGen.GetPreferredWidth(roadNameToolTipText, generationSettings)) + 24;
+            int width = (int)Mathf.Round(textGen.GetPreferredWidth(roadNameToolTipText, generationSettings) + 24);
             int height = toolTipTexture.height;
             guiText.text = roadNameToolTipText;
             rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width * UIScale);
             rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height * UIScale);
+            guiText.rectTransform.localScale = new Vector3(UIScale, UIScale, 1.0f);
 
             // Update the background image to scale properly
             Texture bg = FrameTex(width, height);
