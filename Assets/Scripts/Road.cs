@@ -27,8 +27,11 @@ public class Road : MonoBehaviour
 
     [HideInInspector]
     public float roadWidthMultiplier;
+    [HideInInspector]
+    public bool isValid = true;
+    [HideInInspector]
+    public List<Vector3> points;
 
-    private List<Vector3> points;
     private LineRenderer lineRenderer;
 
     public static float MaxX = float.MinValue;
@@ -66,6 +69,7 @@ public class Road : MonoBehaviour
         Assets.PolyLine pline = (Assets.PolyLine)record.ShpRecord.Contents;
         if (pline.Points.Length <= 1)
         {
+            isValid = false;
             Destroy(this);
             return;
         }

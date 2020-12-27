@@ -102,10 +102,10 @@ public class UIController : MonoBehaviour
 
         // Get the correct size based on the text
         Text guiText = toolTipPanel.GetComponentInChildren<Text>();
-        guiText.fontSize = 12;
         TextGenerator textGen = new TextGenerator();
         TextGenerationSettings generationSettings = guiText.GetGenerationSettings(rt.rect.size);
-        int width = (int)Mathf.Round(textGen.GetPreferredWidth(roadNameToolTipText, generationSettings) + 24);
+        generationSettings.fontSize = 12;
+        int width = (int)Mathf.Round(textGen.GetPreferredWidth(roadNameToolTipText, generationSettings) + 27);
         //int height = (int)Mathf.Round(textGen.GetPreferredHeight(roadNameToolTipText, generationSettings) + 6 * UIScale);
         int height = 24;
         guiText.fontSize = (int)(12 * UIScale);
