@@ -98,7 +98,7 @@ public class UIController : MonoBehaviour
     Texture2D FrameTex(int width, int height)
     {
         Texture2D texture = new Texture2D(width, height, TextureFormat.ARGB32, false);
-        texture.alphaIsTransparency = true;
+        //texture.alphaIsTransparency = true;
         for (int i = 0; i < width; i++)
             for (int j = 0; j < height; j++)
             {
