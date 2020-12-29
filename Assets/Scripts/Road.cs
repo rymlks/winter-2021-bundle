@@ -120,8 +120,8 @@ public class Road : MonoBehaviour
                 break;
         }
 
-        trafficSum *= (int)condition;
-        trafficSum /= lanes;
+        // trafficSum *= (int)condition;
+        // trafficSum /= lanes;
 
         if (lineRenderer == null)
         {
