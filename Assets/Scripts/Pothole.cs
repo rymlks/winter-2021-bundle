@@ -41,4 +41,9 @@ public class Pothole : MonoBehaviour
     {
         this.GetComponent<SpriteRenderer>().sprite = patchedPotholeSprite;
     }
+
+    void OnMouseUpAsButton()
+    {
+        this.Patch();
+    }
 }
