@@ -16,7 +16,7 @@ public class ShapefileImport : MonoBehaviour
     public GameObject cityNameLabel;
     [Range(0.0f, 0.05f)]
     public float roadWidthMultiplier;
-
+    
     public string shxPath;
     public GameObject roadPrefab;
     public PotholeController potholeController;
@@ -75,6 +75,8 @@ public class ShapefileImport : MonoBehaviour
                 count++;
             }
         }
+
+        potholeController.SortAndSumRoads();
 
         Camera.main.gameObject.GetComponent<CameraController>().JumpTo(new Vector3((Road.MaxX + Road.MinX) * 0.5f, (Road.MaxY + Road.MinY) * 0.5f, -10f));
         float maxExtent = Mathf.Max(Road.MaxX - Road.MinX, Road.MaxY - Road.MinY);
