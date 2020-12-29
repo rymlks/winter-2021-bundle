@@ -94,3 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fc7566672e17d64b9c6fa1e229b94c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  potholeSprite: {fileID: 21300000, guid: 0fb99e24a8d954f49ae33a1469ca0475, type: 3}
+  patchedPotholeSprite: {fileID: 21300000, guid: 5c2600b2c2bca9642aac84b7cba37194,
+    type: 3}
