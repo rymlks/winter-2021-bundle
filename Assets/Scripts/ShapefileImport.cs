@@ -16,9 +16,10 @@ public class ShapefileImport : MonoBehaviour
     public GameObject cityNameLabel;
     [Range(0.0f, 0.05f)]
     public float roadWidthMultiplier;
-
+    
     public string shxPath;
     public GameObject roadPrefab;
+    public PotholeController potholeController;
 
     private int linesPerFrame = 100;
     private Assets.ShxFile shapeFile;
@@ -59,9 +60,12 @@ public class ShapefileImport : MonoBehaviour
                 // Some records aren't polyline and I don't know what they're for
                 if (record.ShpRecord.Header.Type == Assets.ShapeType.PolyLine)
                 {
-                    GameObject road = Instantiate(roadPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-                    road.GetComponent<Road>().roadWidthMultiplier = roadWidthMultiplier;
-                    road.GetComponent<Road>().loadFromGIS(record);
+                    GameObject roadObj = Instantiate(roadPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+                    Road road = roadObj.GetComponent<Road>();
+                    road.roadWidthMultiplier = roadWidthMultiplier;
+                    road.loadFromGIS(record);
+                    if (road.isValid)
+                        potholeController.roads.Add(road);
                 }
                 if (count > linesPerFrame)
                 {
@@ -71,6 +75,8 @@ public class ShapefileImport : MonoBehaviour
                 count++;
             }
         }
+
+        potholeController.SortAndSumRoads();
 
         Camera.main.gameObject.GetComponent<CameraController>().JumpTo(new Vector3((Road.MaxX + Road.MinX) * 0.5f, (Road.MaxY + Road.MinY) * 0.5f, -10f));
         float maxExtent = Mathf.Max(Road.MaxX - Road.MinX, Road.MaxY - Road.MinY);

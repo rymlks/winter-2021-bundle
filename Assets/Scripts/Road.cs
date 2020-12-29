@@ -7,9 +7,11 @@ using UnityEngine.EventSystems;
 public class Road : MonoBehaviour
 {
     public string roadName;
-    public double traffic;
-    public string material;
+    public double trafficRate; // cars/day aka "aadt"
+    public double trafficSum;  // cars/day * segmentLength aka "vmt"
     public int lanes;
+    public Material material;
+    public Condition condition;
 
     public Material asphaltMaterial;
     public Material concreteMaterial;
@@ -27,8 +29,11 @@ public class Road : MonoBehaviour
 
     [HideInInspector]
     public float roadWidthMultiplier;
+    [HideInInspector]
+    public bool isValid = true;
+    [HideInInspector]
+    public List<Vector3> points;
 
-    private List<Vector3> points;
     private LineRenderer lineRenderer;
 
     public static float MaxX = float.MinValue;
@@ -37,6 +42,27 @@ public class Road : MonoBehaviour
     public static float MinY = float.MaxValue;
     private static int positionScale = 50;
 
+    // Useful indices in DbfRecord objects
+    private const int I_AADT = 1;  // DBNumeric
+    private const int I_ROAD_NAME = 36;  // DBCharacter
+    private const int I_SURFACE = 41;  // DBCharacter
+    private const int I_LANES = 42;  // DBNumeric
+    private const int I_VMT = 35;  // DBNumeric
+    private const int I_CONDITION = 40;  // DBCharacter
+
+    public enum Condition
+    {
+        GOOD = 1,
+        FAIR = 5,
+        POOR = 10
+    }
+
+    public enum Material
+    {
+        ASPHALT,
+        CONCRETE,
+        GRAVEL
+    }
 
     void OnMouseOver()
     {
@@ -57,24 +83,46 @@ public class Road : MonoBehaviour
     public void loadFromGIS(Assets.GISRecord record)
     {
         // Get GIS data from record
-        Assets.DBNumeric aadt = (Assets.DBNumeric)record.DbfRecord.Record[1];
-        Assets.DBCharacter roadname = (Assets.DBCharacter)record.DbfRecord.Record[36];
-        Assets.DBCharacter surface = (Assets.DBCharacter)record.DbfRecord.Record[41];
-        Assets.DBNumeric _lanes = (Assets.DBNumeric)record.DbfRecord.Record[42];
+        Assets.DBNumeric vmt = (Assets.DBNumeric)record.DbfRecord.Record[I_VMT];
+        Assets.DBNumeric aadt = (Assets.DBNumeric)record.DbfRecord.Record[I_AADT];
+        Assets.DBCharacter roadname = (Assets.DBCharacter)record.DbfRecord.Record[I_ROAD_NAME];
+        Assets.DBCharacter surface = (Assets.DBCharacter)record.DbfRecord.Record[I_SURFACE];
+        Assets.DBNumeric _lanes = (Assets.DBNumeric)record.DbfRecord.Record[I_LANES];
+        Assets.DBCharacter _condition = (Assets.DBCharacter)record.DbfRecord.Record[I_CONDITION];
 
         // Get the line from the GIS record. Ignore if it doesn't have at least 2 points
         Assets.PolyLine pline = (Assets.PolyLine)record.ShpRecord.Contents;
         if (pline.Points.Length <= 1)
         {
+            isValid = false;
             Destroy(this);
             return;
         }
 
         // Update public values
         roadName = roadname.Value.Trim();
-        traffic = int.Parse(new string(aadt.Value));
-        material = surface.Value.Trim().ToLower();
+        trafficSum = double.Parse(new string(vmt.Value).Trim());
+        trafficRate = double.Parse(new string(aadt.Value).Trim());
         lanes = int.Parse(new string(_lanes.Value));
+        switch(_condition.Value.ToLower().Trim())
+        {
+            case "good":
+                condition = Condition.GOOD;
+                break;
+            case "fair":
+                condition = Condition.FAIR;
+                break;
+            case "poor":
+                condition = Condition.POOR;
+                break;
+            default:
+                condition = Condition.GOOD;
+                break;
+        }
+
+        // trafficSum *= (int)condition;
+        // trafficSum /= lanes;
+
         if (lineRenderer == null)
         {
             lineRenderer = GetComponent<LineRenderer>();
@@ -85,22 +133,25 @@ public class Road : MonoBehaviour
         }
 
         // Update positions and line renderer
-        float scaledTraffic = Utils.Sigmoid((traffic - 20000) / 10000.0f);
+        float scaledTrafficRate = Utils.Sigmoid((trafficRate - 20000) / 10000.0f);
         Color color;
 
-        switch(material)
+        switch(surface.Value.Trim().ToLower())
         {
             case "asphalt":
-                color = Color.Lerp(lowTrafficAsphalt, highTrafficAsphalt, scaledTraffic);
+                material = Material.ASPHALT;
+                color = Color.Lerp(lowTrafficAsphalt, highTrafficAsphalt, scaledTrafficRate);
                 break;
             case "concrete":
-                color = Color.Lerp(lowTrafficConcrete, highTrafficConcrete, scaledTraffic);
+                material = Material.CONCRETE;
+                color = Color.Lerp(lowTrafficConcrete, highTrafficConcrete, scaledTrafficRate);
                 break;
             case "gravel":
-                color = Color.Lerp(lowTrafficGravel, highTrafficGravel, scaledTraffic);
+                material = Material.GRAVEL;
+                color = Color.Lerp(lowTrafficGravel, highTrafficGravel, scaledTrafficRate);
                 break;
             default:
-                color = Color.Lerp(lowTrafficAsphalt, highTrafficAsphalt, scaledTraffic);
+                color = Color.Lerp(lowTrafficAsphalt, highTrafficAsphalt, scaledTrafficRate);
                 break;
         }
         lineRenderer.startColor = color;
@@ -128,5 +179,18 @@ public class Road : MonoBehaviour
         lineRenderer.BakeMesh(mesh, true);
 
         meshCollider.sharedMesh = mesh;
+    }
+
+    public Vector3 RandomPoint()
+    {
+        int randIdx = new System.Random().Next(points.Count - 1);
+        Vector3 p1 = points[randIdx];
+        Vector3 p2 = points[randIdx + 1];
+        return Vector3.Lerp(p1, p2, UnityEngine.Random.value);
+    }
+
+    public static int Sort(Road r1, Road r2)
+    {
+        return r1.trafficSum.CompareTo(r2.trafficSum);
     }
 }

@@ -46,20 +46,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roadName: 
-  traffic: 0
-  material: 
+  trafficRate: 0
+  trafficSum: 0
   lanes: 0
-  asphaltMaterial: {fileID: 2100000, guid: cc3374a7c67c9b642a6975e944b21ced, type: 2}
-  concreteMaterial: {fileID: 2100000, guid: 9633879a4c51609469a51f8dd9006518, type: 2}
-  asphaltMaterial1L: {fileID: 2100000, guid: efc370ec079fb234aa258c445922308a, type: 2}
-  concreteMaterial1L: {fileID: 2100000, guid: 4980f9f0bd09193458e273c3a39b65a0, type: 2}
+  material: 0
+  condition: 0
+  asphaltMaterial: 0
+  concreteMaterial: 0
+  asphaltMaterial1L: 0
+  concreteMaterial1L: 0
   lowTrafficAsphalt: {r: 0, g: 0, b: 0, a: 0}
-  highTrafficAsphalt: {r: 0.4, g: 0, b: 0, a: 0}
+  highTrafficAsphalt: {r: 1, g: 0, b: 0, a: 0}
   lowTrafficConcrete: {r: 0.6431373, g: 0.61960787, b: 0.5568628, a: 0}
   highTrafficConcrete: {r: 1, g: 0.8108632, b: 0.25943398, a: 1}
   lowTrafficGravel: {r: 0.3490566, g: 0.23747519, b: 0.13007298, a: 0}
   highTrafficGravel: {r: 0.9811321, g: 0.55551636, b: 0, a: 1}
   roadWidthMultiplier: 0.0055
+  isValid: 1
+  points: []
 --- !u!120 &3114658325036330241
 LineRenderer:
   m_ObjectHideFlags: 0
