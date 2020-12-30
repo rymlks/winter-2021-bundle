@@ -12,7 +12,7 @@ public class PotholeController : MonoBehaviour
     private BalanceParameters _parameters;
 
     private double _sumTraffic = 0;
-    
+    private float _sqrMinDistanceApart;
     
     void Start()
     {
@@ -32,6 +32,8 @@ public class PotholeController : MonoBehaviour
             _parameters = FindObjectOfType<BalanceParameters>();
         }
 
+        Vector2 size = potholePrefab.GetComponent<BoxCollider2D>().size;
+        _sqrMinDistanceApart = Mathf.Max(size.x * size.x, size.y * size.y);
     }
 
     void Update()
@@ -82,7 +84,22 @@ public class PotholeController : MonoBehaviour
 
     private Vector2 generatePotholeLocation()
     {
-        int trafficThreshold = new System.Random().Next(0, (int)_sumTraffic);
+        Vector2 candidate = generateCandidateLocation();
+        if (isTooCloseToAnExistingPothole(candidate))
+        {
+            Debug.Log("placing overlapping pothole; handling not in place yet");
+        }
+        return candidate;
+    }
+    
+    private bool isTooCloseToAnExistingPothole(Vector2 possibleLocation)
+    {
+        return this._potholeParent.GetComponentsInChildren<Pothole>().Any(hole => Vector2.SqrMagnitude(possibleLocation - new Vector2(hole.transform.position.x, hole.transform.position.y)) < _sqrMinDistanceApart);
+    }
+
+    private Vector3 generateCandidateLocation()
+    {
+        int trafficThreshold = new System.Random().Next(0, (int) _sumTraffic);
         double sum = 0;
         Vector3 point = roads.Last().RandomPoint();
         foreach (Road road in roads)
@@ -94,7 +111,8 @@ public class PotholeController : MonoBehaviour
                 break;
             }
         }
-        return new Vector2(point.x, point.y);
+
+        return point;
     }
 
     private bool roundHasEndedThisFrame()
