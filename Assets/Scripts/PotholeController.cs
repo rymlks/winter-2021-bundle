@@ -38,16 +38,6 @@ public class PotholeController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (roundHasEndedThisFrame())
-        {
-            createAngerDueToExistingPotholes();
-            createNewPotholes();
-        }
-    }
-
     public void SortAndSumRoads()
     {
         roads.Sort(Road.Sort);
@@ -57,17 +47,12 @@ public class PotholeController : MonoBehaviour
         }
     }
 
-    private void createAngerDueToExistingPotholes()
-    {
-        FindObjectOfType<PlaythroughStatistics>().currentAnger += getTotalAngerFromExistingPotholes();
-    }
-
-    private float getTotalAngerFromExistingPotholes()
+    public float getTotalAngerFromExistingPotholes()
     {
         return _potholeParent.GetComponentsInChildren<Pothole>().Sum(hole => hole.getAngerCausedPerRound());
     }
 
-    private void createNewPotholes()
+    public void createNewPotholes()
     {
         int newPotholesThisRound = new System.Random().Next(_parameters.minimumNewPotholesPerRound, _parameters.maximumNewPotholesPerRound + 1);    //Sysrand is exclusive of the maximum
         for (int i = 0; i < newPotholesThisRound; i++)

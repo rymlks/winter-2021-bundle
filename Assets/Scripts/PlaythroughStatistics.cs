@@ -6,4 +6,5 @@ public class PlaythroughStatistics : MonoBehaviour
 {
     public float currentAnger;
     public float currentBudget;
+    public float maxAnger;
 }
