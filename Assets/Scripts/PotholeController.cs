@@ -11,13 +11,9 @@ public class PotholeController : MonoBehaviour
     private GameObject _potholeParent;
     private BalanceParameters _parameters;
 
-    private float WIDTH_OF_PLAY_AREA = 20f;
-    private float HEIGHT_OF_PLAY_AREA = 9.5f;
-
     private double _sumTraffic = 0;
     
     
-    // Start is called before the first frame update
     void Start()
     {
         roads = new List<Road>();
@@ -38,13 +34,21 @@ public class PotholeController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (roundHasEndedThisFrame())
         {
             createAngerDueToExistingPotholes();
+            ageExistingPotholes();
             createNewPotholes();
+        }
+    }
+
+    private void ageExistingPotholes()
+    {
+        foreach (Pothole hole in _potholeParent.GetComponentsInChildren<Pothole>())
+        {
+            hole.NotifyRoundEnded();
         }
     }
 
@@ -78,13 +82,6 @@ public class PotholeController : MonoBehaviour
 
     private Vector2 generatePotholeLocation()
     {
-        //integrate the real map when we have one
-        //for now, anyplace the pothole is fully visible to the camera is a valid place for it to appear
-        /*
-        float x = Random.value * WIDTH_OF_PLAY_AREA;
-        float z = Random.value * HEIGHT_OF_PLAY_AREA;
-        return new Vector2((-WIDTH_OF_PLAY_AREA / 2f) + x,(-HEIGHT_OF_PLAY_AREA / 2f) + z);
-        */
         int trafficThreshold = new System.Random().Next(0, (int)_sumTraffic);
         double sum = 0;
         Vector3 point = roads.Last().RandomPoint();
@@ -104,7 +101,6 @@ public class PotholeController : MonoBehaviour
     {
         //integrate the real round system when we have one
         //for now, rounds can be faked as ending by the player pressing 'R'
-        //return true;
         return Input.GetKeyUp(KeyCode.R);
     }
 }
