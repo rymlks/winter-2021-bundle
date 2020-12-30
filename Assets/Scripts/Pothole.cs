@@ -7,12 +7,16 @@ public class Pothole : MonoBehaviour
     private float _angerPerRound;
     private bool _isPatched;
     private float _timeLastPatched;
+    private float _patchMoneyCost;
     public Sprite potholeSprite;
     public Sprite patchedPotholeSprite;
+    private PlaythroughStatistics _stats;
     
     void Start()
     {
+        this._stats = FindObjectOfType<PlaythroughStatistics>();
         this._angerPerRound = Random.value * FindObjectOfType<BalanceParameters>().maximumPotholeAngerPerRound;
+        this._patchMoneyCost = FindObjectOfType<BalanceParameters>().patchMoneyCost;
         this._isPatched = false;
         this._timeLastPatched = -1f;
         RenderNormal();
@@ -44,6 +48,24 @@ public class Pothole : MonoBehaviour
 
     void OnMouseUpAsButton()
     {
-        this.Patch();
+        if (canAffordPatch())
+        {
+            DeductCost();
+            Patch();
+        }
+        else
+        {
+            Debug.Log("Cannot patch pothole: insufficient funds.  Have " + this._stats.currentBudget + ", need " + this._patchMoneyCost);
+        }
+    }
+
+    private float DeductCost()
+    {
+        return this._stats.currentBudget -= this._patchMoneyCost;
+    }
+
+    private bool canAffordPatch()
+    {
+        return this._stats.currentBudget >= this._patchMoneyCost;
     }
 }
