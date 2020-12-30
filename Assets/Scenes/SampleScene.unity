@@ -248,7 +248,22 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6329237117739572329, guid: 21166c92722572a4894703f716e61b8c,
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: patchMoneyCost
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: maximumPotholePatchDuration
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: minimumPotholePatchDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7465854068290007706, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0

@@ -7,4 +7,7 @@ public class BalanceParameters : MonoBehaviour
     public int minimumNewPotholesPerRound;
     public int maximumNewPotholesPerRound;
     public float maximumPotholeAngerPerRound;
+    public float patchMoneyCost;
+    public int minimumPotholePatchDuration;
+    public int maximumPotholePatchDuration;
 }
