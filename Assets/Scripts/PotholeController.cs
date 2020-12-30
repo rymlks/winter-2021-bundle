@@ -34,17 +34,7 @@ public class PotholeController : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        if (roundHasEndedThisFrame())
-        {
-            createAngerDueToExistingPotholes();
-            ageExistingPotholes();
-            createNewPotholes();
-        }
-    }
-
-    private void ageExistingPotholes()
+    public void AgeExistingPotholes()
     {
         foreach (Pothole hole in _potholeParent.GetComponentsInChildren<Pothole>())
         {

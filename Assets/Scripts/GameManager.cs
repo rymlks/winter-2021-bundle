@@ -48,6 +48,9 @@ public class GameManager : MonoBehaviour
             playthroughStatistics.currentAnger = Mathf.Max(playthroughStatistics.currentAnger - angerDecayPerRound, 0);
         }
 
+        // Age the potholes
+        potholeController.AgeExistingPotholes();
+
         // Spawn potholes
         potholeController.createNewPotholes();
     }
