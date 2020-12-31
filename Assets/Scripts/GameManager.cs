@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
         currentYear = 0;
         playthroughStatistics.currentBudget = balanceParameters.budgetPerYear;
         playthroughStatistics.maxAnger = balanceParameters.maxAnger;
+        playthroughStatistics.maxBudget = balanceParameters.moneyToWin;
     }
 
     public void NextRound()
@@ -49,6 +50,11 @@ public class GameManager : MonoBehaviour
 
         // Spawn potholes
         potholeController.createNewPotholes();
+    }
+
+    public void Retire()
+    {
+        LoadTitleScreen();
     }
 
     public static void ExitGame()
