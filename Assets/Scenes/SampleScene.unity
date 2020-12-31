@@ -250,6 +250,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
+      propertyPath: maxAnger
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
       propertyPath: angerIncreaseThreshold
       value: 10
       objectReference: {fileID: 0}
