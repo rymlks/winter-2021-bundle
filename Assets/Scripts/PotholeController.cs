@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = System.Random;
 
 public class PotholeController : MonoBehaviour
 {
@@ -12,7 +13,6 @@ public class PotholeController : MonoBehaviour
     private BalanceParameters _parameters;
 
     private double _sumTraffic = 0;
-    
     
     void Start()
     {
@@ -31,7 +31,6 @@ public class PotholeController : MonoBehaviour
         {
             _parameters = FindObjectOfType<BalanceParameters>();
         }
-
     }
 
     public void AgeExistingPotholes()
@@ -58,16 +57,35 @@ public class PotholeController : MonoBehaviour
 
     public void createNewPotholes()
     {
-        int newPotholesThisRound = new System.Random().Next(_parameters.minimumNewPotholesPerRound, _parameters.maximumNewPotholesPerRound + 1);    //Sysrand is exclusive of the maximum
+            Random random = new System.Random();
+        int newPotholesThisRound = random.Next(_parameters.minimumNewPotholesPerRound, _parameters.maximumNewPotholesPerRound + 1);    //Sysrand is exclusive of the maximum
         for (int i = 0; i < newPotholesThisRound; i++)
         {
-            GameObject.Instantiate(potholePrefab, generatePotholeLocation(), Quaternion.identity, _potholeParent.transform);
+            GameObject.Instantiate(potholePrefab, generatePotholeLocation(random), Quaternion.identity, _potholeParent.transform);
         }
     }
 
-    private Vector2 generatePotholeLocation()
+    private Vector2 generatePotholeLocation(Random random)
     {
-        int trafficThreshold = new System.Random().Next(0, (int)_sumTraffic);
+        Vector2 candidate = generateCandidateLocation(random);
+        int tries = 0;
+        while(isTooCloseToAnExistingPothole(candidate)  && tries < 300)
+        {
+            candidate = generateCandidateLocation(random);
+            tries++;
+        }
+        return candidate;
+    }
+    
+    private bool isTooCloseToAnExistingPothole(Vector2 possibleLocation)
+    {
+        Bounds candidateBounds = new Bounds(possibleLocation, potholePrefab.GetComponent<SpriteRenderer>().bounds.size);
+        return this._potholeParent.GetComponentsInChildren<Pothole>().Any(hole => hole.GetComponent<SpriteRenderer>().bounds.Intersects(candidateBounds));
+    }
+
+    private Vector3 generateCandidateLocation(Random random)
+    {
+        int trafficThreshold = random.Next(0, (int) _sumTraffic);
         double sum = 0;
         Vector3 point = roads.Last().RandomPoint();
         foreach (Road road in roads)
@@ -79,7 +97,8 @@ public class PotholeController : MonoBehaviour
                 break;
             }
         }
-        return new Vector2(point.x, point.y);
+
+        return point;
     }
 
     private bool roundHasEndedThisFrame()
