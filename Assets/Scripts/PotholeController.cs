@@ -13,7 +13,6 @@ public class PotholeController : MonoBehaviour
     private BalanceParameters _parameters;
 
     private double _sumTraffic = 0;
-    private float _sqrMinDistanceApart;
     
     void Start()
     {
