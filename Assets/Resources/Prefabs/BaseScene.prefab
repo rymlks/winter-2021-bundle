@@ -126,9 +126,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117d1a3f879adb64ab2f1e756ebff16f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roundsInAYear: 10
   minimumNewPotholesPerRound: 3
   maximumNewPotholesPerRound: 6
   maximumPotholeAngerPerRound: 3
+  patchMoneyCost: 5
+  minimumPotholePatchDuration: 5
+  maximumPotholePatchDuration: 8
+  budgetPerYear: 10000
+  angerIncreaseThreshold: 500
+  maxAnger: 10000
+  angerDecayPerRound: 500
 --- !u!1 &1932140525184958445
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,13 +180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae439a2d7ae00e49bda2e41a118a96d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  budgetPerYear: 0
-  angerIncreaseThreshold: 0
-  maxAnger: 0
-  angerDecayPerRound: 0
   potholeController: {fileID: 216195350906039678}
   playthroughStatistics: {fileID: 2260144524971849263}
-  roundsInAYear: 0
+  balanceParameters: {fileID: 5101476513431392859}
 --- !u!1 &6318903299560662670
 GameObject:
   m_ObjectHideFlags: 0

@@ -248,26 +248,6 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
-        type: 3}
-      propertyPath: patchMoneyCost
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
-        type: 3}
-      propertyPath: maximumPotholePatchDuration
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
-        type: 3}
-      propertyPath: minimumPotholePatchDuration
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7465854068290007706, guid: 21166c92722572a4894703f716e61b8c,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6438516944366786525, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -279,6 +259,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 12800000, guid: 23e270efc05b739458a55d775077e70e,
         type: 3}
+    - target: {fileID: 7465854068290007706, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7930264257289689902, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: m_FontData.m_Font
@@ -294,11 +279,6 @@ PrefabInstance:
         type: 3}
       propertyPath: budgetPerYear
       value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 9030515009485454238, guid: 21166c92722572a4894703f716e61b8c,
-        type: 3}
-      propertyPath: roundsInAYear
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9030515009485454238, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
