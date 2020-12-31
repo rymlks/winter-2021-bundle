@@ -77,7 +77,7 @@ public class StatisticsUIController : MonoBehaviour
                 GameObject moneyObj = Instantiate(moneyPrefab);
                 moneyInstances.Add(moneyObj);
                 moneyObj.GetComponent<RectTransform>().SetParent(moneyPanel.GetComponent<RectTransform>());
-                moneyObj.GetComponent<RectTransform>().localPosition = new Vector3(0, i * moneyPanel.GetComponent<RectTransform>().rect.height / numberOfMoneys, 0);
+                moneyObj.GetComponent<RectTransform>().localPosition = new Vector3(Mathf.Sin(i) * 0.5f, i * moneyPanel.GetComponent<RectTransform>().rect.height / numberOfMoneys, 0);
             } else if (i > (statsModel.currentBudget / statsModel.maxBudget * 100) && moneyInstances.Count >= i)
             {
                 for (int j = moneyInstances.Count - 1; moneyInstances.Count >= i; j--)
