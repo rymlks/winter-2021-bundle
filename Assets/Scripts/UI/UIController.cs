@@ -63,15 +63,6 @@ public class UIController : MonoBehaviour
         roadNameToolTipText = "";
     }
 
-    public void ExitGame()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-         Application.Quit();
-#endif
-    }
-
     public void UpdateUIScale(System.Single scale)
     {
         if (scale == 0)
