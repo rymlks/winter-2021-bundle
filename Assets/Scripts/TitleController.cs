@@ -9,11 +9,7 @@ public class TitleController : MonoBehaviour
 
     public void ExitGame()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-         Application.Quit();
-#endif
+        GameManager.ExitGame();
     }
 
     public void LoadDemoScene()
