@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     private int currentRound;
     private int currentYear;
 
+    private string titleScene = "TitleScreen";
 
     void Start()
     {
@@ -47,5 +49,23 @@ public class GameManager : MonoBehaviour
 
         // Spawn potholes
         potholeController.createNewPotholes();
+    }
+
+    public static void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+         Application.Quit();
+#endif
+    }
+    public void ExitGameUI()
+    {
+        GameManager.ExitGame();
+    }
+
+    public void LoadTitleScreen()
+    {
+        SceneManager.LoadSceneAsync(titleScene);
     }
 }
