@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = System.Random;
 
 public class PotholeController : MonoBehaviour
 {
@@ -31,9 +32,6 @@ public class PotholeController : MonoBehaviour
         {
             _parameters = FindObjectOfType<BalanceParameters>();
         }
-
-        Vector2 size = potholePrefab.GetComponent<BoxCollider2D>().size;
-        _sqrMinDistanceApart = Mathf.Max(size.x * size.x, size.y * size.y);
     }
 
     void Update()
@@ -75,31 +73,35 @@ public class PotholeController : MonoBehaviour
 
     private void createNewPotholes()
     {
-        int newPotholesThisRound = new System.Random().Next(_parameters.minimumNewPotholesPerRound, _parameters.maximumNewPotholesPerRound + 1);    //Sysrand is exclusive of the maximum
+            Random random = new System.Random();
+        int newPotholesThisRound = random.Next(_parameters.minimumNewPotholesPerRound, _parameters.maximumNewPotholesPerRound + 1);    //Sysrand is exclusive of the maximum
         for (int i = 0; i < newPotholesThisRound; i++)
         {
-            GameObject.Instantiate(potholePrefab, generatePotholeLocation(), Quaternion.identity, _potholeParent.transform);
+            GameObject.Instantiate(potholePrefab, generatePotholeLocation(random), Quaternion.identity, _potholeParent.transform);
         }
     }
 
-    private Vector2 generatePotholeLocation()
+    private Vector2 generatePotholeLocation(Random random)
     {
-        Vector2 candidate = generateCandidateLocation();
-        if (isTooCloseToAnExistingPothole(candidate))
+        Vector2 candidate = generateCandidateLocation(random);
+        int tries = 0;
+        while(isTooCloseToAnExistingPothole(candidate)  && tries < 300)
         {
-            Debug.Log("placing overlapping pothole; handling not in place yet");
+            candidate = generateCandidateLocation(random);
+            tries++;
         }
         return candidate;
     }
     
     private bool isTooCloseToAnExistingPothole(Vector2 possibleLocation)
     {
-        return this._potholeParent.GetComponentsInChildren<Pothole>().Any(hole => Vector2.SqrMagnitude(possibleLocation - new Vector2(hole.transform.position.x, hole.transform.position.y)) < _sqrMinDistanceApart);
+        Bounds candidateBounds = new Bounds(possibleLocation, potholePrefab.GetComponent<SpriteRenderer>().bounds.size);
+        return this._potholeParent.GetComponentsInChildren<Pothole>().Any(hole => hole.GetComponent<SpriteRenderer>().bounds.Intersects(candidateBounds));
     }
 
-    private Vector3 generateCandidateLocation()
+    private Vector3 generateCandidateLocation(Random random)
     {
-        int trafficThreshold = new System.Random().Next(0, (int) _sumTraffic);
+        int trafficThreshold = random.Next(0, (int) _sumTraffic);
         double sum = 0;
         Vector3 point = roads.Last().RandomPoint();
         foreach (Road road in roads)
