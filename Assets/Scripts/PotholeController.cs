@@ -34,17 +34,7 @@ public class PotholeController : MonoBehaviour
 
     }
 
-    void Update()
-    {
-        if (roundHasEndedThisFrame())
-        {
-            createAngerDueToExistingPotholes();
-            ageExistingPotholes();
-            createNewPotholes();
-        }
-    }
-
-    private void ageExistingPotholes()
+    public void AgeExistingPotholes()
     {
         foreach (Pothole hole in _potholeParent.GetComponentsInChildren<Pothole>())
         {
@@ -61,17 +51,12 @@ public class PotholeController : MonoBehaviour
         }
     }
 
-    private void createAngerDueToExistingPotholes()
-    {
-        FindObjectOfType<PlaythroughStatistics>().currentAnger += getTotalAngerFromExistingPotholes();
-    }
-
-    private float getTotalAngerFromExistingPotholes()
+    public float getTotalAngerFromExistingPotholes()
     {
         return _potholeParent.GetComponentsInChildren<Pothole>().Sum(hole => hole.getAngerCausedPerRound());
     }
 
-    private void createNewPotholes()
+    public void createNewPotholes()
     {
         int newPotholesThisRound = new System.Random().Next(_parameters.minimumNewPotholesPerRound, _parameters.maximumNewPotholesPerRound + 1);    //Sysrand is exclusive of the maximum
         for (int i = 0; i < newPotholesThisRound; i++)

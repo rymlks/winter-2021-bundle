@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
     public GameObject toolTipPanel;
     public GameObject pausePanel;
     public GameObject UIScalePanel;
+
     public Texture2D toolTipTexture;
 
     public static string roadNameToolTipText = "";
