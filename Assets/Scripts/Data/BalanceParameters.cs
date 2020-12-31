@@ -13,6 +13,7 @@ public class BalanceParameters : MonoBehaviour
     public int minimumPotholePatchDuration;
     public int maximumPotholePatchDuration;
     public float budgetPerYear;
+    public float moneyToWin;
     public float angerIncreaseThreshold;
     public float maxAnger;
     public float angerDecayPerRound;

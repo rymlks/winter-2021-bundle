@@ -46,6 +46,7 @@ MonoBehaviour:
   currentAnger: 0
   currentBudget: 100
   maxAnger: 0
+  maxBudget: 0
 --- !u!1 &1271797627241702706
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +135,7 @@ MonoBehaviour:
   minimumPotholePatchDuration: 5
   maximumPotholePatchDuration: 8
   budgetPerYear: 10000
+  moneyToWin: 100000
   angerIncreaseThreshold: 500
   maxAnger: 10000
   angerDecayPerRound: 500
@@ -456,6 +458,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4568836568939642347, guid: 110178f597f51c54e99ecc8dbed8db23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4568836568939642347, guid: 110178f597f51c54e99ecc8dbed8db23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4568836568939642347, guid: 110178f597f51c54e99ecc8dbed8db23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 9030515009485454238}
+    - target: {fileID: 4568836568939642347, guid: 110178f597f51c54e99ecc8dbed8db23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4568836568939642347, guid: 110178f597f51c54e99ecc8dbed8db23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Retire
+      objectReference: {fileID: 0}
+    - target: {fileID: 4568836568939642347, guid: 110178f597f51c54e99ecc8dbed8db23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4964882658517075615, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}

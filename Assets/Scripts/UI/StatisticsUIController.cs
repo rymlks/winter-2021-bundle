@@ -10,8 +10,12 @@ public class StatisticsUIController : MonoBehaviour
 
     public GameObject movingAngerIconImage;
     public GameObject angerThermometer;
+    public GameObject moneyPanel;
+    public GameObject retireButton;
 
+    public GameObject moneyPrefab;
     public Texture2D thermometerTexture;
+    public Texture2D moneyTexture;
     public Color thermometerColor;
 
     private Text budgetText;
@@ -19,7 +23,9 @@ public class StatisticsUIController : MonoBehaviour
     private PlaythroughStatistics statsModel;
 
     private float angerInitialPosition;
-    
+    private float moneyAspectRatio;
+    private List<GameObject> moneyInstances;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +34,9 @@ public class StatisticsUIController : MonoBehaviour
         statsModel = GameObject.FindObjectOfType<PlaythroughStatistics>();
 
         angerInitialPosition = movingAngerIconImage.GetComponent<RectTransform>().localPosition.y;
-
+        moneyAspectRatio = (float)moneyTexture.height / (float)moneyTexture.width;
+        moneyInstances = new List<GameObject>();
+        retireButton.SetActive(false);
     }
 
     // Update is called once per frame
@@ -39,7 +47,9 @@ public class StatisticsUIController : MonoBehaviour
         angerText.text = statsModel.currentAnger.ToString("F0");
 
         UpdateAngerMeter();
+        UpdateBudgetMeter();
     }
+
 
     private void UpdateAngerMeter()
     {
@@ -55,6 +65,30 @@ public class StatisticsUIController : MonoBehaviour
         rect.localPosition = new Vector3(rect.localPosition.x, angerInitialPosition * (1 - angerPercent), 0.0f);
 
         UpdateThermometerTexture(angerPercent);
+    }
+    private void UpdateBudgetMeter()
+    {
+        float numberOfMoneys = 100;
+        //RectTransform budgetRect = moneyPanel.GetComponent<RectTransform>();
+        for (int i=0; i < numberOfMoneys; i++)
+        {
+            if (i <= (statsModel.currentBudget / statsModel.maxBudget * numberOfMoneys) && moneyInstances.Count < i)
+            {
+                GameObject moneyObj = Instantiate(moneyPrefab);
+                moneyInstances.Add(moneyObj);
+                moneyObj.GetComponent<RectTransform>().SetParent(moneyPanel.GetComponent<RectTransform>());
+                moneyObj.GetComponent<RectTransform>().localPosition = new Vector3(0, i * moneyPanel.GetComponent<RectTransform>().rect.height / numberOfMoneys, 0);
+            } else if (i > (statsModel.currentBudget / statsModel.maxBudget * 100) && moneyInstances.Count >= i)
+            {
+                for (int j = moneyInstances.Count - 1; moneyInstances.Count >= i; j--)
+                {
+                    Destroy(moneyInstances[j]);
+                    moneyInstances.RemoveAt(j);
+                }
+            }
+        }
+
+        retireButton.SetActive(statsModel.currentBudget >= statsModel.maxBudget);
     }
 
     private void UpdateThermometerTexture(float percentFilled)
