@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2260144524971849263}
   m_Layer: 0
   m_Name: Stats
-  m_TagString: Untagged
+  m_TagString: Stats
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roundsInAYear: 10
+  maxYears: 11
   minimumNewPotholesPerRound: 3
   maximumNewPotholesPerRound: 6
   maximumPotholeAngerPerRound: 3
@@ -136,8 +137,8 @@ MonoBehaviour:
   maximumPotholePatchDuration: 8
   budgetPerYear: 10000
   moneyToWin: 100000
-  angerIncreaseThreshold: 500
-  maxAnger: 10000
+  angerIncreaseThreshold: 100
+  maxAnger: 100000
   angerDecayPerRound: 500
 --- !u!1 &1932140525184958445
 GameObject:
@@ -334,6 +335,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1271797627241702709}
     m_Modifications:
+    - target: {fileID: 706221575822464139, guid: 110178f597f51c54e99ecc8dbed8db23,
+        type: 3}
+      propertyPath: m_Name
+      value: Exit
+      objectReference: {fileID: 0}
     - target: {fileID: 1737064968837210828, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -374,6 +380,11 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0.11111111
       objectReference: {fileID: 0}
+    - target: {fileID: 3556060805013409124, guid: 110178f597f51c54e99ecc8dbed8db23,
+        type: 3}
+      propertyPath: m_Name
+      value: UnPause
+      objectReference: {fileID: 0}
     - target: {fileID: 3952905504181288533, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -397,12 +408,17 @@ PrefabInstance:
     - target: {fileID: 3952905504181288533, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadTitleScreen
+      value: LoadTitleScreenUI
       objectReference: {fileID: 0}
     - target: {fileID: 3952905504181288533, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4198632470435811380, guid: 110178f597f51c54e99ecc8dbed8db23,
+        type: 3}
+      propertyPath: m_Name
+      value: Title
       objectReference: {fileID: 0}
     - target: {fileID: 4360537588092576173, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
@@ -488,6 +504,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4616662614278407785, guid: 110178f597f51c54e99ecc8dbed8db23,
+        type: 3}
+      propertyPath: m_Name
+      value: Buttons
       objectReference: {fileID: 0}
     - target: {fileID: 4964882658517075615, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}

@@ -5,6 +5,7 @@ using UnityEngine;
 public class BalanceParameters : MonoBehaviour
 {
     public int roundsInAYear;
+    public int maxYears;
 
     public int minimumNewPotholesPerRound;
     public int maximumNewPotholesPerRound;
