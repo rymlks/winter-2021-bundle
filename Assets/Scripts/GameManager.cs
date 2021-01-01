@@ -12,7 +12,10 @@ public class GameManager : MonoBehaviour
     private int currentRound;
     private int currentYear;
 
-    private string titleScene = "TitleScreen";
+    private static string titleScene = "TitleScreen";
+    private string losingScene = "LosingScreen";
+    private string goodEndScene = "GoodEnd";
+    private string badEndScene = "BadEnd";
 
     void Start()
     {
@@ -31,6 +34,14 @@ public class GameManager : MonoBehaviour
         {
             currentRound = 0;
             currentYear++;
+
+            // Win if you've managed to survive long enough
+            if (currentYear >= balanceParameters.maxYears)
+            {
+                Win();
+                return;
+            }
+
             // Get budget each year
             playthroughStatistics.currentBudget += balanceParameters.budgetPerYear;
         }
@@ -45,6 +56,13 @@ public class GameManager : MonoBehaviour
             playthroughStatistics.currentAnger = Mathf.Max(playthroughStatistics.currentAnger - balanceParameters.angerDecayPerRound, 0);
         }
 
+        // Lose if people are too angry
+        if (playthroughStatistics.currentAnger > playthroughStatistics.maxAnger)
+        {
+            Lose();
+            return;
+        }
+
         // Age the potholes
         potholeController.AgeExistingPotholes();
 
@@ -54,7 +72,28 @@ public class GameManager : MonoBehaviour
 
     public void Retire()
     {
-        LoadTitleScreen();
+        WinBad();
+    }
+
+    public void Win()
+    {
+        if (playthroughStatistics.currentBudget < playthroughStatistics.maxBudget) WinGood(); 
+        else WinBad();
+    }
+
+    public void Lose()
+    {
+        SceneManager.LoadSceneAsync(losingScene);
+    }
+
+    public void WinGood()
+    {
+        SceneManager.LoadSceneAsync(goodEndScene);
+    }
+
+    public void WinBad()
+    {
+        SceneManager.LoadSceneAsync(badEndScene);
     }
 
     public static void ExitGame()
@@ -70,8 +109,13 @@ public class GameManager : MonoBehaviour
         GameManager.ExitGame();
     }
 
-    public void LoadTitleScreen()
+    public static void LoadTitleScreen()
     {
         SceneManager.LoadSceneAsync(titleScene);
+    }
+
+    public void LoadTitleScreenUI()
+    {
+        GameManager.LoadTitleScreen();
     }
 }
