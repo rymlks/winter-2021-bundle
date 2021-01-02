@@ -81,6 +81,7 @@ Transform:
   - {fileID: 7610616242615121817}
   - {fileID: 7469769071997100273}
   - {fileID: 3461631973123322495}
+  - {fileID: 7976570345767893620}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -140,52 +141,6 @@ MonoBehaviour:
   angerIncreaseThreshold: 100
   maxAnger: 100000
   angerDecayPerRound: 500
---- !u!1 &1932140525184958445
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3461631973123322495}
-  - component: {fileID: 9030515009485454238}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3461631973123322495
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932140525184958445}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1271797627241702709}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9030515009485454238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932140525184958445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ae439a2d7ae00e49bda2e41a118a96d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  potholeController: {fileID: 216195350906039678}
-  playthroughStatistics: {fileID: 2260144524971849263}
-  balanceParameters: {fileID: 5101476513431392859}
 --- !u!1 &6318903299560662670
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,6 +186,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   potholePrefab: {fileID: 0}
   roads: []
+--- !u!1 &6987987128440792458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7976570345767893620}
+  m_Layer: 0
+  m_Name: Roads
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7976570345767893620
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6987987128440792458}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 161.24055, y: 261.87183, z: -172.4553}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1271797627241702709}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7992860249384199570
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,6 +313,113 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7992860249384199570}
   m_Enabled: 1
+--- !u!1001 &3557058733660673450
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1271797627241702709}
+    m_Modifications:
+    - target: {fileID: 96574375937828821, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 96574375937828821, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 96574375937828821, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 96574375937828821, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 96574375937828821, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 96574375937828821, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 96574375937828821, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 96574375937828821, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 96574375937828821, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 96574375937828821, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 96574375937828821, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3138271719387736647, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+        type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5480849532134436404, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+        type: 3}
+      propertyPath: canvasCover
+      value: 
+      objectReference: {fileID: 6818321956360523026}
+    - target: {fileID: 5480849532134436404, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+        type: 3}
+      propertyPath: balanceParameters
+      value: 
+      objectReference: {fileID: 5101476513431392859}
+    - target: {fileID: 5480849532134436404, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+        type: 3}
+      propertyPath: potholeController
+      value: 
+      objectReference: {fileID: 216195350906039678}
+    - target: {fileID: 5480849532134436404, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+        type: 3}
+      propertyPath: playthroughStatistics
+      value: 
+      objectReference: {fileID: 2260144524971849263}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f6bbf37e85eafd34b9ea3b49b082bb74, type: 3}
+--- !u!4 &3461631973123322495 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 96574375937828821, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+    type: 3}
+  m_PrefabInstance: {fileID: 3557058733660673450}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9030515009485454238 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5480849532134436404, guid: f6bbf37e85eafd34b9ea3b49b082bb74,
+    type: 3}
+  m_PrefabInstance: {fileID: 3557058733660673450}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae439a2d7ae00e49bda2e41a118a96d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8147388147153004823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -339,6 +431,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Exit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1256033763604444431, guid: 110178f597f51c54e99ecc8dbed8db23,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 1.0000011
+      objectReference: {fileID: 0}
+    - target: {fileID: 1256033763604444431, guid: 110178f597f51c54e99ecc8dbed8db23,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1256033763604444431, guid: 110178f597f51c54e99ecc8dbed8db23,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 35.559998
       objectReference: {fileID: 0}
     - target: {fileID: 1737064968837210828, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
@@ -353,7 +460,7 @@ PrefabInstance:
     - target: {fileID: 1737064968837210828, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ExitGameUI
+      value: ExitGame
       objectReference: {fileID: 0}
     - target: {fileID: 2903523606646013642, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
@@ -364,6 +471,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 3426920371542418437, guid: 110178f597f51c54e99ecc8dbed8db23,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3521539144321683486, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
@@ -408,7 +520,7 @@ PrefabInstance:
     - target: {fileID: 3952905504181288533, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadTitleScreenUI
+      value: LoadTitleScreen
       objectReference: {fileID: 0}
     - target: {fileID: 3952905504181288533, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
@@ -530,6 +642,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6969042720061707876, guid: 110178f597f51c54e99ecc8dbed8db23,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.9000244
+      objectReference: {fileID: 0}
     - target: {fileID: 7663311553599711383, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
       propertyPath: m_IsActive
@@ -562,6 +679,12 @@ GameObject:
 --- !u!1 &1271797626891591445 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6969042721361540610, guid: 110178f597f51c54e99ecc8dbed8db23,
+    type: 3}
+  m_PrefabInstance: {fileID: 8147388147153004823}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6818321956360523026 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3426920371542418437, guid: 110178f597f51c54e99ecc8dbed8db23,
     type: 3}
   m_PrefabInstance: {fileID: 8147388147153004823}
   m_PrefabAsset: {fileID: 0}
@@ -637,6 +760,11 @@ PrefabInstance:
       propertyPath: debugLines
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8043583785313486277, guid: 4f19583599bf0af47b0ab50834809294,
+        type: 3}
+      propertyPath: roadParent
+      value: 
+      objectReference: {fileID: 6987987128440792458}
     - target: {fileID: 8043583785313486277, guid: 4f19583599bf0af47b0ab50834809294,
         type: 3}
       propertyPath: toolTipPanel

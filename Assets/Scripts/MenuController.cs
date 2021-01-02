@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EndingController : MonoBehaviour
+public class MenuController : MonoBehaviour
 {
     public Text scoreText;
 
@@ -19,15 +19,5 @@ public class EndingController : MonoBehaviour
         {
             scoreText.text = "";
         }
-    }
-
-    public void ExitGame()
-    {
-        GameManager.ExitGame();
-    }
-
-    public void ReturnToTitle()
-    {
-        GameManager.LoadTitleScreen();
     }
 }

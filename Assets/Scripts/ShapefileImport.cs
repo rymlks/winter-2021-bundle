@@ -14,6 +14,7 @@ public class ShapefileImport : MonoBehaviour
     public float cameraMargin;
 
     public GameObject cityNameLabel;
+    public GameObject roadParent;
     [Range(0.0f, 0.05f)]
     public float roadWidthMultiplier;
     
@@ -32,14 +33,15 @@ public class ShapefileImport : MonoBehaviour
         cityNameLabel.GetComponent<Text>().text = city;
 
         // -83.2f, 42.6f, 0.0f
-        StartCoroutine(ReadGIS());
+        //StartCoroutine(ReadGIS());
+        ReadGIS();
     }
 
-    IEnumerator ReadGIS()
+    void ReadGIS()
     {
         // Load all the GIS data from file
         shapeFile.Load();
-        yield return null;
+        //yield return null;
 
         
         Assets.GISRecord record1 = shapeFile.GetData(0);
@@ -61,6 +63,7 @@ public class ShapefileImport : MonoBehaviour
                 if (record.ShpRecord.Header.Type == Assets.ShapeType.PolyLine)
                 {
                     GameObject roadObj = Instantiate(roadPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+                    roadObj.transform.parent = roadParent.transform;
                     Road road = roadObj.GetComponent<Road>();
                     road.roadWidthMultiplier = roadWidthMultiplier;
                     road.loadFromGIS(record);
@@ -70,7 +73,7 @@ public class ShapefileImport : MonoBehaviour
                 if (count > linesPerFrame)
                 {
                     count = 0;
-                    yield return null;
+                    //yield return null;
                 }
                 count++;
             }
