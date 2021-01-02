@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GoodEnd.unity
     guid: c78a0e57378bdb549868f1a366ac9887
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 596e4c85c4c4e1644b405e1c6be4aff4
   m_configObjects: {}

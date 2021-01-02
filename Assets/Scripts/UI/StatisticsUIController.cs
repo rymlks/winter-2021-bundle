@@ -112,8 +112,10 @@ public class StatisticsUIController : MonoBehaviour
             }
             for (int x = 0; x < thermometerTexture.width; x++)
             {
-                if (y < colorHeight && x > leftMostBlackPixel && x < rightMostBlackPixel && thermometerTexture.GetPixel(x, y).a < 1)
+                float pixelAlpha = thermometerTexture.GetPixel(x, y).a;
+                if (y < colorHeight && x > leftMostBlackPixel && x < rightMostBlackPixel && pixelAlpha < 1)
                 {
+                    //Color color = new Color(thermometerColor.r * (1- pixelAlpha), thermometerColor.g * (1 - pixelAlpha), thermometerColor.b * (1 - pixelAlpha), 1);
                     texture.SetPixel(x, y, thermometerColor);
                 } else
                 {

@@ -30,6 +30,8 @@ public class CameraController : MonoBehaviour
         {
              targetPosition += cameraComponent.ScreenToWorldPoint(prevMousePosition) - cameraComponent.ScreenToWorldPoint(Input.mousePosition);
         }
+        targetPosition.x = Mathf.Clamp(targetPosition.x, Road.MinX, Road.MaxX);
+        targetPosition.y = Mathf.Clamp(targetPosition.y, Road.MinY, Road.MaxY);
         gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, targetPosition, speed);
         prevMousePosition = Input.mousePosition;
 

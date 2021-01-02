@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Pothole : MonoBehaviour
 {
@@ -71,6 +72,8 @@ public class Pothole : MonoBehaviour
 
     void OnMouseUpAsButton()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
         if (canAffordPatch())
         {
             DeductCost();

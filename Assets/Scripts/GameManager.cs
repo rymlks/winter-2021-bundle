@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public PotholeController potholeController;
     public PlaythroughStatistics playthroughStatistics;
     public BalanceParameters balanceParameters;
+
+    public GameObject canvasCover;
+    private int fadeInFrames = 60;
 
     private int currentRound;
     private int currentYear;
@@ -17,13 +21,38 @@ public class GameManager : MonoBehaviour
     private string goodEndScene = "GoodEnd";
     private string badEndScene = "BadEnd";
 
+    private string demoScene = "RickDev";
+
+    private string loadingScene = "Loading";
+    [HideInInspector]
+    public string nextScene = null;
+
     void Start()
     {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("GameController");
+        if (objs.Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         currentRound = 0;
         currentYear = 0;
-        playthroughStatistics.currentBudget = balanceParameters.budgetPerYear;
-        playthroughStatistics.maxAnger = balanceParameters.maxAnger;
-        playthroughStatistics.maxBudget = balanceParameters.moneyToWin;
+
+        if (playthroughStatistics != null && balanceParameters != null)
+        {
+            playthroughStatistics.currentBudget = balanceParameters.budgetPerYear;
+            playthroughStatistics.maxAnger = balanceParameters.maxAnger;
+            playthroughStatistics.maxBudget = balanceParameters.moneyToWin;
+        }
+
+        transform.parent = null;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void Awake()
+    {
+        StartCoroutine(FadeIn());
     }
 
     public void NextRound()
@@ -70,6 +99,11 @@ public class GameManager : MonoBehaviour
         potholeController.createNewPotholes();
     }
 
+    public void LoadDemoScene()
+    {
+        LoadingScreenTransition(demoScene);
+    }
+
     public void Retire()
     {
         WinBad();
@@ -83,20 +117,20 @@ public class GameManager : MonoBehaviour
 
     public void Lose()
     {
-        SceneManager.LoadSceneAsync(losingScene);
+        LoadingScreenTransition(losingScene);
     }
 
     public void WinGood()
     {
-        SceneManager.LoadSceneAsync(goodEndScene);
+        LoadingScreenTransition(goodEndScene);
     }
 
     public void WinBad()
     {
-        SceneManager.LoadSceneAsync(badEndScene);
+        LoadingScreenTransition(badEndScene);
     }
 
-    public static void ExitGame()
+    public void ExitGame()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
@@ -104,18 +138,52 @@ public class GameManager : MonoBehaviour
          Application.Quit();
 #endif
     }
-    public void ExitGameUI()
+
+    public void LoadTitleScreen()
     {
-        GameManager.ExitGame();
+        LoadingScreenTransition(titleScene);
     }
 
-    public static void LoadTitleScreen()
+    public void LoadingScreenTransition(string scene)
     {
-        SceneManager.LoadSceneAsync(titleScene);
+        nextScene = scene;
+        StartCoroutine(FadeOutAndLoad());
     }
 
-    public void LoadTitleScreenUI()
+    private IEnumerator FadeOutAndLoad()
     {
-        GameManager.LoadTitleScreen();
+        // Fade out
+        if (canvasCover != null)
+        {
+            canvasCover.GetComponent<Image>().color = new Color(0, 0, 0, 0);
+            canvasCover.SetActive(true);
+
+            for (int i=0; i<fadeInFrames; i++)
+            {
+                canvasCover.GetComponent<Image>().color = new Color(0, 0, 0, i / (float)fadeInFrames);
+                yield return null;
+            }
+        }
+
+        // Load
+        SceneManager.LoadScene(loadingScene);
+        yield return null;
+    }
+
+    private IEnumerator FadeIn()
+    {
+        if (canvasCover != null)
+        {
+            canvasCover.GetComponent<Image>().color = new Color(0, 0, 0, 0);
+            canvasCover.SetActive(true);
+
+            for (int i = fadeInFrames; i >= 0; i--)
+            {
+                canvasCover.GetComponent<Image>().color = new Color(0, 0, 0, i / (float)fadeInFrames);
+                yield return null;
+            }
+            canvasCover.SetActive(false);
+        }
+        yield return null;
     }
 }

@@ -95,7 +95,7 @@ public class Road : MonoBehaviour
         if (pline.Points.Length <= 1)
         {
             isValid = false;
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
 
@@ -172,6 +172,22 @@ public class Road : MonoBehaviour
             MinY = Mathf.Min(MinY, v.y);
         }
         lineRenderer.SetPositions(points.ToArray());
+
+        // Simplify the line renderer to remove unnecessary duplicate points
+        lineRenderer.Simplify(0.0001f);
+        if (lineRenderer.positionCount < 2)
+        {
+            isValid = false;
+            Destroy(gameObject);
+            return;
+        }
+        Vector3[] LRPoints = new Vector3[lineRenderer.positionCount];
+        lineRenderer.GetPositions(LRPoints);
+        points = new List<Vector3>();
+        foreach(Vector3 point in LRPoints)
+        {
+            points.Add(point);
+        }
 
         // Update collider to follow the line
         MeshCollider meshCollider = GetComponent<MeshCollider>();
