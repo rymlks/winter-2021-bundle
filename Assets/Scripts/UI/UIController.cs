@@ -10,6 +10,7 @@ public class UIController : MonoBehaviour
     public GameObject toolTipPanel;
     public GameObject pausePanel;
     public GameObject UIScalePanel;
+    public Canvas mainCanvas;
 
     public Texture2D toolTipTexture;
 
@@ -88,8 +89,8 @@ public class UIController : MonoBehaviour
 
         // Move it to the correct location
         RectTransform rt = toolTipPanel.GetComponent<RectTransform>();
-        var x = Input.mousePosition.x + 3;
-        var y = Input.mousePosition.y - 3;
+        float x = (Input.mousePosition.x / mainCanvas.scaleFactor) + 3;
+        float y = (Input.mousePosition.y / mainCanvas.scaleFactor) - 3;
         rt.anchoredPosition = new Vector2(x, y);
 
         // Get the correct size based on the text
@@ -97,7 +98,7 @@ public class UIController : MonoBehaviour
         TextGenerator textGen = new TextGenerator();
         TextGenerationSettings generationSettings = guiText.GetGenerationSettings(rt.rect.size);
         generationSettings.fontSize = 12;
-        int width = (int)Mathf.Round(textGen.GetPreferredWidth(roadNameToolTipText, generationSettings) + 27);
+        int width = (int)Mathf.Round((textGen.GetPreferredWidth(roadNameToolTipText, generationSettings)) / mainCanvas.scaleFactor + 27);
         //int height = (int)Mathf.Round(textGen.GetPreferredHeight(roadNameToolTipText, generationSettings) + 6 * UIScale);
         int height = 24;
         guiText.fontSize = (int)(12 * UIScale);

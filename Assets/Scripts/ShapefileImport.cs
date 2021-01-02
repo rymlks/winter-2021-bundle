@@ -27,7 +27,7 @@ public class ShapefileImport : MonoBehaviour
     void Start()
     {
         Debug.Log("Reading " + shxPath);
-        shapeFile = new Assets.ShxFile(shxPath);
+        shapeFile = new Assets.ShxFile(Application.dataPath + "/" + shxPath);
 
         cityNameLabel.GetComponent<Text>().text = city;
 
