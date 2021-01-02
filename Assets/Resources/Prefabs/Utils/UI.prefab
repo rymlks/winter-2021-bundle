@@ -2020,7 +2020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -2081,7 +2081,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0.00036621094, y: 0}
+  m_AnchoredPosition: {x: 2.899994, y: -3.100006}
   m_SizeDelta: {x: 325.18982, y: 65.985054}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &6969042720061707874
@@ -2387,6 +2387,7 @@ MonoBehaviour:
   toolTipPanel: {fileID: 6969042721361540610}
   pausePanel: {fileID: 7663311553599711383}
   UIScalePanel: {fileID: 90581936956331015}
+  mainCanvas: {fileID: 6969042719826004085}
   toolTipTexture: {fileID: 2800000, guid: 851996e084f88f745a59a770cedfc014, type: 3}
 --- !u!1 &7629316073197988296
 GameObject:
@@ -2496,10 +2497,10 @@ RectTransform:
   m_Father: {fileID: 6969042719826004082}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 332.14722, y: 884.1472}
+  m_SizeDelta: {x: 1893.5923, y: 1965.1912}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6033584344388875150
 CanvasRenderer:

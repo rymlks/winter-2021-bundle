@@ -23,7 +23,6 @@ public class StatisticsUIController : MonoBehaviour
     private PlaythroughStatistics statsModel;
 
     private float angerInitialPosition;
-    private float moneyAspectRatio;
     private List<GameObject> moneyInstances;
 
     // Start is called before the first frame update
@@ -34,7 +33,6 @@ public class StatisticsUIController : MonoBehaviour
         statsModel = GameObject.FindObjectOfType<PlaythroughStatistics>();
 
         angerInitialPosition = movingAngerIconImage.GetComponent<RectTransform>().localPosition.y;
-        moneyAspectRatio = (float)moneyTexture.height / (float)moneyTexture.width;
         moneyInstances = new List<GameObject>();
         retireButton.SetActive(false);
     }
@@ -77,6 +75,7 @@ public class StatisticsUIController : MonoBehaviour
                 GameObject moneyObj = Instantiate(moneyPrefab);
                 moneyInstances.Add(moneyObj);
                 moneyObj.GetComponent<RectTransform>().SetParent(moneyPanel.GetComponent<RectTransform>());
+                moneyObj.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
                 moneyObj.GetComponent<RectTransform>().localPosition = new Vector3(Mathf.Sin(i) * 0.5f, i * moneyPanel.GetComponent<RectTransform>().rect.height / numberOfMoneys, 0);
             } else if (i > (statsModel.currentBudget / statsModel.maxBudget * 100) && moneyInstances.Count >= i)
             {
