@@ -13,9 +13,6 @@ public class GameManager : MonoBehaviour
     public GameObject canvasCover;
     private int fadeInFrames = 60;
 
-    private int currentRound;
-    private int currentYear;
-
     private static string titleScene = "TitleScreen";
     private string losingScene = "LosingScreen";
     private string goodEndScene = "GoodEnd";
@@ -24,8 +21,13 @@ public class GameManager : MonoBehaviour
     private string demoScene = "RickDev";
 
     private string loadingScene = "Loading";
+
     [HideInInspector]
     public string nextScene = null;
+    [HideInInspector]
+    public int currentRound;
+    [HideInInspector]
+    public int currentYear;
 
     void Start()
     {

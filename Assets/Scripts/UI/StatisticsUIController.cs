@@ -12,6 +12,7 @@ public class StatisticsUIController : MonoBehaviour
     public GameObject angerThermometer;
     public GameObject moneyPanel;
     public GameObject retireButton;
+    public Text roundDisplay;
 
     public GameObject moneyPrefab;
     public Texture2D thermometerTexture;
@@ -21,6 +22,7 @@ public class StatisticsUIController : MonoBehaviour
     private Text budgetText;
     private Text angerText;
     private PlaythroughStatistics statsModel;
+    private GameManager gameManager;
 
     private float angerInitialPosition;
     private List<GameObject> moneyInstances;
@@ -31,6 +33,7 @@ public class StatisticsUIController : MonoBehaviour
         budgetText = GameObject.Find("BudgetText").GetComponent<Text>();
         angerText = GameObject.Find("AngerText").GetComponent<Text>();
         statsModel = GameObject.FindObjectOfType<PlaythroughStatistics>();
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
         angerInitialPosition = movingAngerIconImage.GetComponent<RectTransform>().localPosition.y;
         moneyInstances = new List<GameObject>();
@@ -43,6 +46,7 @@ public class StatisticsUIController : MonoBehaviour
         
         budgetText.text = statsModel.currentBudget.ToString("F0");
         angerText.text = statsModel.currentAnger.ToString("F0");
+        roundDisplay.text = "Month: " + (gameManager.currentRound+1) + "\nYear: " + (gameManager.currentYear+1);
 
         UpdateAngerMeter();
         UpdateBudgetMeter();
