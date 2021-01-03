@@ -159,6 +159,7 @@ public class GameManager : MonoBehaviour
         {
             canvasCover.GetComponent<Image>().color = new Color(0, 0, 0, 0);
             canvasCover.SetActive(true);
+            canvasCover.GetComponent<Image>().raycastTarget = true;
 
             for (int i=0; i<fadeInFrames; i++)
             {
@@ -178,6 +179,7 @@ public class GameManager : MonoBehaviour
         {
             canvasCover.GetComponent<Image>().color = new Color(0, 0, 0, 0);
             canvasCover.SetActive(true);
+            canvasCover.GetComponent<Image>().raycastTarget = false;
 
             for (int i = fadeInFrames; i >= 0; i--)
             {

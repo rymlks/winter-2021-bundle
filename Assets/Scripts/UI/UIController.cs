@@ -12,6 +12,8 @@ public class UIController : MonoBehaviour
     public GameObject UIScalePanel;
     public Canvas mainCanvas;
 
+    public GameObject contextMenu;
+
     public Texture2D toolTipTexture;
 
     public static string roadNameToolTipText = "";
@@ -75,6 +77,8 @@ public class UIController : MonoBehaviour
         rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 24 * UIScale);
         Text guiText = UIScalePanel.GetComponentInChildren<Text>();
         guiText.rectTransform.localScale = new Vector3(UIScale, UIScale, 1.0f);
+
+        contextMenu.GetComponent<ContextMenuControler>().SetScale();
     }
 
     public void HideRoadSign()
@@ -98,7 +102,7 @@ public class UIController : MonoBehaviour
         TextGenerator textGen = new TextGenerator();
         TextGenerationSettings generationSettings = guiText.GetGenerationSettings(rt.rect.size);
         generationSettings.fontSize = 12;
-        int width = (int)Mathf.Round((textGen.GetPreferredWidth(roadNameToolTipText, generationSettings)) / mainCanvas.scaleFactor + 27);
+        int width = (int)Mathf.Round(textGen.GetPreferredWidth(roadNameToolTipText, generationSettings) / mainCanvas.scaleFactor + 27 );
         //int height = (int)Mathf.Round(textGen.GetPreferredHeight(roadNameToolTipText, generationSettings) + 6 * UIScale);
         int height = 24;
         guiText.fontSize = (int)(12 * UIScale);

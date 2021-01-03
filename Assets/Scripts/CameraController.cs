@@ -15,6 +15,8 @@ public class CameraController : MonoBehaviour
     private float minZoom = 0.1f;
     private float maxZoom = 10.0f;
 
+    private bool panning = false;
+
     void Start()
     {
         targetPosition = gameObject.transform.position;
@@ -23,19 +25,29 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
+        bool isHoveringOverMenu = EventSystem.current.IsPointerOverGameObject();
+        if (Input.GetMouseButtonDown(0) && !isHoveringOverMenu)
+        {
+            panning = true;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            panning = false;
+        }
 
-        if (Input.GetMouseButton(0))
+        if (panning)
         {
              targetPosition += cameraComponent.ScreenToWorldPoint(prevMousePosition) - cameraComponent.ScreenToWorldPoint(Input.mousePosition);
         }
-        targetPosition.x = Mathf.Clamp(targetPosition.x, Road.MinX, Road.MaxX);
-        targetPosition.y = Mathf.Clamp(targetPosition.y, Road.MinY, Road.MaxY);
+        int cityWidth = (int)(Road.MaxX - Road.MinX);
+        int cityHeight = (int)(Road.MaxY - Road.MinY);
+        targetPosition.x = Mathf.Clamp(targetPosition.x, Road.MinX - cityWidth * 0.5f, Road.MaxX + cityWidth * 0.5f);
+        targetPosition.y = Mathf.Clamp(targetPosition.y, Road.MinY - cityHeight * 0.5f, Road.MaxY + cityHeight * 0.5f);
         gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, targetPosition, speed);
         prevMousePosition = Input.mousePosition;
 
-        cameraComponent.orthographicSize = Mathf.Clamp(cameraComponent.orthographicSize - (Input.mouseScrollDelta.y * cameraComponent.orthographicSize / 10.0f), minZoom, maxZoom);
+        if (!isHoveringOverMenu)
+            cameraComponent.orthographicSize = Mathf.Clamp(cameraComponent.orthographicSize - (Input.mouseScrollDelta.y * cameraComponent.orthographicSize / 10.0f), minZoom, maxZoom);
     }
 
 
