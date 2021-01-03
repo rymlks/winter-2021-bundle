@@ -11,6 +11,7 @@ public class BalanceParameters : MonoBehaviour
     public int maximumNewPotholesPerRound;
     public float maximumPotholeAngerPerRound;
     public float patchMoneyCost;
+    public float rePaveMoneyCost;
     public int minimumPotholePatchDuration;
     public int maximumPotholePatchDuration;
     public float budgetPerYear;

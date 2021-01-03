@@ -78,7 +78,7 @@ public class UIController : MonoBehaviour
         Text guiText = UIScalePanel.GetComponentInChildren<Text>();
         guiText.rectTransform.localScale = new Vector3(UIScale, UIScale, 1.0f);
 
-        contextMenu.GetComponent<ContextMenuControler>().SetScale();
+        contextMenu.GetComponent<ContextMenuController>().SetScale();
     }
 
     public void HideRoadSign()
