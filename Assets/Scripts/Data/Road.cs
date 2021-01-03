@@ -8,8 +8,10 @@ public class Road : MonoBehaviour
 {
     public string roadName;
     public double trafficRate; // cars/day aka "aadt"
-    public double trafficSum;  // cars/day * segmentLength aka "vmt"
+    public double trafficSum;  // cars/day * length aka "vmt"
+    public double length;
     public int lanes;
+    public int ID;
     public Material material;
     public Condition condition;
 
@@ -33,8 +35,20 @@ public class Road : MonoBehaviour
     public bool isValid = true;
     [HideInInspector]
     public List<Vector3> points;
+    [HideInInspector]
+    public List<GameObject> potholes;
+    [HideInInspector]
+    public float rePaveCost;
+    [HideInInspector]
+    public ContextMenuController contextMenuController;
+    [HideInInspector]
+    public BalanceParameters balanceParameters;
+    [HideInInspector]
+    public PlaythroughStatistics playthroughStatistics;
 
     private LineRenderer lineRenderer;
+    private bool _selected = false;
+    private Vector3 _initialScale;
 
     public static float MaxX = float.MinValue;
     public static float MaxY = float.MinValue;
@@ -43,12 +57,14 @@ public class Road : MonoBehaviour
     private static int positionScale = 50;
 
     // Useful indices in DbfRecord objects
+    private const int I_FID = 0;  // DBNumeric
     private const int I_AADT = 1;  // DBNumeric
     private const int I_ROAD_NAME = 36;  // DBCharacter
     private const int I_SURFACE = 41;  // DBCharacter
     private const int I_LANES = 42;  // DBNumeric
     private const int I_VMT = 35;  // DBNumeric
     private const int I_CONDITION = 40;  // DBCharacter
+    private const int I_SHAPE_LEN = 50;  // DBNumeric
 
     public enum Condition
     {
@@ -64,6 +80,20 @@ public class Road : MonoBehaviour
         GRAVEL
     }
 
+    public void Start()
+    {
+        _initialScale = new Vector3(transform.localScale.x, transform.localScale.y, 1);
+    }
+
+    public void Update()
+    {
+        if (_selected)
+        {
+            float scale = 1.0f + Mathf.Sin(Time.time * 5) * 0.125f;
+            lineRenderer.widthMultiplier = lanes * roadWidthMultiplier * scale;
+        }
+    }
+
     void OnMouseOver()
     {
         if(!EventSystem.current.IsPointerOverGameObject())
@@ -77,24 +107,151 @@ public class Road : MonoBehaviour
         UIController.roadNameToolTipText = "";
     }
 
+    void OnMouseUpAsButton()
+    {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
+        DoClick();
+    }
+
+    public void DoClick()
+    {
+        contextMenuController.Open(this);
+        Select();
+    }
+
+    public void Select()
+    {
+        _selected = true;
+        GetComponent<MeshCollider>().enabled = false;
+        Colorize(Color.blue);
+
+        foreach(GameObject pothole in potholes)
+        {
+            pothole.GetComponent<Pothole>().Select();
+        }
+    }
+
+    public void Deselect()
+    {
+        _selected = false;
+        GetComponent<MeshCollider>().enabled = true;
+        Colorize();
+        foreach (GameObject pothole in potholes)
+        {
+            pothole.GetComponent<Pothole>().Deselect();
+        }
+        lineRenderer.widthMultiplier = lanes * roadWidthMultiplier;
+    }
+
+    public string GetContextMessage()
+    {
+        string message = "";
+        message += roadName;
+        message += "\nSegment ID: " + ID;
+        message += "\nDaily Drivers: " + trafficRate;
+        message += "\nPotholes: " + potholes.Count;
+        message += "\nMaterial: " + material.ToString();
+        //message += "\nCondition: " + condition.ToString();
+        message += "\nLanes: " + lanes;
+        return message;
+    }
+
+    public void TryRePave()
+    {
+
+        if (CanAffordRePave())
+        {
+            DeductCost();
+            RePave();
+        }
+        else
+        {
+            Debug.Log("Cannot patch pothole: insufficient funds.  Have " + this.playthroughStatistics.currentBudget + ", need " + this.GetRePaveCost());
+        }
+    }
+
+    private void RePave()
+    {
+        condition = Condition.GOOD;
+
+        foreach(GameObject pothole in potholes)
+        {
+            Destroy(pothole);
+        }
+
+        potholes = new List<GameObject>();
+
+        Colorize();
+    }
+
+    private float DeductCost()
+    {
+        return this.playthroughStatistics.currentBudget -= GetRePaveCost();
+    }
+
+    public bool CanAffordRePave()
+    {
+        return this.playthroughStatistics.currentBudget >= GetRePaveCost();
+    }
+
+    public float GetRePaveCost()
+    {
+        return balanceParameters.rePaveMoneyCost * (float)length;
+    }
+
+    private void Colorize()
+    {
+        // Update positions and line renderer
+        float scaledTrafficRate = Utils.Sigmoid((trafficRate - 20000) / 10000.0f);
+        Color color;
+
+        switch (material)
+        {
+            case Material.ASPHALT:
+                color = Color.Lerp(lowTrafficAsphalt, highTrafficAsphalt, scaledTrafficRate);
+                break;
+            case Material.CONCRETE:
+                color = Color.Lerp(lowTrafficConcrete, highTrafficConcrete, scaledTrafficRate);
+                break;
+            case Material.GRAVEL:
+                color = Color.Lerp(lowTrafficGravel, highTrafficGravel, scaledTrafficRate);
+                break;
+            default:
+                color = Color.Lerp(lowTrafficAsphalt, highTrafficAsphalt, scaledTrafficRate);
+                break;
+        }
+        Colorize(color);
+    }
+
+    private void Colorize(Color color)
+    {
+        lineRenderer.startColor = color;
+        lineRenderer.endColor = color;
+    }
+
     /**
      * Load data from a GISRecord to represent this road. Update visuals
      */
     public void loadFromGIS(Assets.GISRecord record)
     {
         // Get GIS data from record
+        Assets.DBNumeric FID = (Assets.DBNumeric)record.DbfRecord.Record[I_FID];
         Assets.DBNumeric vmt = (Assets.DBNumeric)record.DbfRecord.Record[I_VMT];
         Assets.DBNumeric aadt = (Assets.DBNumeric)record.DbfRecord.Record[I_AADT];
         Assets.DBCharacter roadname = (Assets.DBCharacter)record.DbfRecord.Record[I_ROAD_NAME];
         Assets.DBCharacter surface = (Assets.DBCharacter)record.DbfRecord.Record[I_SURFACE];
         Assets.DBNumeric _lanes = (Assets.DBNumeric)record.DbfRecord.Record[I_LANES];
         Assets.DBCharacter _condition = (Assets.DBCharacter)record.DbfRecord.Record[I_CONDITION];
+        Assets.DBNumeric shapelen = (Assets.DBNumeric)record.DbfRecord.Record[I_SHAPE_LEN];
 
         // Update public values
         roadName = roadname.Value.Trim();
         trafficSum = double.Parse(new string(vmt.Value).Trim());
         trafficRate = double.Parse(new string(aadt.Value).Trim());
+        length = double.Parse(new string(shapelen.Value).Trim());
         lanes = int.Parse(new string(_lanes.Value));
+        ID = int.Parse(new string(FID.Value));
 
         // Get the line from the GIS record. Ignore if it doesn't have at least 2 points and 1 lane
         Assets.PolyLine pline = (Assets.PolyLine)record.ShpRecord.Contents;
@@ -132,31 +289,8 @@ public class Road : MonoBehaviour
             points = new List<Vector3>();
         }
 
-        // Update positions and line renderer
-        float scaledTrafficRate = Utils.Sigmoid((trafficRate - 20000) / 10000.0f);
-        Color color;
-
-        switch(surface.Value.Trim().ToLower())
-        {
-            case "asphalt":
-                material = Material.ASPHALT;
-                color = Color.Lerp(lowTrafficAsphalt, highTrafficAsphalt, scaledTrafficRate);
-                break;
-            case "concrete":
-                material = Material.CONCRETE;
-                color = Color.Lerp(lowTrafficConcrete, highTrafficConcrete, scaledTrafficRate);
-                break;
-            case "gravel":
-                material = Material.GRAVEL;
-                color = Color.Lerp(lowTrafficGravel, highTrafficGravel, scaledTrafficRate);
-                break;
-            default:
-                color = Color.Lerp(lowTrafficAsphalt, highTrafficAsphalt, scaledTrafficRate);
-                break;
-        }
-        lineRenderer.startColor = color;
-        lineRenderer.endColor = color;
-
+        material = (Material)System.Enum.Parse(typeof(Material), surface.Value.Trim().ToUpper());
+        Colorize();
         lineRenderer.widthMultiplier = lanes * roadWidthMultiplier;
 
         lineRenderer.positionCount = pline.NumPoints;
@@ -195,6 +329,8 @@ public class Road : MonoBehaviour
         lineRenderer.BakeMesh(mesh, true);
 
         meshCollider.sharedMesh = mesh;
+
+        potholes = new List<GameObject>();
     }
 
     public Vector3 RandomPoint()
@@ -203,6 +339,23 @@ public class Road : MonoBehaviour
         Vector3 p1 = points[randIdx];
         Vector3 p2 = points[randIdx + 1];
         return Vector3.Lerp(p1, p2, UnityEngine.Random.value);
+    }
+
+    /**
+     * Return a point that is roughly in the middle of the road segment
+     */
+    public Vector3 MidPoint()
+    {
+        if (points.Count % 2 == 0)
+        {
+            Vector3 p1 = points[points.Count / 2];
+            Vector3 p2 = points[(points.Count / 2) - 1];
+
+            return Vector3.Lerp(p1, p2, 0.5f);
+        } else
+        {
+            return points[points.Count / 2];
+        }
     }
 
     public static int Sort(Road r1, Road r2)

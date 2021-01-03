@@ -21,6 +21,9 @@ public class ShapefileImport : MonoBehaviour
     public string shxPath;
     public GameObject roadPrefab;
     public PotholeController potholeController;
+    public BalanceParameters balanceParameters;
+    public ContextMenuController contextMenuController;
+    public PlaythroughStatistics playthroughStatistics;
 
     private int linesPerFrame = 100;
     private Assets.ShxFile shapeFile;
@@ -62,13 +65,17 @@ public class ShapefileImport : MonoBehaviour
                 // Some records aren't polyline and I don't know what they're for
                 if (record.ShpRecord.Header.Type == Assets.ShapeType.PolyLine)
                 {
-                    GameObject roadObj = Instantiate(roadPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-                    roadObj.transform.parent = roadParent.transform;
+                    GameObject roadObj = Instantiate(roadPrefab, new Vector3(0, 0, 0), Quaternion.identity, roadParent.transform);
                     Road road = roadObj.GetComponent<Road>();
                     road.roadWidthMultiplier = roadWidthMultiplier;
                     road.loadFromGIS(record);
                     if (road.isValid)
+                    {
                         potholeController.roads.Add(road);
+                        road.balanceParameters = balanceParameters;
+                        road.contextMenuController = contextMenuController;
+                        road.playthroughStatistics = playthroughStatistics;
+                    }
                 }
                 if (count > linesPerFrame)
                 {

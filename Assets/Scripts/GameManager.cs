@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public PotholeController potholeController;
     public PlaythroughStatistics playthroughStatistics;
     public BalanceParameters balanceParameters;
+    public ContextMenuController contextMenu;
 
     public GameObject canvasCover;
     private int fadeInFrames = 60;
@@ -59,6 +60,9 @@ public class GameManager : MonoBehaviour
 
     public void NextRound()
     {
+        if (contextMenu != null)
+            contextMenu.Close();
+
         // Advance the counters
         currentRound++;
         if (currentRound >= balanceParameters.roundsInAYear)

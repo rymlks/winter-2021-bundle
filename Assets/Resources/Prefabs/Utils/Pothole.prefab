@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8956065939585700096}
   - component: {fileID: 8956065939585700097}
   - component: {fileID: -5483865005926695844}
-  - component: {fileID: -6546012876713516407}
+  - component: {fileID: 3313391410382105248}
   m_Layer: 0
   m_Name: Pothole
   m_TagString: Untagged
@@ -100,10 +100,11 @@ MonoBehaviour:
   potholeSprite: {fileID: 21300000, guid: d1c5e9e2787cb244295951fcd4b61c70, type: 3}
   patchedPotholeSprite: {fileID: 21300000, guid: 4756db5f30d2cc946a9a903442d71428,
     type: 3}
+  balanceParameters: {fileID: 0}
   contextMenuControler: {fileID: 0}
   roadSegment: {fileID: 0}
---- !u!61 &-6546012876713516407
-BoxCollider2D:
+--- !u!60 &3313391410382105248
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -112,7 +113,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -125,6 +126,29 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.02, y: 0.55}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.41, y: -0.27333334}
+      - {x: 0.39666668, y: -0.24333334}
+      - {x: 0.36, y: -0.18}
+      - {x: 0.14666668, y: 0.19}
+      - {x: 0.1, y: 0.27}
+      - {x: 0.07333334, y: 0.31666666}
+      - {x: 0.05666667, y: 0.34333333}
+      - {x: 0.04, y: 0.35666668}
+      - {x: 0.030000001, y: 0.36333334}
+      - {x: -0.033333335, y: 0.36333334}
+      - {x: -0.043333333, y: 0.36}
+      - {x: -0.07666667, y: 0.31666666}
+      - {x: -0.11, y: 0.25333333}
+      - {x: -0.14666668, y: 0.19}
+      - {x: -0.29666668, y: -0.07}
+      - {x: -0.32333335, y: -0.11666667}
+      - {x: -0.36, y: -0.18}
+      - {x: -0.41, y: -0.26333335}
+      - {x: -0.41, y: -0.33666667}
+      - {x: -0.3866667, y: -0.36333334}
+      - {x: 0.37666667, y: -0.36333334}
+      - {x: 0.3866667, y: -0.36}
+      - {x: 0.40666667, y: -0.34}
+      - {x: 0.41, y: -0.33}
