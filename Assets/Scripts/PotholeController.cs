@@ -8,6 +8,7 @@ public class PotholeController : MonoBehaviour
 {
     public GameObject potholePrefab;
     public List<Road> roads;
+    public ContextMenuControler contextMenuControler;
 
     private GameObject _potholeParent;
     private BalanceParameters _parameters;
@@ -30,6 +31,11 @@ public class PotholeController : MonoBehaviour
         if (_parameters == null)
         {
             _parameters = FindObjectOfType<BalanceParameters>();
+        }
+
+        if (contextMenuControler != null)
+        {
+            contextMenuControler.gameObject.SetActive(false);
         }
     }
 
@@ -61,7 +67,8 @@ public class PotholeController : MonoBehaviour
         int newPotholesThisRound = random.Next(_parameters.minimumNewPotholesPerRound, _parameters.maximumNewPotholesPerRound + 1);    //Sysrand is exclusive of the maximum
         for (int i = 0; i < newPotholesThisRound; i++)
         {
-            GameObject.Instantiate(potholePrefab, generatePotholeLocation(random), Quaternion.identity, _potholeParent.transform);
+            GameObject pothole = GameObject.Instantiate(potholePrefab, generatePotholeLocation(random), Quaternion.identity, _potholeParent.transform);
+            pothole.GetComponent<Pothole>().contextMenuControler = contextMenuControler;
         }
     }
 
