@@ -120,7 +120,7 @@ public class Pothole : MonoBehaviour
             for (int x = 0; x < tex.width; x++)
             {
                 Color sourcePixel = original.GetPixel(x, y);
-                if (sourcePixel.r > 0 && sourcePixel.b < 1)
+                if (sourcePixel.r > 0 && sourcePixel.b < sourcePixel.r)
                 {
                     Color c = Color.Lerp(Color.yellow, Color.red, _angerPerRound / 3);
                     //c.b = sourcePixel.b;

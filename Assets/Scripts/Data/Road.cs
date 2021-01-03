@@ -90,20 +90,20 @@ public class Road : MonoBehaviour
         Assets.DBNumeric _lanes = (Assets.DBNumeric)record.DbfRecord.Record[I_LANES];
         Assets.DBCharacter _condition = (Assets.DBCharacter)record.DbfRecord.Record[I_CONDITION];
 
-        // Get the line from the GIS record. Ignore if it doesn't have at least 2 points
-        Assets.PolyLine pline = (Assets.PolyLine)record.ShpRecord.Contents;
-        if (pline.Points.Length <= 1)
-        {
-            isValid = false;
-            Destroy(gameObject);
-            return;
-        }
-
         // Update public values
         roadName = roadname.Value.Trim();
         trafficSum = double.Parse(new string(vmt.Value).Trim());
         trafficRate = double.Parse(new string(aadt.Value).Trim());
         lanes = int.Parse(new string(_lanes.Value));
+
+        // Get the line from the GIS record. Ignore if it doesn't have at least 2 points and 1 lane
+        Assets.PolyLine pline = (Assets.PolyLine)record.ShpRecord.Contents;
+        if (pline.Points.Length <= 1 || lanes <= 0)
+        {
+            isValid = false;
+            Destroy(gameObject);
+            return;
+        }
         switch(_condition.Value.ToLower().Trim())
         {
             case "good":

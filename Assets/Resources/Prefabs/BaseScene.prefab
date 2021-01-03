@@ -133,7 +133,7 @@ MonoBehaviour:
   minimumNewPotholesPerRound: 3
   maximumNewPotholesPerRound: 6
   maximumPotholeAngerPerRound: 3
-  patchMoneyCost: 5
+  patchMoneyCost: 1000
   minimumPotholePatchDuration: 5
   maximumPotholePatchDuration: 8
   budgetPerYear: 10000
@@ -676,6 +676,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8147388147153004823}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1271797627939503984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6969042720061707879, guid: 110178f597f51c54e99ecc8dbed8db23,
+    type: 3}
+  m_PrefabInstance: {fileID: 8147388147153004823}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1271797626891591445 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6969042721361540610, guid: 110178f597f51c54e99ecc8dbed8db23,
@@ -694,12 +700,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d390a34d08fe2418ca86b02c085638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1271797627939503984 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6969042720061707879, guid: 110178f597f51c54e99ecc8dbed8db23,
-    type: 3}
-  m_PrefabInstance: {fileID: 8147388147153004823}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6818321956360523026 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3426920371542418437, guid: 110178f597f51c54e99ecc8dbed8db23,
