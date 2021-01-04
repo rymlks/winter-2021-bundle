@@ -77,7 +77,7 @@ public class Road : MonoBehaviour
     {
         ASPHALT,
         CONCRETE,
-        GRAVEL
+        GRAVEL,
     }
 
     public void Start()
@@ -96,7 +96,7 @@ public class Road : MonoBehaviour
 
     void OnMouseOver()
     {
-        if(!EventSystem.current.IsPointerOverGameObject())
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
             UIController.roadNameToolTipText = roadName;
         }
@@ -126,7 +126,7 @@ public class Road : MonoBehaviour
         GetComponent<MeshCollider>().enabled = false;
         Colorize(Color.blue);
 
-        foreach(GameObject pothole in potholes)
+        foreach (GameObject pothole in potholes)
         {
             pothole.GetComponent<Pothole>().Select();
         }
@@ -157,25 +157,26 @@ public class Road : MonoBehaviour
         return message;
     }
 
-    public void TryRePave()
+    public void TryRePave(float cost, Material material, Condition condition)
     {
 
-        if (CanAffordRePave())
+        if (CanAffordRePave(cost))
         {
-            DeductCost();
-            RePave();
+            DeductCost(cost);
+            RePave(material, condition);
         }
         else
         {
-            Debug.Log("Cannot patch pothole: insufficient funds.  Have " + this.playthroughStatistics.currentBudget + ", need " + this.GetRePaveCost());
+            Debug.Log("Cannot patch pothole: insufficient funds.  Have " + this.playthroughStatistics.currentBudget + ", need " + cost);
         }
     }
 
-    private void RePave()
+    private void RePave(Material material, Condition condition)
     {
-        condition = Condition.GOOD;
+        this.condition = condition;
+        this.material = material;
 
-        foreach(GameObject pothole in potholes)
+        foreach (GameObject pothole in potholes)
         {
             Destroy(pothole);
         }
@@ -185,19 +186,66 @@ public class Road : MonoBehaviour
         Colorize();
     }
 
-    private float DeductCost()
+    private float DeductCost(float cost)
     {
-        return this.playthroughStatistics.currentBudget -= GetRePaveCost();
+        return this.playthroughStatistics.currentBudget -= cost;
     }
 
-    public bool CanAffordRePave()
+    public bool CanAffordRePave(float cost)
     {
-        return this.playthroughStatistics.currentBudget >= GetRePaveCost();
+        return this.playthroughStatistics.currentBudget >= cost;
     }
 
-    public float GetRePaveCost()
+    public float GetRePaveCost(Material material, Condition condition)
     {
-        return balanceParameters.rePaveMoneyCost * (float)length;
+        float baseCost;
+        if (material == Material.ASPHALT && condition == Condition.FAIR)
+        {
+            baseCost = balanceParameters.lowGradeAsphaltCostPerFoot;
+        }
+        else if (material == Material.ASPHALT && condition == Condition.GOOD)
+        {
+            baseCost = balanceParameters.highGradeAsphaltCostPerFoot;
+        }
+        else if (material == Material.CONCRETE && condition == Condition.FAIR)
+        {
+            baseCost = balanceParameters.lowGradeConcreteCostPerFoot;
+        }
+        else if (material == Material.CONCRETE && condition == Condition.GOOD)
+        {
+            baseCost = balanceParameters.highGradeConcreteCostPerFoot;
+        } else if (material == Material.GRAVEL)
+        {
+            baseCost = balanceParameters.gravelCostPerFoot;
+        } else
+        {
+            Debug.LogError("Unexpected road repair combination: " + material + ", " + condition);
+            baseCost = -1;
+        }
+
+        return baseCost * (float)length * lanes;
+    }
+
+    public List<ContextMenuController.ContextMenuOption> GetRepairOptions()
+    {
+        List<ContextMenuController.ContextMenuOption> options = new List<ContextMenuController.ContextMenuOption>
+        {
+            CreateOption("Shit asphalt", Material.ASPHALT, Condition.FAIR),
+            CreateOption("Good asphalt", Material.ASPHALT, Condition.GOOD),
+
+            CreateOption("Shit concrete", Material.CONCRETE, Condition.FAIR),
+            CreateOption("Good concrete", Material.CONCRETE, Condition.GOOD),
+
+            CreateOption("Gravel", Material.GRAVEL, Condition.GOOD)
+        };
+
+        return options;
+    }
+
+    private ContextMenuController.ContextMenuOption CreateOption(string label, Material material, Condition condition)
+    {
+        float cost = GetRePaveCost(material, condition);
+        return new ContextMenuController.ContextMenuOption(label, cost, delegate { TryRePave(cost, material, condition); });
     }
 
     private void Colorize()
@@ -252,6 +300,19 @@ public class Road : MonoBehaviour
         length = double.Parse(new string(shapelen.Value).Trim());
         lanes = int.Parse(new string(_lanes.Value));
         ID = int.Parse(new string(FID.Value));
+        try
+        {
+            condition = (Condition)System.Enum.Parse(typeof(Condition), _condition.Value.Trim().ToUpper());
+        } catch (ArgumentException) {
+            condition = Condition.POOR;
+        }
+        try
+        {
+            material = (Material)System.Enum.Parse(typeof(Material), surface.Value.Trim().ToUpper());
+        } catch (ArgumentException)
+        {
+            material = Material.GRAVEL;
+        }
 
         // Get the line from the GIS record. Ignore if it doesn't have at least 2 points and 1 lane
         Assets.PolyLine pline = (Assets.PolyLine)record.ShpRecord.Contents;
@@ -261,24 +322,6 @@ public class Road : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        switch(_condition.Value.ToLower().Trim())
-        {
-            case "good":
-                condition = Condition.GOOD;
-                break;
-            case "fair":
-                condition = Condition.FAIR;
-                break;
-            case "poor":
-                condition = Condition.POOR;
-                break;
-            default:
-                condition = Condition.GOOD;
-                break;
-        }
-
-        // trafficSum *= (int)condition;
-        // trafficSum /= lanes;
 
         if (lineRenderer == null)
         {
@@ -289,10 +332,11 @@ public class Road : MonoBehaviour
             points = new List<Vector3>();
         }
 
-        material = (Material)System.Enum.Parse(typeof(Material), surface.Value.Trim().ToUpper());
+        // Set linerenderer color
         Colorize();
-        lineRenderer.widthMultiplier = lanes * roadWidthMultiplier;
 
+        // Fill linerenderer with points
+        lineRenderer.widthMultiplier = lanes * roadWidthMultiplier;
         lineRenderer.positionCount = pline.NumPoints;
         for (int j = 0; j < pline.Points.Length; j++)
         {

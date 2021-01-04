@@ -133,15 +133,28 @@ MonoBehaviour:
   minimumNewPotholesPerRound: 3
   maximumNewPotholesPerRound: 6
   maximumPotholeAngerPerRound: 3
-  patchMoneyCost: 1000
-  rePaveMoneyCost: 10
-  minimumPotholePatchDuration: 5
+  minimumPotholePatchDuration: 1
   maximumPotholePatchDuration: 8
   budgetPerYear: 10000
   moneyToWin: 100000
   angerIncreaseThreshold: 100
   maxAnger: 100000
   angerDecayPerRound: 500
+  throwAndGoDurability: 1
+  throwAndRollDurability: 3
+  asphaltPatchDurability: 4
+  concretePatchDurability: 8
+  gravelFillDurability: 1
+  throwAndGoCost: 500
+  throwAndRollCost: 600
+  asphaltPatchCost: 1000
+  concretePatchCost: 3000
+  gravelFillCost: 25
+  lowGradeConcreteCostPerFoot: 100
+  highGradeConcreteCostPerFoot: 250
+  lowGradeAsphaltCostPerFoot: 50
+  highGradeAsphaltCostPerFoot: 300
+  gravelCostPerFoot: 10
 --- !u!1 &6318903299560662670
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,7 +751,7 @@ PrefabInstance:
     - target: {fileID: 5623161895720325090, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 97.513664
+      value: 77.96728
       objectReference: {fileID: 0}
     - target: {fileID: 5880015937774854629, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
@@ -763,7 +776,7 @@ PrefabInstance:
     - target: {fileID: 6722834130617546653, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 42
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6969042719826004082, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
@@ -778,7 +791,7 @@ PrefabInstance:
     - target: {fileID: 7035973937504419049, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 15.513666
+      value: 15.967279
       objectReference: {fileID: 0}
     - target: {fileID: 7663311553599711383, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}

@@ -24,7 +24,6 @@ public class Pothole : MonoBehaviour
         _initialScale = new Vector3(transform.localScale.x, transform.localScale.y, 1);
         this._stats = FindObjectOfType<PlaythroughStatistics>();
         this._angerPerRound = Random.value * balanceParameters.maximumPotholeAngerPerRound;
-        this.patchMoneyCost = balanceParameters.patchMoneyCost;
         this.isPatched = false;
         this._durability = -1;
         RenderNormal();
@@ -97,26 +96,27 @@ public class Pothole : MonoBehaviour
         }
     }
 
-    private void Patch()
+    private void Patch(int durability)
     {
         this.isPatched = true;
-        InitializeDurability();
+        InitializeDurability(durability);
         RenderPatch();
     }
 
-    public void TryPatch()
+
+    public void TryPatch(float cost, int durability)
     {
-        if (CanAffordPatch())
+        if (CanAffordPatch(cost))
         {
-            DeductCost();
-            Patch();
+            DeductCost(cost);
+            Patch(durability);
         }
         else
         {
-            Debug.Log("Cannot patch pothole: insufficient funds.  Have " + this._stats.currentBudget + ", need " + this.patchMoneyCost);
+            Debug.Log("Cannot patch pothole: insufficient funds.  Have " + this._stats.currentBudget + ", need " + cost);
         }
     }
-    
+
     public void Unpatch()
     {
         this.isPatched = false;
@@ -138,14 +138,14 @@ public class Pothole : MonoBehaviour
         }
     }
 
-    private void InitializeDurability()
+    private void InitializeDurability(int durability)
     {
-        this._durability = Random.Range(balanceParameters.minimumPotholePatchDuration, balanceParameters.maximumPotholePatchDuration + 1);
+        this._durability = Random.Range(balanceParameters.minimumPotholePatchDuration,durability);
     }
 
     private void RenderNormal()
     {
-        Texture2D tex = Colorize(potholeSprite, _angerPerRound / 3);
+        Texture2D tex = Colorize(potholeSprite, Utils.Sigmoid(_angerPerRound - 3));
         Sprite s = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), potholeSprite.pixelsPerUnit);
         Render(s);
     }
@@ -187,14 +187,47 @@ public class Pothole : MonoBehaviour
         return message;
     }
 
-    private float DeductCost()
+    private float DeductCost(float cost)
     {
-        return this._stats.currentBudget -= this.patchMoneyCost;
+        return this._stats.currentBudget -= cost;
     }
 
-    public bool CanAffordPatch()
+    public bool CanAffordPatch(float cost)
     {
-        return this._stats.currentBudget >= this.patchMoneyCost;
+        return this._stats.currentBudget >= cost;
+    }
+
+    public List<ContextMenuController.ContextMenuOption> GetRepairOptions()
+    {
+        List<ContextMenuController.ContextMenuOption> options = new List<ContextMenuController.ContextMenuOption>();
+        switch (roadSegment.material)
+        {
+            case Road.Material.ASPHALT:
+                options.Add(CreateOption("Throw 'n' Go", balanceParameters.throwAndGoCost, balanceParameters.throwAndGoDurability));
+                options.Add(CreateOption("Throw 'n' Roll", balanceParameters.throwAndRollCost, balanceParameters.throwAndRollDurability));
+                options.Add(CreateOption("Asphalt Patch", balanceParameters.asphaltPatchCost, balanceParameters.asphaltPatchDurability));
+                break;
+            case Road.Material.CONCRETE:
+                options.Add(CreateOption("Throw 'n' Go", balanceParameters.throwAndGoCost, balanceParameters.throwAndGoDurability));
+                options.Add(CreateOption("Throw 'n' Roll", balanceParameters.throwAndRollCost, balanceParameters.throwAndRollDurability));
+                options.Add(CreateOption("Asphalt Patch", balanceParameters.asphaltPatchCost, balanceParameters.asphaltPatchDurability));
+                options.Add(CreateOption("Concrete Patch", balanceParameters.concretePatchCost, balanceParameters.concretePatchDurability));
+                break;
+            case Road.Material.GRAVEL:
+                options.Add(CreateOption("More Gravel", balanceParameters.gravelFillCost, balanceParameters.gravelFillDurability));
+                break;
+            default:
+                options.Add(CreateOption("Throw 'n' Go", balanceParameters.throwAndGoCost, balanceParameters.throwAndGoDurability));
+                options.Add(CreateOption("Throw 'n' Roll", balanceParameters.throwAndRollCost, balanceParameters.throwAndRollDurability));
+                break;
+        }
+
+        return options;
+    }
+
+    private ContextMenuController.ContextMenuOption CreateOption(string label, float cost, int durability)
+    {
+        return new ContextMenuController.ContextMenuOption(label, cost, delegate { TryPatch(cost, durability); });
     }
 
     private Texture2D Colorize(Sprite sprite, float percent)
