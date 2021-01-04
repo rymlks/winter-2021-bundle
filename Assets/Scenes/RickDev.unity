@@ -191,7 +191,7 @@ PrefabInstance:
     - target: {fileID: 1271797628247567618, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: city
-      value: Ypsilanti
+      value: Canton
       objectReference: {fileID: 0}
     - target: {fileID: 2045570438879295814, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}

@@ -48,7 +48,9 @@ MonoBehaviour:
   roadName: 
   trafficRate: 0
   trafficSum: 0
+  length: 0
   lanes: 0
+  ID: 0
   material: 0
   condition: 0
   asphaltMaterial: 0
@@ -59,11 +61,16 @@ MonoBehaviour:
   highTrafficAsphalt: {r: 1, g: 0, b: 0, a: 0}
   lowTrafficConcrete: {r: 0.6431373, g: 0.61960787, b: 0.5568628, a: 0}
   highTrafficConcrete: {r: 1, g: 0.8108632, b: 0.25943398, a: 1}
-  lowTrafficGravel: {r: 0.3490566, g: 0.23747519, b: 0.13007298, a: 0}
-  highTrafficGravel: {r: 0.9811321, g: 0.55551636, b: 0, a: 1}
+  lowTrafficGravel: {r: 0.2264151, g: 0.15325738, b: 0.08009968, a: 0}
+  highTrafficGravel: {r: 0.6226415, g: 0.13327397, b: 0, a: 1}
   roadWidthMultiplier: 0.0055
   isValid: 1
   points: []
+  potholes: []
+  rePaveCost: 0
+  contextMenuController: {fileID: 0}
+  balanceParameters: {fileID: 0}
+  playthroughStatistics: {fileID: 0}
 --- !u!120 &3114658325036330241
 LineRenderer:
   m_ObjectHideFlags: 0

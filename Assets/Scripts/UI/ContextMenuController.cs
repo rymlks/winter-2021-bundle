@@ -10,6 +10,9 @@ public class ContextMenuController : MonoBehaviour
     public GameObject buttonsPanel;
     public GameObject selectRoadButton;
 
+    public GameObject labelPrefab;
+    public GameObject buttonPrefab;
+
     private Vector3 worldPosition;
     private string message = "";
     private Vector2 gridCellSize = new Vector2(130, 20);
@@ -18,6 +21,21 @@ public class ContextMenuController : MonoBehaviour
     private Pothole targetPothole;
 
     private int _buttonFontSize = 14;
+    private int numOptions = 0;
+
+    public class ContextMenuOption
+    {
+        public string label;
+        public float cost;
+        public UnityEngine.Events.UnityAction callback;
+
+        public ContextMenuOption(string label, float cost, UnityEngine.Events.UnityAction callback)
+        {
+            this.label = label;
+            this.cost = cost;
+            this.callback = callback;
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -44,15 +62,25 @@ public class ContextMenuController : MonoBehaviour
         if (!target.isPatched)
         {
             buttonsPanel.SetActive(true);
-            buttonsPanel.GetComponentInChildren<Button>().onClick.RemoveAllListeners();
-            buttonsPanel.GetComponentInChildren<Button>().onClick.AddListener(target.TryPatch);
-            buttonsPanel.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "$" + target.patchMoneyCost.ToString("#,#");
-            if (!target.CanAffordPatch())
-                buttonsPanel.GetComponentInChildren<Button>().interactable = false;
-            else
-                buttonsPanel.GetComponentInChildren<Button>().interactable = true;
 
-            buttonsPanel.GetComponentInChildren<Button>().onClick.AddListener(Close);
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("ContextMenuItem"))
+            {
+                Destroy(obj);
+            }
+            List<ContextMenuOption> options = target.GetRepairOptions();
+            numOptions = options.Count;
+            foreach(ContextMenuOption option in options)
+            {
+                GameObject label = Instantiate(labelPrefab, buttonsPanel.transform);
+                label.GetComponent<Text>().text = option.label;
+                GameObject button = Instantiate(buttonPrefab, buttonsPanel.transform);
+                button.GetComponentInChildren<Text>().text = "$" + option.cost.ToString("#,#");
+                button.GetComponent<Button>().onClick.AddListener(option.callback);
+                button.GetComponent<Button>().onClick.AddListener(Close);
+
+                if (!target.CanAffordPatch(option.cost))
+                    button.GetComponent<Button>().interactable = false;
+            }
         } else
         {
             buttonsPanel.SetActive(false);
@@ -74,15 +102,25 @@ public class ContextMenuController : MonoBehaviour
         messageBox.text = message;
 
         buttonsPanel.SetActive(true);
-        buttonsPanel.GetComponentInChildren<Button>().onClick.RemoveAllListeners();
-        buttonsPanel.GetComponentInChildren<Button>().onClick.AddListener(target.TryRePave);
-        buttonsPanel.GetComponentInChildren<Button>().GetComponentInChildren<Text>().text = "$" + target.GetRePaveCost().ToString("#,#");
-        if (!target.CanAffordRePave())
-            buttonsPanel.GetComponentInChildren<Button>().interactable = false;
-        else
-            buttonsPanel.GetComponentInChildren<Button>().interactable = true;
 
-        buttonsPanel.GetComponentInChildren<Button>().onClick.AddListener(Close);
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("ContextMenuItem"))
+        {
+            Destroy(obj);
+        }
+        List<ContextMenuOption> options = target.GetRepairOptions();
+        numOptions = options.Count;
+        foreach (ContextMenuOption option in options)
+        {
+            GameObject label = Instantiate(labelPrefab, buttonsPanel.transform);
+            label.GetComponent<Text>().text = option.label;
+            GameObject button = Instantiate(buttonPrefab, buttonsPanel.transform);
+            button.GetComponentInChildren<Text>().text = "$" + option.cost.ToString("#,#");
+            button.GetComponent<Button>().onClick.AddListener(option.callback);
+            button.GetComponent<Button>().onClick.AddListener(Close);
+
+            if (!target.CanAffordRePave(option.cost))
+                button.GetComponent<Button>().interactable = false;
+        }
 
         SetScale();
     }
@@ -101,18 +139,7 @@ public class ContextMenuController : MonoBehaviour
 
         // Adjust buttons
         buttonsPanel.GetComponent<GridLayoutGroup>().cellSize = new Vector2(gridCellSize.x * UIController.UIScale, gridCellSize.y * UIController.UIScale);
-        float buttonsHeight = 0;
-        int i = 0;
-        foreach (Text subText in buttonsPanel.GetComponentsInChildren<Text>())
-        {
-            if (subText.gameObject.activeSelf)
-            {
-                i++;
-                if (i%2==0)
-                    buttonsHeight += (gridCellSize.y * UIController.UIScale) + 1;
-                subText.fontSize = (int)(14 * UIController.UIScale);
-            }
-        }
+        float buttonsHeight = gridCellSize.y * UIController.UIScale * (numOptions + 1);
         buttonsPanel.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, buttonsHeight);
         selectRoadButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 18 * UIController.UIScale);
 
