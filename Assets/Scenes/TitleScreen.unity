@@ -128,6 +128,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3276754962123774842, guid: 556312a751231af4d95c9c3871b56aa9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0017089844
+      objectReference: {fileID: 0}
     - target: {fileID: 7423155609727247936, guid: 556312a751231af4d95c9c3871b56aa9,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -141,7 +146,7 @@ PrefabInstance:
     - target: {fileID: 7423155610442389007, guid: 556312a751231af4d95c9c3871b56aa9,
         type: 3}
       propertyPath: m_Text
-      value: Cool Title Graphic Here
+      value: Why Don't They Fix the D@#n Roads!?
       objectReference: {fileID: 0}
     - target: {fileID: 7423155610662102164, guid: 556312a751231af4d95c9c3871b56aa9,
         type: 3}
@@ -202,11 +207,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7423155610987449288, guid: 556312a751231af4d95c9c3871b56aa9,
-        type: 3}
-      propertyPath: m_Text
-      value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 7423155611331881569, guid: 556312a751231af4d95c9c3871b56aa9,
         type: 3}

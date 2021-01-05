@@ -139,7 +139,7 @@ public class ContextMenuController : MonoBehaviour
 
         // Adjust buttons
         buttonsPanel.GetComponent<GridLayoutGroup>().cellSize = new Vector2(gridCellSize.x * UIController.UIScale, gridCellSize.y * UIController.UIScale);
-        float buttonsHeight = gridCellSize.y * UIController.UIScale * (numOptions + 1);
+        float buttonsHeight = gridCellSize.y * UIController.UIScale * (numOptions + 1) + 4;
         buttonsPanel.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, buttonsHeight);
         selectRoadButton.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 18 * UIController.UIScale);
 
