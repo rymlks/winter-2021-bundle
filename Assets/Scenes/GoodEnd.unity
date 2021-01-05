@@ -128,6 +128,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3276754962123774842, guid: 556312a751231af4d95c9c3871b56aa9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0017089844
+      objectReference: {fileID: 0}
     - target: {fileID: 7423155609727247936, guid: 556312a751231af4d95c9c3871b56aa9,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -204,6 +209,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7423155610987449288, guid: 556312a751231af4d95c9c3871b56aa9,
+        type: 3}
+      propertyPath: m_Text
+      value: Title
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 556312a751231af4d95c9c3871b56aa9, type: 3}
