@@ -10,6 +10,7 @@ public class StatisticsUIController : MonoBehaviour
 
     public GameObject movingAngerIconImage;
     public GameObject angerThermometer;
+    public GameObject laborMeter;
     public GameObject moneyPanel;
     public GameObject retireButton;
     public Text roundDisplay;
@@ -17,27 +18,40 @@ public class StatisticsUIController : MonoBehaviour
     public GameObject moneyPrefab;
     public Texture2D thermometerTexture;
     public Texture2D moneyTexture;
+    public Texture2D shovelTexture;
     public Color thermometerColor;
 
     private Text budgetText;
     private Text angerText;
+    private Text laborText;
     private PlaythroughStatistics statsModel;
     private GameManager gameManager;
 
     private float angerInitialPosition;
     private List<GameObject> moneyInstances;
 
+    private Texture2D _shovelTexture;
+    private Texture2D _thermometerTexture;
+    private float _previousLabor;
+
     // Start is called before the first frame update
     void Start()
     {
         budgetText = GameObject.Find("BudgetText").GetComponent<Text>();
         angerText = GameObject.Find("AngerText").GetComponent<Text>();
+        laborText = GameObject.Find("LaborText").GetComponent<Text>();
         statsModel = GameObject.FindObjectOfType<PlaythroughStatistics>();
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
         angerInitialPosition = movingAngerIconImage.GetComponent<RectTransform>().localPosition.y;
         moneyInstances = new List<GameObject>();
         retireButton.SetActive(false);
+
+        _shovelTexture = new Texture2D(shovelTexture.width, shovelTexture.height);
+        _shovelTexture.wrapMode = TextureWrapMode.Clamp;
+        _thermometerTexture = new Texture2D(thermometerTexture.width, thermometerTexture.height);
+        _thermometerTexture.wrapMode = TextureWrapMode.Clamp;
+        _previousLabor = statsModel.currentLabor;
     }
 
     // Update is called once per frame
@@ -50,6 +64,8 @@ public class StatisticsUIController : MonoBehaviour
 
         UpdateAngerMeter();
         UpdateBudgetMeter();
+        UpdateLaborMeter();
+        _previousLabor = statsModel.currentLabor;
     }
 
 
@@ -66,8 +82,9 @@ public class StatisticsUIController : MonoBehaviour
         rect.rotation = Quaternion.Euler(0, 0, rotation);
         rect.localPosition = new Vector3(rect.localPosition.x, angerInitialPosition * (1 - angerPercent), 0.0f);
 
-        UpdateThermometerTexture(angerPercent);
+        StartCoroutine(UpdateThermometerTexture(angerPercent));
     }
+
     private void UpdateBudgetMeter()
     {
         float numberOfMoneys = 100;
@@ -94,9 +111,17 @@ public class StatisticsUIController : MonoBehaviour
         retireButton.SetActive(statsModel.currentBudget >= statsModel.maxBudget);
     }
 
-    private void UpdateThermometerTexture(float percentFilled)
+    private void UpdateLaborMeter()
     {
-        Texture2D texture = new Texture2D(thermometerTexture.width, thermometerTexture.height, TextureFormat.ARGB32, false);
+        laborText.text = string.Format("Labor: {0:#,#} Hours", statsModel.currentLabor);
+        if (_previousLabor != statsModel.currentLabor)
+        {
+            StartCoroutine(UpdateShovelTexture());
+        }
+    }
+
+    private IEnumerator UpdateThermometerTexture(float percentFilled)
+    {
         int heightOfBulb = (int)((thermometerTexture.height / angerThermometer.GetComponent<RectTransform>().rect.height) * angerInitialPosition) + thermometerTexture.height;
 
         int colorHeight = (int)((thermometerTexture.height - heightOfBulb) * percentFilled) + heightOfBulb;
@@ -120,15 +145,42 @@ public class StatisticsUIController : MonoBehaviour
                 if (y < colorHeight && x > leftMostBlackPixel && x < rightMostBlackPixel && pixelAlpha < 1)
                 {
                     //Color color = new Color(thermometerColor.r * (1- pixelAlpha), thermometerColor.g * (1 - pixelAlpha), thermometerColor.b * (1 - pixelAlpha), 1);
-                    texture.SetPixel(x, y, thermometerColor);
+                    _thermometerTexture.SetPixel(x, y, thermometerColor);
                 } else
                 {
-                    texture.SetPixel(x, y, thermometerTexture.GetPixel(x, y));
+                    _thermometerTexture.SetPixel(x, y, thermometerTexture.GetPixel(x, y));
                 }
             }
-        }
-        texture.Apply();
 
-        angerThermometer.GetComponent<RawImage>().texture = texture;
+            if (y % 100 == 0) yield return null;
+        }
+        _thermometerTexture.Apply();
+
+        angerThermometer.GetComponent<RawImage>().texture = _thermometerTexture;
+    }
+
+    private IEnumerator UpdateShovelTexture()
+    {
+        float percentFilled = statsModel.currentLabor / statsModel.maxLabor;
+
+        //texture.alphaIsTransparency = true;
+        for (int y = 0; y < _shovelTexture.height; y++)
+        {
+            for (int x = 0; x < _shovelTexture.width; x++)
+            {
+                if (shovelTexture.GetPixel(x, y).a == 1 && (float) y / _shovelTexture.height > percentFilled)
+                {
+                    _shovelTexture.SetPixel(x, y, Color.black);
+                } else
+                {
+                    _shovelTexture.SetPixel(x, y, shovelTexture.GetPixel(x, y));
+                }
+            }
+
+            if (y % 100 == 0) yield return null;
+        }
+        _shovelTexture.Apply();
+
+        laborMeter.GetComponent<RawImage>().texture = _shovelTexture;
     }
 }

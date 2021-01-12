@@ -128,7 +128,7 @@ public class Road : MonoBehaviour
 
         foreach (GameObject pothole in potholes)
         {
-            pothole.GetComponent<Pothole>().Select();
+            pothole.GetComponent<Pothole>().FauxSelect();
         }
     }
 
@@ -157,12 +157,12 @@ public class Road : MonoBehaviour
         return message;
     }
 
-    public void TryRePave(float cost, Material material, Condition condition)
+    public void TryRePave(float cost, float labor, Material material, Condition condition)
     {
 
-        if (CanAffordRePave(cost))
+        if (CanAffordRePave(cost, labor))
         {
-            DeductCost(cost);
+            DeductCost(cost, labor);
             RePave(material, condition);
         }
         else
@@ -186,66 +186,43 @@ public class Road : MonoBehaviour
         Colorize();
     }
 
-    private float DeductCost(float cost)
+    private void DeductCost(float cost, float labor)
     {
-        return this.playthroughStatistics.currentBudget -= cost;
+        this.playthroughStatistics.currentBudget -= cost;
+        this.playthroughStatistics.currentLabor -= labor;
     }
 
-    public bool CanAffordRePave(float cost)
+    public bool CanAffordRePave(float cost, float labor)
     {
-        return this.playthroughStatistics.currentBudget >= cost;
+        return this.playthroughStatistics.currentBudget >= cost && playthroughStatistics.currentLabor >= labor;
     }
 
-    public float GetRePaveCost(Material material, Condition condition)
+    public float GetRePaveCost(float baseCost)
     {
-        float baseCost;
-        if (material == Material.ASPHALT && condition == Condition.FAIR)
-        {
-            baseCost = balanceParameters.lowGradeAsphaltCostPerFoot;
-        }
-        else if (material == Material.ASPHALT && condition == Condition.GOOD)
-        {
-            baseCost = balanceParameters.highGradeAsphaltCostPerFoot;
-        }
-        else if (material == Material.CONCRETE && condition == Condition.FAIR)
-        {
-            baseCost = balanceParameters.lowGradeConcreteCostPerFoot;
-        }
-        else if (material == Material.CONCRETE && condition == Condition.GOOD)
-        {
-            baseCost = balanceParameters.highGradeConcreteCostPerFoot;
-        } else if (material == Material.GRAVEL)
-        {
-            baseCost = balanceParameters.gravelCostPerFoot;
-        } else
-        {
-            Debug.LogError("Unexpected road repair combination: " + material + ", " + condition);
-            baseCost = -1;
-        }
-
         return baseCost * (float)length * lanes;
+    }
+
+    public float GetRePaveLabor(float baseLabor)
+    {
+        return baseLabor * (float)length * lanes;
     }
 
     public List<ContextMenuController.ContextMenuOption> GetRepairOptions()
     {
-        List<ContextMenuController.ContextMenuOption> options = new List<ContextMenuController.ContextMenuOption>
+        List<ContextMenuController.ContextMenuOption> options = new List<ContextMenuController.ContextMenuOption>();
+        foreach (BalanceParameters.RoadOption option in balanceParameters.roadRepairs)
         {
-            CreateOption("Shit asphalt", Material.ASPHALT, Condition.FAIR),
-            CreateOption("Good asphalt", Material.ASPHALT, Condition.GOOD),
-
-            CreateOption("Shit concrete", Material.CONCRETE, Condition.FAIR),
-            CreateOption("Good concrete", Material.CONCRETE, Condition.GOOD),
-
-            CreateOption("Gravel", Material.GRAVEL, Condition.GOOD)
-        };
+            options.Add(CreateOption(option));
+        }
 
         return options;
     }
 
-    private ContextMenuController.ContextMenuOption CreateOption(string label, Material material, Condition condition)
+    private ContextMenuController.ContextMenuOption CreateOption(BalanceParameters.RoadOption option)
     {
-        float cost = GetRePaveCost(material, condition);
-        return new ContextMenuController.ContextMenuOption(label, cost, delegate { TryRePave(cost, material, condition); });
+        float cost = GetRePaveCost(option.cost);
+        float labor = GetRePaveLabor(option.labor);
+        return new ContextMenuController.ContextMenuOption(option.description, cost, labor, delegate { TryRePave(cost, labor, option.material, option.condition); });
     }
 
     private void Colorize()

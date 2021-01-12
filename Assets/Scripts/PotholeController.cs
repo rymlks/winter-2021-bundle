@@ -10,6 +10,9 @@ public class PotholeController : MonoBehaviour
     public List<Road> roads;
     public ContextMenuController contextMenuControler;
 
+    public IEnumerator ageEnumerator;
+    public IEnumerator createEnumerator;
+
     private GameObject _potholeParent;
     private BalanceParameters _parameters;
 
@@ -39,12 +42,24 @@ public class PotholeController : MonoBehaviour
         }
     }
 
-    public void AgeExistingPotholes()
+    public void AdvanceRound()
     {
+        ageEnumerator = AgeExistingPotholes();
+        createEnumerator = CreateNewPotholes();
+
+        StartCoroutine(ageEnumerator);
+        StartCoroutine(createEnumerator);
+    }
+
+    private IEnumerator AgeExistingPotholes()
+    {
+        int i = 0;
         foreach (Pothole hole in _potholeParent.GetComponentsInChildren<Pothole>())
         {
             hole.NotifyRoundEnded();
+            if (i%10 == 0) yield return null;
         }
+        ageEnumerator = null;
     }
 
     public void SortAndSumRoads()
@@ -61,7 +76,7 @@ public class PotholeController : MonoBehaviour
         return _potholeParent.GetComponentsInChildren<Pothole>().Sum(hole => hole.getAngerCausedPerRound());
     }
 
-    public void createNewPotholes()
+    private IEnumerator CreateNewPotholes()
     {
         Random random = new System.Random();
         int newPotholesThisRound = random.Next(_parameters.minimumNewPotholesPerRound, _parameters.maximumNewPotholesPerRound + 1);    //Sysrand is exclusive of the maximum
@@ -81,7 +96,10 @@ public class PotholeController : MonoBehaviour
             {
                 intersect.Degrade();
             }
+
+            if (i % 10 == 0) yield return null;
         }
+        createEnumerator = null;
     }
 
     /**

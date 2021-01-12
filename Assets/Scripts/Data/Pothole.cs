@@ -52,11 +52,25 @@ public class Pothole : MonoBehaviour
         if (isPatched)
         {
             RenderPatch(Color.blue);
-        } else
+        }
+        else
         {
             RenderNormal(Color.blue);
         }
         GetComponent<PolygonCollider2D>().enabled = false;
+    }
+
+    public void FauxSelect()
+    {
+        _selected = true;
+        if (isPatched)
+        {
+            RenderPatch(Color.blue);
+        }
+        else
+        {
+            RenderNormal(Color.blue);
+        }
     }
 
     public void Deselect()
@@ -103,12 +117,11 @@ public class Pothole : MonoBehaviour
         RenderPatch();
     }
 
-
-    public void TryPatch(float cost, int durability)
+    public void TryPatch(float cost, int durability, float labor)
     {
-        if (CanAffordPatch(cost))
+        if (CanAffordPatch(cost, labor))
         {
-            DeductCost(cost);
+            DeductCost(cost, labor);
             Patch(durability);
         }
         else
@@ -187,47 +200,33 @@ public class Pothole : MonoBehaviour
         return message;
     }
 
-    private float DeductCost(float cost)
+    private void DeductCost(float cost, float labor)
     {
-        return this._stats.currentBudget -= cost;
+        this._stats.currentBudget -= cost;
+        this._stats.currentLabor -= labor;
     }
 
-    public bool CanAffordPatch(float cost)
+    public bool CanAffordPatch(float cost, float labor)
     {
-        return this._stats.currentBudget >= cost;
+        return this._stats.currentBudget >= cost && this._stats.currentLabor >= labor;
     }
 
     public List<ContextMenuController.ContextMenuOption> GetRepairOptions()
     {
         List<ContextMenuController.ContextMenuOption> options = new List<ContextMenuController.ContextMenuOption>();
-        switch (roadSegment.material)
+        foreach (BalanceParameters.RepairOption option in balanceParameters.potholeRepairs)
         {
-            case Road.Material.ASPHALT:
-                options.Add(CreateOption("Throw 'n' Go", balanceParameters.throwAndGoCost, balanceParameters.throwAndGoDurability));
-                options.Add(CreateOption("Throw 'n' Roll", balanceParameters.throwAndRollCost, balanceParameters.throwAndRollDurability));
-                options.Add(CreateOption("Asphalt Patch", balanceParameters.asphaltPatchCost, balanceParameters.asphaltPatchDurability));
-                break;
-            case Road.Material.CONCRETE:
-                options.Add(CreateOption("Throw 'n' Go", balanceParameters.throwAndGoCost, balanceParameters.throwAndGoDurability));
-                options.Add(CreateOption("Throw 'n' Roll", balanceParameters.throwAndRollCost, balanceParameters.throwAndRollDurability));
-                options.Add(CreateOption("Asphalt Patch", balanceParameters.asphaltPatchCost, balanceParameters.asphaltPatchDurability));
-                options.Add(CreateOption("Concrete Patch", balanceParameters.concretePatchCost, balanceParameters.concretePatchDurability));
-                break;
-            case Road.Material.GRAVEL:
-                options.Add(CreateOption("More Gravel", balanceParameters.gravelFillCost, balanceParameters.gravelFillDurability));
-                break;
-            default:
-                options.Add(CreateOption("Throw 'n' Go", balanceParameters.throwAndGoCost, balanceParameters.throwAndGoDurability));
-                options.Add(CreateOption("Throw 'n' Roll", balanceParameters.throwAndRollCost, balanceParameters.throwAndRollDurability));
-                break;
+            if (option.compatibleRoadMaterials.Contains(roadSegment.material))
+            {
+                options.Add(CreateOption(option));
+            }
         }
-
         return options;
     }
 
-    private ContextMenuController.ContextMenuOption CreateOption(string label, float cost, int durability)
+    private ContextMenuController.ContextMenuOption CreateOption(BalanceParameters.RepairOption option)
     {
-        return new ContextMenuController.ContextMenuOption(label, cost, delegate { TryPatch(cost, durability); });
+        return new ContextMenuController.ContextMenuOption(option.description, option.cost, option.labor, delegate { TryPatch(option.cost, option.durability, option.labor); });
     }
 
     private Texture2D Colorize(Sprite sprite, float percent)

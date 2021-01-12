@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public PlaythroughStatistics playthroughStatistics;
     public BalanceParameters balanceParameters;
     public ContextMenuController contextMenu;
+    public Button nextButton;
 
     public GameObject canvasCover;
     private int fadeInFrames = 60;
@@ -47,6 +48,8 @@ public class GameManager : MonoBehaviour
             playthroughStatistics.currentBudget = balanceParameters.budgetPerYear;
             playthroughStatistics.maxAnger = balanceParameters.maxAnger;
             playthroughStatistics.maxBudget = balanceParameters.moneyToWin;
+            playthroughStatistics.currentLabor = balanceParameters.maxLabor;
+            playthroughStatistics.maxLabor = balanceParameters.maxLabor;
         }
 
         transform.parent = null;
@@ -91,6 +94,8 @@ public class GameManager : MonoBehaviour
             playthroughStatistics.currentAnger = Mathf.Max(playthroughStatistics.currentAnger - balanceParameters.angerDecayPerRound, 0);
         }
 
+        playthroughStatistics.currentLabor = playthroughStatistics.maxLabor;
+
         // Lose if people are too angry
         if (playthroughStatistics.currentAnger > playthroughStatistics.maxAnger)
         {
@@ -98,13 +103,19 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // Age the potholes
-        potholeController.AgeExistingPotholes();
-
-        // Spawn potholes
-        potholeController.createNewPotholes();
+        StartCoroutine(TransitionRounds());
     }
 
+    private IEnumerator TransitionRounds()
+    {
+        nextButton.interactable = false;
+        potholeController.AdvanceRound();
+
+        while (potholeController.ageEnumerator != null || potholeController.createEnumerator != null)
+            yield return null;
+
+        nextButton.interactable = true;
+    }
     public void LoadDemoScene()
     {
         LoadingScreenTransition(demoScene);
