@@ -13,6 +13,11 @@ public class ContextMenuController : MonoBehaviour
     public GameObject labelPrefab;
     public GameObject buttonPrefab;
 
+    public PlaythroughStatistics playthroughStatistics;
+
+    public Color textColor;
+    public Color errorColor;
+
     private Vector3 worldPosition;
     private string message = "";
     private Vector2 gridCellSize = new Vector2(130, 20);
@@ -27,12 +32,14 @@ public class ContextMenuController : MonoBehaviour
     {
         public string label;
         public float cost;
+        public float labor;
         public UnityEngine.Events.UnityAction callback;
 
-        public ContextMenuOption(string label, float cost, UnityEngine.Events.UnityAction callback)
+        public ContextMenuOption(string label, float cost, float labor, UnityEngine.Events.UnityAction callback)
         {
             this.label = label;
             this.cost = cost;
+            this.labor = labor;
             this.callback = callback;
         }
     }
@@ -49,8 +56,11 @@ public class ContextMenuController : MonoBehaviour
     public void Open(Pothole target)
     {
         gameObject.SetActive(true);
+
+        // Deselect previously selected objects
         Deselect();
 
+        // Init stuff
         selectRoadButton.SetActive(true);
         targetRoad = null;
         targetPothole = target;
@@ -59,6 +69,7 @@ public class ContextMenuController : MonoBehaviour
         message = text;
         messageBox.text = message;
 
+        // Set up options for repair
         if (!target.isPatched)
         {
             buttonsPanel.SetActive(true);
@@ -71,15 +82,7 @@ public class ContextMenuController : MonoBehaviour
             numOptions = options.Count;
             foreach(ContextMenuOption option in options)
             {
-                GameObject label = Instantiate(labelPrefab, buttonsPanel.transform);
-                label.GetComponent<Text>().text = option.label;
-                GameObject button = Instantiate(buttonPrefab, buttonsPanel.transform);
-                button.GetComponentInChildren<Text>().text = "$" + option.cost.ToString("#,#");
-                button.GetComponent<Button>().onClick.AddListener(option.callback);
-                button.GetComponent<Button>().onClick.AddListener(Close);
-
-                if (!target.CanAffordPatch(option.cost))
-                    button.GetComponent<Button>().interactable = false;
+                InstantiateOption(option);
             }
         } else
         {
@@ -111,18 +114,36 @@ public class ContextMenuController : MonoBehaviour
         numOptions = options.Count;
         foreach (ContextMenuOption option in options)
         {
-            GameObject label = Instantiate(labelPrefab, buttonsPanel.transform);
-            label.GetComponent<Text>().text = option.label;
-            GameObject button = Instantiate(buttonPrefab, buttonsPanel.transform);
-            button.GetComponentInChildren<Text>().text = "$" + option.cost.ToString("#,#");
-            button.GetComponent<Button>().onClick.AddListener(option.callback);
-            button.GetComponent<Button>().onClick.AddListener(Close);
-
-            if (!target.CanAffordRePave(option.cost))
-                button.GetComponent<Button>().interactable = false;
+            InstantiateOption(option);
         }
 
         SetScale();
+    }
+
+    private void InstantiateOption(ContextMenuOption option)
+    {
+        // Create a button, a cost label, and a labor label.
+        GameObject button = Instantiate(buttonPrefab, buttonsPanel.transform);
+        button.GetComponent<Button>().interactable = true;
+        button.GetComponentInChildren<Text>().text = option.label;
+        GameObject moneyLabel = Instantiate(labelPrefab, buttonsPanel.transform);
+        moneyLabel.GetComponent<Text>().text = string.Format("${0:#,0}", option.cost);
+        GameObject laborLabel = Instantiate(labelPrefab, buttonsPanel.transform);
+        laborLabel.GetComponent<Text>().text = string.Format("{0:#,0} hrs.", option.labor);
+        button.GetComponent<Button>().onClick.AddListener(option.callback);
+        button.GetComponent<Button>().onClick.AddListener(Close);
+
+
+        if (option.cost > playthroughStatistics.currentBudget)
+        {
+            moneyLabel.GetComponent<Text>().color = errorColor;
+            button.GetComponent<Button>().interactable = false;
+        }
+        if (option.labor > playthroughStatistics.currentLabor)
+        {
+            laborLabel.GetComponent<Text>().color = errorColor;
+            button.GetComponent<Button>().interactable = false;
+        }
     }
 
     public void SetScale()
@@ -130,7 +151,7 @@ public class ContextMenuController : MonoBehaviour
         // Find minimum width
         float minWidth;
         if (buttonsPanel.activeSelf)
-            minWidth = gridCellSize.x * UIController.UIScale * 2 + _buttonFontSize;
+            minWidth = gridCellSize.x * UIController.UIScale * 3 + _buttonFontSize;
         else
             minWidth = 36;
 

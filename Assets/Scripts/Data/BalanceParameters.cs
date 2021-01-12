@@ -4,6 +4,27 @@ using UnityEngine;
 
 public class BalanceParameters : MonoBehaviour
 {
+
+    [System.Serializable]
+    public class RepairOption
+    {
+        public string description;
+        public float cost;
+        public float labor;
+        public int durability;
+
+        public List<Road.Material> compatibleRoadMaterials;
+    }
+    [System.Serializable]
+    public class RoadOption
+    {
+        public string description;
+        public float cost;
+        public float labor;
+        public Road.Material material;
+        public Road.Condition condition;
+    }
+
     public int roundsInAYear;
     public int maxYears;
 
@@ -19,24 +40,8 @@ public class BalanceParameters : MonoBehaviour
     public float maxAnger;
     public float angerDecayPerRound;
 
-    [Header("Pothole Durabilities")]
-    public int throwAndGoDurability;
-    public int throwAndRollDurability;
-    public int asphaltPatchDurability;
-    public int concretePatchDurability;
-    public int gravelFillDurability;
+    public float maxLabor;
 
-    [Header("Pothole Costs")]
-    public float throwAndGoCost;
-    public float throwAndRollCost;
-    public float asphaltPatchCost;
-    public float concretePatchCost;
-    public float gravelFillCost;
-
-    [Header("Road Costs")]
-    public float lowGradeConcreteCostPerFoot;
-    public float highGradeConcreteCostPerFoot;
-    public float lowGradeAsphaltCostPerFoot;
-    public float highGradeAsphaltCostPerFoot;
-    public float gravelCostPerFoot;
+    public List<RepairOption> potholeRepairs;
+    public List<RoadOption> roadRepairs;
 }

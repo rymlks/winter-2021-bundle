@@ -6,8 +6,10 @@ public class PlaythroughStatistics : MonoBehaviour
 {
     public float currentAnger;
     public float currentBudget;
+    public float currentLabor;
     public float maxAnger;
     public float maxBudget;
+    public float maxLabor;
 
     public void Awake()
     {
