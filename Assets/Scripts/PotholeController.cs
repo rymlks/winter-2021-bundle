@@ -139,6 +139,7 @@ public class PotholeController : MonoBehaviour
      */
     private Road GetRandomRoad(Random random)
     {
+        // Return a random road weighted by daily drivers*length
         int trafficThreshold = random.Next(0, (int)_sumTraffic);
         double sum = 0;
         foreach (Road road in roads)
@@ -149,6 +150,16 @@ public class PotholeController : MonoBehaviour
                 return road;
             }
         }
+        // Finding none, find any road that isn't under construction, starting with the busiest roads
+        for (int i=roads.Count-1; i<=0; i++)
+        {
+            Road road = roads[i];
+            if (!road.underConstruction)
+            {
+                return road;
+            }
+        }
+        // Finding none, return the busiest road
         return roads.Last();
     }
 

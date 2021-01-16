@@ -104,6 +104,8 @@ MonoBehaviour:
   patchedPotholeSprite: {fileID: 21300000, guid: 4756db5f30d2cc946a9a903442d71428,
     type: 3}
   constructionSprite: {fileID: 21300000, guid: f55abe27ae117de4084af9b3ac9457e4, type: 3}
+  angerParticle: {fileID: 2100000, guid: 718d751cabbcf2745be0875a0d381885, type: 2}
+  laborParticle: {fileID: 2100000, guid: eb28e6166f23f8547a770efeba358c07, type: 2}
   balanceParameters: {fileID: 0}
   contextMenuControler: {fileID: 0}
   roadSegment: {fileID: 0}
@@ -791,7 +793,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 1}
+    m_Scale: {x: 1, y: 1, z: -1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -4833,7 +4835,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 718d751cabbcf2745be0875a0d381885, type: 2}
+  - {fileID: 2100000, guid: eb28e6166f23f8547a770efeba358c07, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0

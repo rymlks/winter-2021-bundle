@@ -48,6 +48,7 @@ public class Road : MonoBehaviour
     public PlaythroughStatistics playthroughStatistics;
 
     private LineRenderer lineRenderer;
+    private ParticleSystem _particleSystem;
     private bool _selected = false;
     private int _constructionTime = -1;
     private float _currentLaborCost = -1;
@@ -123,6 +124,7 @@ public class Road : MonoBehaviour
             } else
             {
                 playthroughStatistics.currentLabor -= _currentLaborCost;
+                _particleSystem.Play();
             }
         }
     }
@@ -249,7 +251,7 @@ public class Road : MonoBehaviour
 
     public float GetRePaveLabor(float baseLabor)
     {
-        return baseLabor * (float)length * lanes;
+        return Mathf.Min(baseLabor * (float)length * lanes, balanceParameters.maxLabor);
     }
 
     public int GetRePaveTime(float baseTime)
@@ -413,6 +415,10 @@ public class Road : MonoBehaviour
         meshCollider.sharedMesh = mesh;
 
         potholes = new List<GameObject>();
+        _particleSystem = GetComponent<ParticleSystem>();
+        ParticleSystem.ShapeModule _editableShape = _particleSystem.shape;
+        //_editableShape.position = MidPoint();
+        _editableShape.mesh = mesh;
     }
 
     public Vector3 RandomPoint()

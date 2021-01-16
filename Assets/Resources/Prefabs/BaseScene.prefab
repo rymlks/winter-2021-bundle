@@ -180,25 +180,25 @@ MonoBehaviour:
   roadRepairs:
   - description: Shit Asphalt
     cost: 7
-    labor: 0.01
+    labor: 0.005
     time: 0.001
     material: 0
     condition: 5
   - description: Good Asphalt
     cost: 12
-    labor: 0.01
+    labor: 0.005
     time: 0.001
     material: 0
     condition: 1
   - description: Shit Concrete
     cost: 10
-    labor: 0.02
-    time: 0
+    labor: 0.01
+    time: 0.002
     material: 1
     condition: 5
   - description: Good Concrete
     cost: 15
-    labor: 0.02
+    labor: 0.01
     time: 0.002
     material: 1
     condition: 1

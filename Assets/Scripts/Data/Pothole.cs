@@ -12,6 +12,10 @@ public class Pothole : MonoBehaviour
     public Sprite potholeSprite;
     public Sprite patchedPotholeSprite;
     public Sprite constructionSprite;
+
+    public UnityEngine.Material angerParticle;
+    public UnityEngine.Material laborParticle;
+
     private PlaythroughStatistics _stats;
     public BalanceParameters balanceParameters;
     private int _durability;
@@ -19,12 +23,17 @@ public class Pothole : MonoBehaviour
     public ContextMenuController contextMenuControler;
     public Road roadSegment;
 
+    private ParticleSystem _particleSystem;
+    private ParticleSystemRenderer _particleSystemRenderer;
+
     private bool _selected = false;
     private Vector3 _initialScale;
     private float _currentLaborCost = -1;
 
     void Start()
     {
+        _particleSystem = GetComponent<ParticleSystem>();
+        _particleSystemRenderer = GetComponent<ParticleSystemRenderer>();
         _initialScale = new Vector3(transform.localScale.x, transform.localScale.y, 1);
         this._stats = FindObjectOfType<PlaythroughStatistics>();
         this.isPatched = false;
@@ -122,7 +131,8 @@ public class Pothole : MonoBehaviour
 
     private void ApplyPotholeAnger()
     {
-        GetComponent<ParticleSystem>().Play();
+        _particleSystemRenderer.material = angerParticle;
+        _particleSystem.Play();
         _angerPerRound += Random.Range(0, balanceParameters.potholeAngerPerCar);// * (float)roadSegment.trafficRate;
     }
 
@@ -201,6 +211,9 @@ public class Pothole : MonoBehaviour
             {
                 RenderConstruction();
                 _stats.currentLabor -= _currentLaborCost;
+
+                _particleSystemRenderer.material = laborParticle;
+                _particleSystem.Play();
             }
 
         } else if (this.isPatched)
