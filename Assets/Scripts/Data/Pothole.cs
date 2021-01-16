@@ -7,25 +7,40 @@ public class Pothole : MonoBehaviour
 {
     private float _angerPerRound;
     public bool isPatched;
+    public bool underConstruction;
     public float patchMoneyCost;
     public Sprite potholeSprite;
     public Sprite patchedPotholeSprite;
+    public Sprite constructionSprite;
+
+    public UnityEngine.Material angerParticle;
+    public UnityEngine.Material laborParticle;
+
     private PlaythroughStatistics _stats;
     public BalanceParameters balanceParameters;
     private int _durability;
+    private int _constructionTime;
     public ContextMenuController contextMenuControler;
     public Road roadSegment;
 
+    private ParticleSystem _particleSystem;
+    private ParticleSystemRenderer _particleSystemRenderer;
+
     private bool _selected = false;
     private Vector3 _initialScale;
+    private float _currentLaborCost = -1;
 
     void Start()
     {
+        _particleSystem = GetComponent<ParticleSystem>();
+        _particleSystemRenderer = GetComponent<ParticleSystemRenderer>();
         _initialScale = new Vector3(transform.localScale.x, transform.localScale.y, 1);
         this._stats = FindObjectOfType<PlaythroughStatistics>();
-        this._angerPerRound = Random.value * balanceParameters.maximumPotholeAngerPerRound;
         this.isPatched = false;
+        this.underConstruction = false;
         this._durability = -1;
+        this._constructionTime = -1;
+        ApplyPotholeAnger();
         RenderNormal();
     }
 
@@ -49,7 +64,11 @@ public class Pothole : MonoBehaviour
     public void Select()
     {
         _selected = true;
-        if (isPatched)
+        if (underConstruction)
+        {
+            RenderConstruction(Color.blue);
+        }
+        else if (isPatched)
         {
             RenderPatch(Color.blue);
         }
@@ -63,7 +82,11 @@ public class Pothole : MonoBehaviour
     public void FauxSelect()
     {
         _selected = true;
-        if (isPatched)
+        if (underConstruction)
+        {
+            RenderConstruction(Color.blue);
+        }
+        else if (isPatched)
         {
             RenderPatch(Color.blue);
         }
@@ -76,7 +99,11 @@ public class Pothole : MonoBehaviour
     public void Deselect()
     {
         _selected = false;
-        if (isPatched)
+        if (underConstruction)
+        {
+            RenderConstruction();
+        }
+        else if (isPatched)
         {
             RenderPatch();
         }
@@ -90,12 +117,34 @@ public class Pothole : MonoBehaviour
 
     public float getAngerCausedPerRound()
     {
-        return this.isPatched ? 0 : this._angerPerRound;
+        if (underConstruction)
+        {
+            return GetConstructionAnger();
+        } else if (isPatched)
+        {
+            return 0;
+        } else
+        {
+            return _angerPerRound;
+        }
     }
+
+    private void ApplyPotholeAnger()
+    {
+        _particleSystemRenderer.material = angerParticle;
+        _particleSystem.Play();
+        _angerPerRound += Random.Range(0, balanceParameters.potholeAngerPerCar);// * (float)roadSegment.trafficRate;
+    }
+
+    private float GetConstructionAnger()
+    {
+        return Random.Range(0, balanceParameters.potholeConstructionAngerPerCar);// * (float)roadSegment.trafficRate;
+    }
+
 
     public void Degrade()
     {
-        if(isPatched) 
+        if(isPatched && !underConstruction) 
         {
             this._durability--;
             if (this._durability <= 0)
@@ -103,26 +152,36 @@ public class Pothole : MonoBehaviour
                 Unpatch();
             }
         }
-        else
+        else if (!isPatched)
         {
-            this._angerPerRound += Random.value * balanceParameters.maximumPotholeAngerPerRound;
+            ApplyPotholeAnger();
             RenderNormal();
         }
     }
 
-    private void Patch(int durability)
+    private void Patch(int durability, int time)
     {
-        this.isPatched = true;
+        isPatched = true;
         InitializeDurability(durability);
-        RenderPatch();
+
+        if (time > 0)
+        {
+            Debug.Log("construction");
+            underConstruction = true;
+            InitializeConstructionTime(time);
+            RenderConstruction();
+        } else
+        {
+            RenderPatch();
+        }
     }
 
-    public void TryPatch(float cost, int durability, float labor)
+    public void TryPatch(float cost, int durability, float labor, int time)
     {
         if (CanAffordPatch(cost, labor))
         {
             DeductCost(cost, labor);
-            Patch(durability);
+            Patch(durability, time);
         }
         else
         {
@@ -134,12 +193,30 @@ public class Pothole : MonoBehaviour
     {
         this.isPatched = false;
         _durability = -1;
+        ApplyPotholeAnger();
         RenderNormal();
     }
 
     public void NotifyRoundEnded()
     {
-        if (this.isPatched)
+        if (this.underConstruction)
+        {
+            _constructionTime--;
+            if (_constructionTime <= 0)
+            {
+                underConstruction = false;
+                RenderPatch();
+            }
+            else
+            {
+                RenderConstruction();
+                _stats.currentLabor -= _currentLaborCost;
+
+                _particleSystemRenderer.material = laborParticle;
+                _particleSystem.Play();
+            }
+
+        } else if (this.isPatched)
         {
             this._durability--;
             if(this._durability <= 0){
@@ -153,12 +230,17 @@ public class Pothole : MonoBehaviour
 
     private void InitializeDurability(int durability)
     {
-        this._durability = Random.Range(balanceParameters.minimumPotholePatchDuration,durability);
+        this._durability = Random.Range(balanceParameters.minimumPotholePatchDuration, durability);
+    }
+
+    private void InitializeConstructionTime(int time)
+    {
+        this._constructionTime = time;
     }
 
     private void RenderNormal()
     {
-        Texture2D tex = Colorize(potholeSprite, Utils.Sigmoid(_angerPerRound - 3));
+        Texture2D tex = Colorize(potholeSprite, _angerPerRound / (balanceParameters.maxAnger * 0.001f));
         Sprite s = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), potholeSprite.pixelsPerUnit);
         Render(s);
     }
@@ -173,6 +255,18 @@ public class Pothole : MonoBehaviour
     {
         Texture2D tex = Colorize(patchedPotholeSprite, 1.0f / _durability);
         Sprite s = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), patchedPotholeSprite.pixelsPerUnit);
+        Render(s);
+    }
+
+    private void RenderConstruction()
+    {
+        Render(constructionSprite);
+    }
+
+    private void RenderConstruction(Color color)
+    {
+        Texture2D tex = Colorize(constructionSprite, color);
+        Sprite s = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), constructionSprite.pixelsPerUnit);
         Render(s);
     }
 
@@ -192,11 +286,25 @@ public class Pothole : MonoBehaviour
 
     public string GetContextMessage()
     {
-        string message = "Pothole on " + roadSegment.roadName;
+        string message = ""; 
+        if (underConstruction)
+        {
+            message += "Construction on " + roadSegment.roadName;
+            message += string.Format("\n<color=#ff2222><b>Annoyance: {0:#,0}</b></color>", GetConstructionAnger());
+            message += string.Format("\nLabor cost per month: {0:#,0} hrs.", _currentLaborCost);
+            message += "\nRemaining construction time: " + _constructionTime.ToString("#,0");
+        }
+        else if (isPatched)
+        {
+            message += "(Patched) Pothole on " + roadSegment.roadName;
+            message += "\nDurability: " + _durability.ToString("#,0");
+        }
+        else
+        {
+            message += "Pothole on " + roadSegment.roadName;
+            message += string.Format("\n<color=#ff2222><b>Annoyance: {0:#,0}</b></color>", _angerPerRound);
+        }
         message += "\nRoad Segment ID: " + roadSegment.ID;
-        message += "\nAnnoyance: " + _angerPerRound.ToString("#,#");
-        if (isPatched)
-            message += "\nDurability: " + _durability.ToString("#,#");
         return message;
     }
 
@@ -204,6 +312,7 @@ public class Pothole : MonoBehaviour
     {
         this._stats.currentBudget -= cost;
         this._stats.currentLabor -= labor;
+        _currentLaborCost = labor;
     }
 
     public bool CanAffordPatch(float cost, float labor)
@@ -226,7 +335,7 @@ public class Pothole : MonoBehaviour
 
     private ContextMenuController.ContextMenuOption CreateOption(BalanceParameters.RepairOption option)
     {
-        return new ContextMenuController.ContextMenuOption(option.description, option.cost, option.labor, delegate { TryPatch(option.cost, option.durability, option.labor); });
+        return new ContextMenuController.ContextMenuOption(option.description, option.cost, option.labor, delegate { TryPatch(option.cost, option.durability, option.labor, option.time); });
     }
 
     private Texture2D Colorize(Sprite sprite, float percent)

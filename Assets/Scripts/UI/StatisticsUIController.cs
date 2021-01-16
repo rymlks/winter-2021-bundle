@@ -58,14 +58,20 @@ public class StatisticsUIController : MonoBehaviour
     void Update()
     {
         
-        budgetText.text = statsModel.currentBudget.ToString("F0");
-        angerText.text = statsModel.currentAnger.ToString("F0");
-        roundDisplay.text = "Month: " + (gameManager.currentRound+1) + "\nYear: " + (gameManager.currentYear+1);
+        budgetText.text = statsModel.currentBudget.ToString("#,0");
+        angerText.text = statsModel.currentAnger.ToString("#,0");
+        roundDisplay.text = "Month: " + GetMonth(gameManager.currentRound+1) + "\nYear: " + (gameManager.currentYear+1);
 
         UpdateAngerMeter();
         UpdateBudgetMeter();
         UpdateLaborMeter();
         _previousLabor = statsModel.currentLabor;
+    }
+
+    private string GetMonth(int month)
+    {
+        DateTime date = new DateTime(2020, month, 1);
+        return date.ToString("MMMM");
     }
 
 
@@ -113,7 +119,7 @@ public class StatisticsUIController : MonoBehaviour
 
     private void UpdateLaborMeter()
     {
-        laborText.text = string.Format("Labor: {0:#,#} Hours", statsModel.currentLabor);
+        laborText.text = string.Format("Labor: {0:#,0} Hours", Mathf.Floor(statsModel.currentLabor));
         if (_previousLabor != statsModel.currentLabor)
         {
             StartCoroutine(UpdateShovelTexture());

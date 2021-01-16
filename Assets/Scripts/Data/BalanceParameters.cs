@@ -12,6 +12,7 @@ public class BalanceParameters : MonoBehaviour
         public float cost;
         public float labor;
         public int durability;
+        public int time;
 
         public List<Road.Material> compatibleRoadMaterials;
     }
@@ -21,6 +22,8 @@ public class BalanceParameters : MonoBehaviour
         public string description;
         public float cost;
         public float labor;
+        public float time;
+
         public Road.Material material;
         public Road.Condition condition;
     }
@@ -34,11 +37,17 @@ public class BalanceParameters : MonoBehaviour
 
     public int minimumPotholePatchDuration;
     public int maximumPotholePatchDuration;
+
     public float budgetPerYear;
     public float moneyToWin;
+
     public float angerIncreaseThreshold;
     public float maxAnger;
     public float angerDecayPerRound;
+
+    public float potholeAngerPerCar;
+    public float potholeConstructionAngerPerCar;
+    public float roadConstructionAngerPerCar;
 
     public float maxLabor;
 

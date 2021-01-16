@@ -139,60 +139,73 @@ MonoBehaviour:
   maximumPotholePatchDuration: 8
   budgetPerYear: 10000
   moneyToWin: 100000
-  angerIncreaseThreshold: 100
-  maxAnger: 100000
-  angerDecayPerRound: 500
+  angerIncreaseThreshold: 10
+  maxAnger: 1000
+  angerDecayPerRound: 50
+  potholeAngerPerCar: 5
+  potholeConstructionAngerPerCar: 3
+  roadConstructionAngerPerCar: 2
   maxLabor: 100
   potholeRepairs:
   - description: Throw 'n' Go
     cost: 150
     labor: 1
     durability: 1
+    time: 0
     compatibleRoadMaterials: 0000000001000000
   - description: Throw 'n' Roll
     cost: 155
     labor: 2
     durability: 3
+    time: 0
     compatibleRoadMaterials: 0000000001000000
   - description: Asphalt Patch
     cost: 300
     labor: 5
     durability: 7
+    time: 1
     compatibleRoadMaterials: 0000000001000000
   - description: Concrete Patch
     cost: 500
     labor: 7
     durability: 12
+    time: 2
     compatibleRoadMaterials: 01000000
   - description: More Gravel
     cost: 25
     labor: 1
     durability: 1
+    time: 0
     compatibleRoadMaterials: 02000000
   roadRepairs:
   - description: Shit Asphalt
     cost: 7
-    labor: 0.01
+    labor: 0.005
+    time: 0.001
     material: 0
     condition: 5
   - description: Good Asphalt
     cost: 12
-    labor: 0.01
+    labor: 0.005
+    time: 0.001
     material: 0
     condition: 1
   - description: Shit Concrete
     cost: 10
-    labor: 0.02
+    labor: 0.01
+    time: 0.002
     material: 1
     condition: 5
   - description: Good Concrete
     cost: 15
-    labor: 0.02
+    labor: 0.01
+    time: 0.002
     material: 1
     condition: 1
   - description: Gravel
     cost: 1
     labor: 0.003
+    time: 0.0003
     material: 2
     condition: 1
 --- !u!1 &6318903299560662670
