@@ -16,6 +16,7 @@ public class StatisticsUIController : MonoBehaviour
     public Text roundDisplay;
 
     public GameObject moneyPrefab;
+    public RectTransform thermometerBulbTop;
     public Texture2D thermometerTexture;
     public Texture2D moneyTexture;
     public Texture2D shovelTexture;
@@ -43,7 +44,7 @@ public class StatisticsUIController : MonoBehaviour
         statsModel = GameObject.FindObjectOfType<PlaythroughStatistics>();
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
-        angerInitialPosition = movingAngerIconImage.GetComponent<RectTransform>().localPosition.y;
+        angerInitialPosition = thermometerBulbTop.localPosition.y;
         moneyInstances = new List<GameObject>();
         retireButton.SetActive(false);
 
@@ -86,7 +87,7 @@ public class StatisticsUIController : MonoBehaviour
 
         rect.localScale = new Vector3(scaleFactor, scaleFactor, 1.0f);
         rect.rotation = Quaternion.Euler(0, 0, rotation);
-        rect.localPosition = new Vector3(rect.localPosition.x, angerInitialPosition * (1 - angerPercent), 0.0f);
+        //rect.localPosition = new Vector3(rect.localPosition.x, angerInitialPosition * (1 - angerPercent), 0.0f);
 
         StartCoroutine(UpdateThermometerTexture(angerPercent));
     }
@@ -167,14 +168,18 @@ public class StatisticsUIController : MonoBehaviour
 
     private IEnumerator UpdateShovelTexture()
     {
-        float percentFilled = statsModel.currentLabor / statsModel.maxLabor;
+        float percentFilled = 1f - (statsModel.currentLabor / statsModel.maxLabor);
 
         //texture.alphaIsTransparency = true;
         for (int y = 0; y < _shovelTexture.height; y++)
         {
             for (int x = 0; x < _shovelTexture.width; x++)
             {
-                if (shovelTexture.GetPixel(x, y).a == 1 && (float) y / _shovelTexture.height > percentFilled)
+                if (shovelTexture.GetPixel(x, y).a != 1)
+                {
+                    _shovelTexture.SetPixel(x, y, shovelTexture.GetPixel(x, y));
+                }
+                else if ((float) y / _shovelTexture.height < percentFilled)
                 {
                     _shovelTexture.SetPixel(x, y, Color.black);
                 } else
