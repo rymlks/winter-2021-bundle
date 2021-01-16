@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Adjust anger
-        float roundAnger = potholeController.getTotalAngerFromExistingPotholes();
+        float roundAnger = potholeController.GetTotalAngerFromRound();
         if (roundAnger > balanceParameters.angerIncreaseThreshold)
         {
             playthroughStatistics.currentAnger += roundAnger;
@@ -111,7 +111,8 @@ public class GameManager : MonoBehaviour
         nextButton.interactable = false;
         potholeController.AdvanceRound();
 
-        while (potholeController.ageEnumerator != null || potholeController.createEnumerator != null)
+        // Wait for all actions advancing the round to finish
+        while (potholeController.IsRoundAdvancing())
             yield return null;
 
         nextButton.interactable = true;

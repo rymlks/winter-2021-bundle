@@ -193,6 +193,11 @@ PrefabInstance:
       propertyPath: city
       value: Howell
       objectReference: {fileID: 0}
+    - target: {fileID: 1271797628247567618, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: roadWidthMultiplier
+      value: 0.0246
+      objectReference: {fileID: 0}
     - target: {fileID: 2045570438879295814, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -223,6 +228,56 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3836770348354795214, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836770348354795214, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836770348354795214, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836770348354795214, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836770348354795214, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836770348354795214, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: maxAnger
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: budgetPerYear
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: angerDecayPerRound
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: roadRepairs.Array.data[2].time
+      value: 0.001
+      objectReference: {fileID: 0}
     - target: {fileID: 5178173252458574380, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -309,6 +364,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6982154905219026904, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7377049806577948147, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7377049806577948147, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7377049806577948147, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7377049806577948147, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7377049806577948147, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7377049806577948147, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0

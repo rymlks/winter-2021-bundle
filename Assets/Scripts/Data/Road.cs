@@ -15,10 +15,9 @@ public class Road : MonoBehaviour
     public Material material;
     public Condition condition;
 
-    public Material asphaltMaterial;
-    public Material concreteMaterial;
-    public Material asphaltMaterial1L;
-    public Material concreteMaterial1L;
+    public UnityEngine.Material normalMaterial;
+    public UnityEngine.Material constructionMaterial;
+    public UnityEngine.Material constructionMaterialSelected;
 
     public Color lowTrafficAsphalt;
     public Color highTrafficAsphalt;
@@ -34,6 +33,8 @@ public class Road : MonoBehaviour
     [HideInInspector]
     public bool isValid = true;
     [HideInInspector]
+    public bool underConstruction = false;
+    [HideInInspector]
     public List<Vector3> points;
     [HideInInspector]
     public List<GameObject> potholes;
@@ -48,7 +49,9 @@ public class Road : MonoBehaviour
 
     private LineRenderer lineRenderer;
     private bool _selected = false;
-    private Vector3 _initialScale;
+    private int _constructionTime = -1;
+    private float _currentLaborCost = -1;
+    private float _angerPerRound = -1;
 
     public static float MaxX = float.MinValue;
     public static float MaxY = float.MinValue;
@@ -80,11 +83,6 @@ public class Road : MonoBehaviour
         GRAVEL,
     }
 
-    public void Start()
-    {
-        _initialScale = new Vector3(transform.localScale.x, transform.localScale.y, 1);
-    }
-
     public void Update()
     {
         if (_selected)
@@ -113,6 +111,25 @@ public class Road : MonoBehaviour
 
         DoClick();
     }
+    public void NotifyRoundEnded()
+    {
+        if (underConstruction)
+        {
+            _constructionTime--;
+            if (_constructionTime <= 0)
+            {
+                underConstruction = false;
+                Colorize();
+            } else
+            {
+                playthroughStatistics.currentLabor -= _currentLaborCost;
+            }
+        }
+    }
+    public float getAngerCausedPerRound()
+    {
+        return this.underConstruction ? _angerPerRound : 0;
+    }
 
     public void DoClick()
     {
@@ -126,6 +143,11 @@ public class Road : MonoBehaviour
         GetComponent<MeshCollider>().enabled = false;
         Colorize(Color.blue);
 
+        if (underConstruction)
+        {
+            lineRenderer.material = constructionMaterialSelected;
+        }
+
         foreach (GameObject pothole in potholes)
         {
             pothole.GetComponent<Pothole>().FauxSelect();
@@ -137,6 +159,12 @@ public class Road : MonoBehaviour
         _selected = false;
         GetComponent<MeshCollider>().enabled = true;
         Colorize();
+
+        if (underConstruction)
+        {
+            lineRenderer.material = constructionMaterial;
+        }
+
         foreach (GameObject pothole in potholes)
         {
             pothole.GetComponent<Pothole>().Deselect();
@@ -149,21 +177,30 @@ public class Road : MonoBehaviour
         string message = "";
         message += roadName;
         message += "\nSegment ID: " + ID;
-        message += "\nDaily Drivers: " + trafficRate;
-        message += "\nPotholes: " + potholes.Count;
         message += "\nMaterial: " + material.ToString();
         //message += "\nCondition: " + condition.ToString();
         message += "\nLanes: " + lanes;
+        if (underConstruction)
+        {
+            message += "\n\n<b>Under construction.</b>";
+            message += string.Format("\nLabor cost per month: {0:#,0} hrs.", _currentLaborCost);
+            message += string.Format("\n<color=#ff2222><b>Annoyance: {0:#,0}</b></color>", _angerPerRound);
+            message += string.Format("\nConstruction time remaining: {0:#,0} months.", _constructionTime);
+        } else
+        {
+            message += "\nDaily Drivers: " + trafficRate;
+            message += "\nPotholes: " + potholes.Count;
+        }
         return message;
     }
 
-    public void TryRePave(float cost, float labor, Material material, Condition condition)
+    public void TryRePave(float cost, float labor, int time, Material material, Condition condition)
     {
 
         if (CanAffordRePave(cost, labor))
         {
             DeductCost(cost, labor);
-            RePave(material, condition);
+            RePave(material, condition, time);
         }
         else
         {
@@ -171,10 +208,17 @@ public class Road : MonoBehaviour
         }
     }
 
-    private void RePave(Material material, Condition condition)
+    private void RePave(Material material, Condition condition, int time)
     {
         this.condition = condition;
         this.material = material;
+
+        if (time > 0)
+        {
+            underConstruction = true;
+            _constructionTime = time;
+            _angerPerRound = balanceParameters.roadConstructionAngerPerCar;// * (float)trafficRate;
+        }
 
         foreach (GameObject pothole in potholes)
         {
@@ -190,6 +234,7 @@ public class Road : MonoBehaviour
     {
         this.playthroughStatistics.currentBudget -= cost;
         this.playthroughStatistics.currentLabor -= labor;
+        _currentLaborCost = labor;
     }
 
     public bool CanAffordRePave(float cost, float labor)
@@ -207,6 +252,11 @@ public class Road : MonoBehaviour
         return baseLabor * (float)length * lanes;
     }
 
+    public int GetRePaveTime(float baseTime)
+    {
+        return (int)(baseTime * length * lanes);
+    }
+
     public List<ContextMenuController.ContextMenuOption> GetRepairOptions()
     {
         List<ContextMenuController.ContextMenuOption> options = new List<ContextMenuController.ContextMenuOption>();
@@ -222,31 +272,42 @@ public class Road : MonoBehaviour
     {
         float cost = GetRePaveCost(option.cost);
         float labor = GetRePaveLabor(option.labor);
-        return new ContextMenuController.ContextMenuOption(option.description, cost, labor, delegate { TryRePave(cost, labor, option.material, option.condition); });
+        int time = GetRePaveTime(option.time);
+        return new ContextMenuController.ContextMenuOption(option.description, cost, labor, delegate { TryRePave(cost, labor, time, option.material, option.condition); });
     }
 
     private void Colorize()
     {
-        // Update positions and line renderer
-        float scaledTrafficRate = Utils.Sigmoid((trafficRate - 20000) / 10000.0f);
-        Color color;
-
-        switch (material)
+        if (underConstruction)
         {
-            case Material.ASPHALT:
-                color = Color.Lerp(lowTrafficAsphalt, highTrafficAsphalt, scaledTrafficRate);
-                break;
-            case Material.CONCRETE:
-                color = Color.Lerp(lowTrafficConcrete, highTrafficConcrete, scaledTrafficRate);
-                break;
-            case Material.GRAVEL:
-                color = Color.Lerp(lowTrafficGravel, highTrafficGravel, scaledTrafficRate);
-                break;
-            default:
-                color = Color.Lerp(lowTrafficAsphalt, highTrafficAsphalt, scaledTrafficRate);
-                break;
+            lineRenderer.material = constructionMaterial;
+            //GetComponent<ParticleSystem>().Play();
+            //lineRenderer.material.mainTextureScale =  new Vector2((float)length, 1);
+        } else
+        {
+            //GetComponent<ParticleSystem>().Stop();
+            lineRenderer.material = normalMaterial;
+            // Update positions and line renderer
+            float scaledTrafficRate = Utils.Sigmoid((trafficRate - 20000) / 10000.0f);
+            Color color;
+
+            switch (material)
+            {
+                case Material.ASPHALT:
+                    color = Color.Lerp(lowTrafficAsphalt, highTrafficAsphalt, scaledTrafficRate);
+                    break;
+                case Material.CONCRETE:
+                    color = Color.Lerp(lowTrafficConcrete, highTrafficConcrete, scaledTrafficRate);
+                    break;
+                case Material.GRAVEL:
+                    color = Color.Lerp(lowTrafficGravel, highTrafficGravel, scaledTrafficRate);
+                    break;
+                default:
+                    color = Color.Lerp(lowTrafficAsphalt, highTrafficAsphalt, scaledTrafficRate);
+                    break;
+            }
+            Colorize(color);
         }
-        Colorize(color);
     }
 
     private void Colorize(Color color)

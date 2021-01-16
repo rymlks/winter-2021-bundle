@@ -10,8 +10,9 @@ public class PotholeController : MonoBehaviour
     public List<Road> roads;
     public ContextMenuController contextMenuControler;
 
-    public IEnumerator ageEnumerator;
-    public IEnumerator createEnumerator;
+    private IEnumerator ageEnumerator;
+    private IEnumerator createEnumerator;
+    private IEnumerator roadEnumerator;
 
     private GameObject _potholeParent;
     private BalanceParameters _parameters;
@@ -46,18 +47,38 @@ public class PotholeController : MonoBehaviour
     {
         ageEnumerator = AgeExistingPotholes();
         createEnumerator = CreateNewPotholes();
+        roadEnumerator = AgeRoads();
 
         StartCoroutine(ageEnumerator);
         StartCoroutine(createEnumerator);
+        StartCoroutine(roadEnumerator);
+    }
+
+    public bool IsRoundAdvancing()
+    {
+        return ageEnumerator != null || createEnumerator != null || roadEnumerator != null;
+    }
+
+    private IEnumerator AgeRoads()
+    {
+        //int i = 0;
+        foreach (Road road in roads)
+        {
+            road.NotifyRoundEnded();
+            //if (i % 100 == 0) yield return null;
+        }
+        roadEnumerator = null;
+        yield return null;
     }
 
     private IEnumerator AgeExistingPotholes()
     {
-        int i = 0;
+        //int i = 0;
         foreach (Pothole hole in _potholeParent.GetComponentsInChildren<Pothole>())
         {
             hole.NotifyRoundEnded();
-            if (i%10 == 0) yield return null;
+            //if (i%10 == 0) yield return null;
+            yield return null;
         }
         ageEnumerator = null;
     }
@@ -71,9 +92,19 @@ public class PotholeController : MonoBehaviour
         }
     }
 
-    public float getTotalAngerFromExistingPotholes()
+    public float GetTotalAngerFromExistingPotholes()
     {
         return _potholeParent.GetComponentsInChildren<Pothole>().Sum(hole => hole.getAngerCausedPerRound());
+    }
+
+    public float GetTotalAngerFromRoads()
+    {
+        return roads.Sum(road => road.getAngerCausedPerRound());
+    }
+
+    public float GetTotalAngerFromRound()
+    {
+        return GetTotalAngerFromExistingPotholes() + GetTotalAngerFromRoads();
     }
 
     private IEnumerator CreateNewPotholes()
@@ -97,7 +128,8 @@ public class PotholeController : MonoBehaviour
                 intersect.Degrade();
             }
 
-            if (i % 10 == 0) yield return null;
+            //if (i % 10 == 0) yield return null;
+            yield return null;
         }
         createEnumerator = null;
     }
@@ -112,7 +144,7 @@ public class PotholeController : MonoBehaviour
         foreach (Road road in roads)
         {
             sum += road.trafficSum;
-            if (sum > trafficThreshold)
+            if (sum > trafficThreshold && !road.underConstruction)
             {
                 return road;
             }

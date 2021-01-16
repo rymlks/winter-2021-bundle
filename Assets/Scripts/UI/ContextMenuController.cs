@@ -104,17 +104,24 @@ public class ContextMenuController : MonoBehaviour
         message = text;
         messageBox.text = message;
 
-        buttonsPanel.SetActive(true);
 
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("ContextMenuItem"))
+        if (!target.underConstruction)
         {
-            Destroy(obj);
-        }
-        List<ContextMenuOption> options = target.GetRepairOptions();
-        numOptions = options.Count;
-        foreach (ContextMenuOption option in options)
+            buttonsPanel.SetActive(true);
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("ContextMenuItem"))
+            {
+                Destroy(obj);
+            }
+
+            List<ContextMenuOption> options = target.GetRepairOptions();
+            numOptions = options.Count;
+            foreach (ContextMenuOption option in options)
+            {
+                InstantiateOption(option);
+            }
+        } else
         {
-            InstantiateOption(option);
+            buttonsPanel.SetActive(false);
         }
 
         SetScale();
