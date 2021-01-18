@@ -51,6 +51,28 @@ public class ContextMenuController : MonoBehaviour
         {
             transform.position = Camera.main.WorldToScreenPoint(worldPosition);
         }
+
+        // Use keyboard shortcuts to click buttons
+        if (buttonsPanel.activeSelf)
+        {
+            int i = 0;
+            foreach (Button button in buttonsPanel.GetComponentsInChildren<Button>())
+            {
+                i++;
+                if (i > 9) break;
+
+                KeyCode key = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + i);
+
+                if (button.interactable && Input.GetKeyDown(key))
+                {
+                    button.onClick.Invoke();
+                }
+            }
+        }
+        if (selectRoadButton.activeSelf && Input.GetKeyDown(KeyCode.Space))
+        {
+            selectRoadButton.GetComponent<Button>().onClick.Invoke();
+        }
     }
 
     public void Open(Pothole target)
