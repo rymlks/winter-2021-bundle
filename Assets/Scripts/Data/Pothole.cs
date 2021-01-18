@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class Pothole : MonoBehaviour
 {
-    private float _angerPerRound;
     public bool isPatched;
     public bool underConstruction;
     public float patchMoneyCost;
@@ -29,6 +28,8 @@ public class Pothole : MonoBehaviour
     private bool _selected = false;
     private Vector3 _initialScale;
     private float _currentLaborCost = -1;
+    private float _angerPerRound;
+    private float _constructionAngerPerRound = -1;
 
     void Start()
     {
@@ -136,9 +137,14 @@ public class Pothole : MonoBehaviour
         _angerPerRound += Random.Range(0, balanceParameters.potholeAngerPerCar);// * (float)roadSegment.trafficRate;
     }
 
+    private void ApplyConstructionAnger()
+    {
+        _constructionAngerPerRound = Random.Range(0, balanceParameters.potholeConstructionAngerPerCar);// * (float)roadSegment.trafficRate;
+    }
+
     private float GetConstructionAnger()
     {
-        return Random.Range(0, balanceParameters.potholeConstructionAngerPerCar);// * (float)roadSegment.trafficRate;
+        return _constructionAngerPerRound;
     }
 
 
@@ -170,6 +176,7 @@ public class Pothole : MonoBehaviour
             underConstruction = true;
             InitializeConstructionTime(time);
             RenderConstruction();
+            ApplyConstructionAnger();
         } else
         {
             RenderPatch();

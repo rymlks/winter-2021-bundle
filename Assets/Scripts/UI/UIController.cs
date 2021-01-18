@@ -33,7 +33,13 @@ public class UIController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            TogglePause();
+            if (contextMenu.activeSelf)
+            {
+                contextMenu.GetComponent<ContextMenuController>().Close();
+            } else
+            {
+                TogglePause();
+            }
         }
         if (roadNameToolTipText != "")
         {
