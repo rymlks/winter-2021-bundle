@@ -77,9 +77,8 @@ public class ShapefileImport : MonoBehaviour
             }
         }
 
-        potholeController.SortAndSumRoads();
-
         configureMainCamera();
+        potholeController.SortAndSumRoads();
         Debug.Log("Done.");
     }
 
