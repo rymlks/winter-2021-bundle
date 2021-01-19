@@ -17,7 +17,7 @@ public class PotholeController : MonoBehaviour
     private GameObject _potholeParent;
     private BalanceParameters _parameters;
 
-    private double _sumTraffic = 0;
+    protected double _sumTraffic = 0;
     
     void Start()
     {
@@ -83,7 +83,7 @@ public class PotholeController : MonoBehaviour
         ageEnumerator = null;
     }
 
-    public void SortAndSumRoads()
+    public virtual void SortAndSumRoads()
     {
         roads.Sort(Road.Sort);
         foreach (Road road in roads )
