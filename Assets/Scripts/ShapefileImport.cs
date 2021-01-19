@@ -5,6 +5,7 @@ using System.IO;
 using UnityEngine;
 using UnityEditor;
 using System;
+using Assets;
 using UnityEngine.UI;
 
 public class ShapefileImport : MonoBehaviour
@@ -65,17 +66,7 @@ public class ShapefileImport : MonoBehaviour
                 // Some records aren't polyline and I don't know what they're for
                 if (record.ShpRecord.Header.Type == Assets.ShapeType.PolyLine)
                 {
-                    GameObject roadObj = Instantiate(roadPrefab, new Vector3(0, 0, 0), Quaternion.identity, roadParent.transform);
-                    Road road = roadObj.GetComponent<Road>();
-                    road.roadWidthMultiplier = roadWidthMultiplier;
-                    road.loadFromGIS(record);
-                    if (road.isValid)
-                    {
-                        potholeController.roads.Add(road);
-                        road.balanceParameters = balanceParameters;
-                        road.contextMenuController = contextMenuController;
-                        road.playthroughStatistics = playthroughStatistics;
-                    }
+                    createRoad(record, roadParent.transform);
                 }
                 if (count > linesPerFrame)
                 {
@@ -88,9 +79,30 @@ public class ShapefileImport : MonoBehaviour
 
         potholeController.SortAndSumRoads();
 
-        Camera.main.gameObject.GetComponent<CameraController>().JumpTo(new Vector3((Road.MaxX + Road.MinX) * 0.5f, (Road.MaxY + Road.MinY) * 0.5f, -10f));
+        configureMainCamera();
+        Debug.Log("Done.");
+    }
+
+    private void configureMainCamera()
+    {
+        Camera.main.gameObject.GetComponent<CameraController>()
+            .JumpTo(new Vector3((Road.MaxX + Road.MinX) * 0.5f, (Road.MaxY + Road.MinY) * 0.5f, -10f));
         float maxExtent = Mathf.Max(Road.MaxX - Road.MinX, Road.MaxY - Road.MinY);
         Camera.main.orthographicSize = maxExtent * 0.5f + cameraMargin;
-        Debug.Log("Done.");
+    }
+
+    private void createRoad(GISRecord record, Transform parent)
+    {
+        GameObject roadObj = Instantiate(roadPrefab, new Vector3(0, 0, 0), Quaternion.identity, parent);
+        Road road = roadObj.GetComponent<Road>();
+        road.roadWidthMultiplier = roadWidthMultiplier;
+        road.loadFromGIS(record);
+        if (road.isValid)
+        {
+            potholeController.roads.Add(road);
+            road.balanceParameters = balanceParameters;
+            road.contextMenuController = contextMenuController;
+            road.playthroughStatistics = playthroughStatistics;
+        }
     }
 }
