@@ -47,6 +47,8 @@ public class Road : MonoBehaviour
     [HideInInspector]
     public PlaythroughStatistics playthroughStatistics;
 
+    protected Bounds bounds;
+    
     private LineRenderer lineRenderer;
     private ParticleSystem _particleSystem;
     private bool _selected = false;
@@ -378,6 +380,7 @@ public class Road : MonoBehaviour
         // Fill linerenderer with points
         lineRenderer.widthMultiplier = lanes * roadWidthMultiplier;
         lineRenderer.positionCount = pline.NumPoints;
+        bounds = new Bounds();
         for (int j = 0; j < pline.Points.Length; j++)
         {
             Assets.Point p = pline.Points[j];
@@ -388,6 +391,8 @@ public class Road : MonoBehaviour
             MaxY = Mathf.Max(MaxY, v.y);
             MinX = Mathf.Min(MinX, v.x);
             MinY = Mathf.Min(MinY, v.y);
+
+            this.updateBounds(v);
         }
         lineRenderer.SetPositions(points.ToArray());
 
@@ -421,6 +426,18 @@ public class Road : MonoBehaviour
         _editableShape.mesh = mesh;
     }
 
+    private void updateBounds(Vector3 newPoint)
+    {
+        if (bounds.center.Equals(Vector3.zero) && bounds.extents.Equals(Vector3.zero))
+        {
+            bounds = new Bounds(newPoint, Vector3.zero);
+        }
+        else
+        {
+            bounds.Encapsulate(newPoint);
+        }
+    }
+
     public Vector3 RandomPoint()
     {
         int randIdx = new System.Random().Next(points.Count - 1);
@@ -449,5 +466,10 @@ public class Road : MonoBehaviour
     public static int Sort(Road r1, Road r2)
     {
         return r1.trafficSum.CompareTo(r2.trafficSum);
+    }
+
+    public Bounds GetBounds()
+    {
+        return this.bounds;
     }
 }

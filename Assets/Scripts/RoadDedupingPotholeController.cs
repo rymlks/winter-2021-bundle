@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -16,32 +17,41 @@ namespace DefaultNamespace
         public override void SortAndSumRoads()
         {
             base.SortAndSumRoads();
-            DeDupeRoads();
+            StartCoroutine(DeDupeRoads(this.roads));
         }
 
         void Update()
         {
-            if (Input.GetKeyUp(KeyCode.Slash))
-            {
-                DeDupeRoads();
-            }
         }
 
-        private void DeDupeRoads()
+        private IEnumerator DeDupeRoads(List<Road> roadsToDedupe)
         {
             this._roadLineRenderers = GameObject.Find("Roads").GetComponentsInChildren<LineRenderer>().ToList();
             InitializeTextureCamera();
-            /*for(int i = 0; i < this.roads.Count; i++){
-                for (int j = i + 1; j < this.roads.Count; j++)
+            for(int i = 0; i < roadsToDedupe.Count; i++){
+                Texture2D imageRoad = getImageOfRoad(roadsToDedupe[i]);
+                for (int j = i + 1; j < roadsToDedupe.Count; j++)
                 {
-                    CheckRoadDuplication(this.roads[i], this.roads[j]);
-                    if(i*j >= 100) return;
+                    Debug.Log("I: " + i + " J: " + j);
+                    if (checkBoundsIntersection(roadsToDedupe[i], roadsToDedupe[j]))
+                    {
+                        Texture2D imageOther = getImageOfRoad(roadsToDedupe[j]);
+                        CheckImageCollision(imageRoad, imageOther);
+                        Destroy(imageOther);
+                    } 
+                    yield return null;
                 }
-            }*/
-            CheckRoadDuplication(roads[2], roads[3]);
-            CheckRoadDuplication(roads[0], roads[1]);
+                Destroy(imageRoad);
+            }
+            DestroyTextureCamera();
+        }
 
-            //DestroyTextureCamera();
+        private static bool checkBoundsIntersection(Road road, Road other)
+        {
+            Debug.Log("Road bounds: " + road.GetBounds() + " , Road2 Bounds: " + other.GetBounds());
+            bool intersects = road.GetBounds().Intersects(other.GetBounds());
+            Debug.Log("Returning " + intersects + " at bounds intersection test");
+            return intersects;
         }
 
         private void DestroyTextureCamera()
@@ -58,11 +68,9 @@ namespace DefaultNamespace
             return renderTexture;
         }
 
-        private void CheckRoadDuplication(Road road, Road other)
+        private void CheckImageCollision(Texture2D imageRoad, Texture2D imageOther)
         {
-            Texture2D imageRoad = getImageOfRoad(road);
             Debug.Log("Nonwhite pixels in road1 image: " + countPixelsNotOfColor(imageRoad, Color.white) + ", total " + imageRoad.GetPixels().Length);
-            Texture2D imageOther = getImageOfRoad(other);
             Debug.Log("Nonwhite pixels in road2 image: " + countPixelsNotOfColor(imageOther, Color.white) + ", total " + imageOther.GetPixels().Length);
             Debug.Log("Number of nonwhite pixels in common: " + countPixelsNotOfColorInCommon(imageRoad, imageOther, Color.white));
             Debug.Log("Recommendation: " + getRoadCollisionRecommendation(countPixelsNotOfColor(imageRoad, Color.white), countPixelsNotOfColor(imageOther, Color.white), countPixelsNotOfColorInCommon(imageRoad, imageOther, Color.white)));
@@ -113,7 +121,6 @@ namespace DefaultNamespace
         private Texture2D getImageOfRoad(Road road)
         {
             enableOnlyOneLineRenderer(road);
-            textureCamera.Render();
             return TakeImageFromCamera(textureCamera);
         }
 
