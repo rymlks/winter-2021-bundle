@@ -32,7 +32,6 @@ namespace DefaultNamespace
                 Texture2D imageRoad = getImageOfRoad(roadsToDedupe[i]);
                 for (int j = i + 1; j < roadsToDedupe.Count; j++)
                 {
-                    Debug.Log("I: " + i + " J: " + j);
                     if (checkBoundsIntersection(roadsToDedupe[i], roadsToDedupe[j]))
                     {
                         Texture2D imageOther = getImageOfRoad(roadsToDedupe[j]);
@@ -42,16 +41,15 @@ namespace DefaultNamespace
                     yield return null;
                 }
                 Destroy(imageRoad);
+                Debug.Log("Road " + i + " dedupe finished.");
             }
             DestroyTextureCamera();
         }
 
         private static bool checkBoundsIntersection(Road road, Road other)
         {
-            Debug.Log("Road bounds: " + road.GetBounds() + " , Road2 Bounds: " + other.GetBounds());
-            bool intersects = road.GetBounds().Intersects(other.GetBounds());
-            Debug.Log("Returning " + intersects + " at bounds intersection test");
-            return intersects;
+            return road.GetBounds().Intersects(other.GetBounds());
+            //consider using Colliders instead, since roads come with those
         }
 
         private void DestroyTextureCamera()
