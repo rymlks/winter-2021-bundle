@@ -26,6 +26,14 @@ public class RoadDedupingPotholeController : PotholeController
         public int roadId;
     }
 
+    [Serializable]
+    private struct RoadDeduplicationEvaluation
+    {
+        public int pixelsInDedupedImage;
+        public int pixelsInOriginalImage;
+        public int aggregateAreaEliminatedRoads;
+    }
+
     private List<LineRenderer> _roadLineRenderers;
     public Camera textureCamera;
     public float ratioThatGetsYouAPass = 0.5f;
@@ -59,8 +67,8 @@ public class RoadDedupingPotholeController : PotholeController
             roadDeduplicationMetadata.road = roadsToDedupe[i];
             dedupeResult.Add(roadDeduplicationMetadata);
             roadsToDedupe[i].Render(false);
-            Debug.Log("Road " + i + " of " + roadsToDedupe.Count + " imaging finished, size: " +
-                      dedupeResult[i].pixelSize);
+            /*Debug.Log("Road " + i + " of " + roadsToDedupe.Count + " imaging finished, size: " +
+                      dedupeResult[i].pixelSize);*/
             yield return null;
         }
 
@@ -88,38 +96,56 @@ public class RoadDedupingPotholeController : PotholeController
             }
 
             dedupeResult[j] = jthRoadDeduplicationMetadata;
-            Debug.Log("Road " + j + " of " + dedupeResult.Count + " unique pixels: " +
+            /*Debug.Log("Road " + j + " of " + dedupeResult.Count + " unique pixels: " +
                       jthRoadDeduplicationMetadata.pixelUniqueContribution + " and total size: " +
                       jthRoadDeduplicationMetadata.pixelSize + ", conclusion: " +
-                      (jthRoadDeduplicationMetadata.isBeingKept ? "keeping" : "discarding"));
+                      (jthRoadDeduplicationMetadata.isBeingKept ? "keeping" : "discarding"));*/
             yield return null;
         }
         Destroy(imageAllRoads);
         Destroy(imageAllRoadsPlusJth);
-        //EvaluateDedupe(dedupeResult);
-        PrintRoadIdWhitelist(dedupeResult);
+        EvaluateDedupe(dedupeResult);
+        SaveResultsToFile(dedupeResult);
         DestroyTextureCamera();
     }
 
-    private void PrintRoadIdWhitelist(List<RoadDeduplicationMetadata> dedupeResult)
+    private void SaveResultsToFile(List<RoadDeduplicationMetadata> dedupeResult)
     {
-        System.IO.File.WriteAllText("Assets/Dedupes/" + FindObjectOfType<ShapefileImport>().city+".dedupe.json",
+        System.IO.File.WriteAllText("Assets/Dedupes/" + GetCityName()+".dedupe.json",
             JsonHelper.ToJson(dedupeResult.Select(getCopyForWriting).ToArray(),
                 true));
     }
-
-    /*private void EvaluateDedupe(List<RoadDeduplicationMetadata> results)
+    
+    private void SaveEvaluationToFile(RoadDeduplicationEvaluation eval)
     {
-        int pixelsInDisabledRoads = results.Where(result => !result.isBeingKept).Sum(result => result.pixelSize);
-        int pixelsInDedupedImage = countPixelsNotOfColor(dedupedRoadsImage, Color.white);
+        System.IO.File.WriteAllText("Assets/Dedupes/" + GetCityName() + ".dedupe-meta-evaluation.json",
+            JsonUtility.ToJson(eval, true));
+    }
+
+    private static string GetCityName()
+    {
+        return FindObjectOfType<ShapefileImport>().city;
+    }
+
+
+    private void EvaluateDedupe(List<RoadDeduplicationMetadata> results)
+    {
+        var eval = new RoadDeduplicationEvaluation();
+        eval.aggregateAreaEliminatedRoads = results.Where(result => !result.isBeingKept).Sum(result => result.pixelSize);
         enableRoadRenderers(roads);
         Texture2D dupedUpRoadsImage = TakeImageFromCamera(textureCamera);
-        int pixelsInDupedImage = countPixelsNotOfColor(dupedUpRoadsImage, Color.white);
-        Debug.Log("duped roads total " + pixelsInDupedImage + "pixels; deduped " + pixelsInDedupedImage + "; " +
-                  (((float) pixelsInDedupedImage / pixelsInDupedImage) * 100) + "% accuracy");
-        Debug.Log(pixelsInDisabledRoads + " pixels' worth of roads disabled; " +
-                  (pixelsInDisabledRoads / pixelsInDedupedImage * 100) + "% of final map size");
-    }*/
+        eval.pixelsInOriginalImage = countPixelsNotOfColor(dupedUpRoadsImage, Color.white);
+        disableRoadRenderers(results.Where(result => !result.isBeingKept).Select(result => result.road).ToList());
+        Texture2D dedupedRoadsImage = TakeImageFromCamera(textureCamera);
+        eval.pixelsInDedupedImage = countPixelsNotOfColor(dedupedRoadsImage, Color.white);
+        /*Debug.Log("duped roads total " + eval.pixelsInOriginalImage + "pixels; deduped " + eval.pixelsInDedupedImage + "; " +
+                  (((float) eval.pixelsInDedupedImage / (float) eval.pixelsInOriginalImage) * 100f) + "% accuracy");
+        Debug.Log(eval.aggregateAreaEliminatedRoads + " pixels' worth of roads disabled; " +
+                  (eval.aggregateAreaEliminatedRoads / eval.pixelsInDedupedImage * 100) + "% of final map size");*/
+        Destroy(dupedUpRoadsImage);
+        Destroy(dedupedRoadsImage);
+        SaveEvaluationToFile(eval);
+    }
 
     private void enableRoadRenderers(List<Road> toEnable)
     {
