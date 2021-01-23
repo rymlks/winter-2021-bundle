@@ -5,6 +5,7 @@ using System.IO;
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.Linq;
 using Assets;
 using UnityEngine.UI;
 
@@ -28,7 +29,8 @@ public class ShapefileImport : MonoBehaviour
 
     private int linesPerFrame = 100;
     private Assets.ShxFile shapeFile;
-
+    private List<int> _roadIdWhiteList;
+    
     void Start()
     {
         Debug.Log("Reading " + shxPath);
@@ -36,9 +38,25 @@ public class ShapefileImport : MonoBehaviour
 
         cityNameLabel.GetComponent<Text>().text = city;
 
+        CreateNonDuplicateRoadWhitelist();
         // -83.2f, 42.6f, 0.0f
         //StartCoroutine(ReadGIS());
         ReadGIS();
+    }
+
+    private void CreateNonDuplicateRoadWhitelist()
+    {
+        try
+        {
+            string dedupeJson = System.IO.File.ReadAllText("Assets/Dedupes/" + city + ".dedupe.json");
+            _roadIdWhiteList = JsonHelper.FromJson<RoadDedupingPotholeController.RoadDeduplicationWrittenData>(dedupeJson)
+                .Where(data => data.isBeingKept).Select(data => data.roadId).ToList();
+        }
+        catch (FileNotFoundException fnfe)
+        {
+            Debug.Log("Dedupe file not found for level! More info: "+ fnfe.Message);
+            _roadIdWhiteList = new List<int>();
+        }
     }
 
     void ReadGIS()
@@ -96,12 +114,28 @@ public class ShapefileImport : MonoBehaviour
         Road road = roadObj.GetComponent<Road>();
         road.roadWidthMultiplier = roadWidthMultiplier;
         road.loadFromGIS(record);
-        if (road.isValid)
+        if (road.isValid && !IsADuplicate(road.ID))
         {
             potholeController.roads.Add(road);
             road.balanceParameters = balanceParameters;
             road.contextMenuController = contextMenuController;
             road.playthroughStatistics = playthroughStatistics;
         }
+        else
+        {
+            Destroy(roadObj);
+        }
+    }
+
+    private bool IsADuplicate(int roadId)
+    {
+        if (_roadIdWhiteList.Count < 1)
+        {
+            return false;
+        }
+        else if(_roadIdWhiteList.Contains(roadId)){
+            return false;
+        }
+        return true;
     }
 }
