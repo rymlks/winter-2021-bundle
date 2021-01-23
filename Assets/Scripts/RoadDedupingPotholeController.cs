@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Assets;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.UIElements;
@@ -36,7 +37,8 @@ public class RoadDedupingPotholeController : PotholeController
 
     private List<LineRenderer> _roadLineRenderers;
     public Camera textureCamera;
-    public float ratioThatGetsYouAPass = 0.5f;
+    [Range(0,1)]
+    public float minimumUniquePixelsToAreaRatio = 0.5f;
 
     public override void SortAndSumRoads()
     {
@@ -174,7 +176,7 @@ public class RoadDedupingPotholeController : PotholeController
     private bool shouldKeepRoad(int uniqueContributionPixels, int totalPixels)
     {
         return uniqueContributionPixels != 0 &&
-               (float) uniqueContributionPixels / totalPixels > ratioThatGetsYouAPass;
+               (float) uniqueContributionPixels / totalPixels > minimumUniquePixelsToAreaRatio;
     }
 
     private int countPixelsNotOfColor(Texture2D texture, Color color)

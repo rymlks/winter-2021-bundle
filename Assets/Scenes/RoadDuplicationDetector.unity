@@ -230,6 +230,7 @@ MonoBehaviour:
   roads: []
   contextMenuControler: {fileID: 189732822}
   textureCamera: {fileID: 160104945}
+  minimumUniquePixelsToAreaRatio: 0.5
 --- !u!1001 &2018051915
 PrefabInstance:
   m_ObjectHideFlags: 0
