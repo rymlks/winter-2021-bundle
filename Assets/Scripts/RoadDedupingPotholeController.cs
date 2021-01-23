@@ -18,7 +18,7 @@ public class RoadDedupingPotholeController : PotholeController
     }
 
     [Serializable]
-    private struct RoadDeduplicationWrittenData
+    public struct RoadDeduplicationWrittenData
     {
         public int pixelSize;
         public int pixelUniqueContribution;
@@ -27,7 +27,7 @@ public class RoadDedupingPotholeController : PotholeController
     }
 
     [Serializable]
-    private struct RoadDeduplicationEvaluation
+    public struct RoadDeduplicationEvaluation
     {
         public int pixelsInDedupedImage;
         public int pixelsInOriginalImage;
