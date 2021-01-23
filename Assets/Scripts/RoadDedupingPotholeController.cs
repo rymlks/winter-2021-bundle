@@ -103,7 +103,7 @@ public class RoadDedupingPotholeController : PotholeController
 
     private void PrintRoadIdWhitelist(List<RoadDeduplicationMetadata> dedupeResult)
     {
-        System.IO.File.WriteAllText(FindObjectOfType<ShapefileImport>().city+".dedupe.json",
+        System.IO.File.WriteAllText("Assets/Dedupes/" + FindObjectOfType<ShapefileImport>().city+".dedupe.json",
             JsonHelper.ToJson(dedupeResult.Select(getCopyForWriting).ToArray(),
                 true));
     }
