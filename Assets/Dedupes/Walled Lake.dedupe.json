@@ -1,0 +1,172 @@
+{
+    "Items": [
+        {
+            "pixelSize": 2029,
+            "pixelUniqueContribution": 2029,
+            "isBeingKept": true,
+            "roadId": 20014
+        },
+        {
+            "pixelSize": 1568,
+            "pixelUniqueContribution": 1568,
+            "isBeingKept": true,
+            "roadId": 2755
+        },
+        {
+            "pixelSize": 1568,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 1816
+        },
+        {
+            "pixelSize": 1568,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 1602
+        },
+        {
+            "pixelSize": 1363,
+            "pixelUniqueContribution": 1312,
+            "isBeingKept": true,
+            "roadId": 4277
+        },
+        {
+            "pixelSize": 1330,
+            "pixelUniqueContribution": 1294,
+            "isBeingKept": true,
+            "roadId": 1380
+        },
+        {
+            "pixelSize": 1053,
+            "pixelUniqueContribution": 912,
+            "isBeingKept": true,
+            "roadId": 2420
+        },
+        {
+            "pixelSize": 1022,
+            "pixelUniqueContribution": 907,
+            "isBeingKept": true,
+            "roadId": 1970
+        },
+        {
+            "pixelSize": 962,
+            "pixelUniqueContribution": 909,
+            "isBeingKept": true,
+            "roadId": 3052
+        },
+        {
+            "pixelSize": 962,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 2495
+        },
+        {
+            "pixelSize": 858,
+            "pixelUniqueContribution": 808,
+            "isBeingKept": true,
+            "roadId": 724
+        },
+        {
+            "pixelSize": 858,
+            "pixelUniqueContribution": 858,
+            "isBeingKept": true,
+            "roadId": 8
+        },
+        {
+            "pixelSize": 810,
+            "pixelUniqueContribution": 729,
+            "isBeingKept": true,
+            "roadId": 1286
+        },
+        {
+            "pixelSize": 804,
+            "pixelUniqueContribution": 778,
+            "isBeingKept": true,
+            "roadId": 18593
+        },
+        {
+            "pixelSize": 804,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 17640
+        },
+        {
+            "pixelSize": 804,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 17452
+        },
+        {
+            "pixelSize": 706,
+            "pixelUniqueContribution": 644,
+            "isBeingKept": true,
+            "roadId": 2000
+        },
+        {
+            "pixelSize": 693,
+            "pixelUniqueContribution": 658,
+            "isBeingKept": true,
+            "roadId": 2281
+        },
+        {
+            "pixelSize": 693,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 2640
+        },
+        {
+            "pixelSize": 688,
+            "pixelUniqueContribution": 636,
+            "isBeingKept": true,
+            "roadId": 2627
+        },
+        {
+            "pixelSize": 607,
+            "pixelUniqueContribution": 552,
+            "isBeingKept": true,
+            "roadId": 3846
+        },
+        {
+            "pixelSize": 607,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 4179
+        },
+        {
+            "pixelSize": 467,
+            "pixelUniqueContribution": 429,
+            "isBeingKept": true,
+            "roadId": 17950
+        },
+        {
+            "pixelSize": 467,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 17379
+        },
+        {
+            "pixelSize": 449,
+            "pixelUniqueContribution": 415,
+            "isBeingKept": true,
+            "roadId": 377
+        },
+        {
+            "pixelSize": 237,
+            "pixelUniqueContribution": 193,
+            "isBeingKept": true,
+            "roadId": 2082
+        },
+        {
+            "pixelSize": 171,
+            "pixelUniqueContribution": 129,
+            "isBeingKept": true,
+            "roadId": 25
+        },
+        {
+            "pixelSize": 120,
+            "pixelUniqueContribution": 57,
+            "isBeingKept": false,
+            "roadId": 137
+        }
+    ]
+}
