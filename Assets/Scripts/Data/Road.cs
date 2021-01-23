@@ -472,4 +472,9 @@ public class Road : MonoBehaviour
     {
         return this.bounds;
     }
+
+    public void Render(bool render)
+    {
+        this.lineRenderer.enabled = render;
+    }
 }
