@@ -1,0 +1,2596 @@
+{
+    "Items": [
+        {
+            "pixelSize": 577,
+            "pixelUniqueContribution": 577,
+            "isBeingKept": true,
+            "roadId": 20988
+        },
+        {
+            "pixelSize": 577,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21534
+        },
+        {
+            "pixelSize": 575,
+            "pixelUniqueContribution": 575,
+            "isBeingKept": true,
+            "roadId": 8811
+        },
+        {
+            "pixelSize": 422,
+            "pixelUniqueContribution": 422,
+            "isBeingKept": true,
+            "roadId": 21014
+        },
+        {
+            "pixelSize": 422,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21407
+        },
+        {
+            "pixelSize": 418,
+            "pixelUniqueContribution": 418,
+            "isBeingKept": true,
+            "roadId": 10497
+        },
+        {
+            "pixelSize": 418,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9800
+        },
+        {
+            "pixelSize": 406,
+            "pixelUniqueContribution": 406,
+            "isBeingKept": true,
+            "roadId": 21311
+        },
+        {
+            "pixelSize": 393,
+            "pixelUniqueContribution": 393,
+            "isBeingKept": true,
+            "roadId": 8564
+        },
+        {
+            "pixelSize": 383,
+            "pixelUniqueContribution": 383,
+            "isBeingKept": true,
+            "roadId": 9779
+        },
+        {
+            "pixelSize": 383,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 8900
+        },
+        {
+            "pixelSize": 367,
+            "pixelUniqueContribution": 367,
+            "isBeingKept": true,
+            "roadId": 9967
+        },
+        {
+            "pixelSize": 354,
+            "pixelUniqueContribution": 354,
+            "isBeingKept": true,
+            "roadId": 11088
+        },
+        {
+            "pixelSize": 348,
+            "pixelUniqueContribution": 348,
+            "isBeingKept": true,
+            "roadId": 8751
+        },
+        {
+            "pixelSize": 345,
+            "pixelUniqueContribution": 343,
+            "isBeingKept": true,
+            "roadId": 8540
+        },
+        {
+            "pixelSize": 345,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9064
+        },
+        {
+            "pixelSize": 340,
+            "pixelUniqueContribution": 340,
+            "isBeingKept": true,
+            "roadId": 21460
+        },
+        {
+            "pixelSize": 340,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21399
+        },
+        {
+            "pixelSize": 340,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21178
+        },
+        {
+            "pixelSize": 340,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21714
+        },
+        {
+            "pixelSize": 337,
+            "pixelUniqueContribution": 337,
+            "isBeingKept": true,
+            "roadId": 8880
+        },
+        {
+            "pixelSize": 334,
+            "pixelUniqueContribution": 334,
+            "isBeingKept": true,
+            "roadId": 9252
+        },
+        {
+            "pixelSize": 334,
+            "pixelUniqueContribution": 334,
+            "isBeingKept": true,
+            "roadId": 8807
+        },
+        {
+            "pixelSize": 334,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9338
+        },
+        {
+            "pixelSize": 325,
+            "pixelUniqueContribution": 105,
+            "isBeingKept": false,
+            "roadId": 8629
+        },
+        {
+            "pixelSize": 325,
+            "pixelUniqueContribution": 105,
+            "isBeingKept": false,
+            "roadId": 8599
+        },
+        {
+            "pixelSize": 319,
+            "pixelUniqueContribution": 319,
+            "isBeingKept": true,
+            "roadId": 8892
+        },
+        {
+            "pixelSize": 316,
+            "pixelUniqueContribution": 301,
+            "isBeingKept": true,
+            "roadId": 9221
+        },
+        {
+            "pixelSize": 316,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9564
+        },
+        {
+            "pixelSize": 297,
+            "pixelUniqueContribution": 122,
+            "isBeingKept": false,
+            "roadId": 9188
+        },
+        {
+            "pixelSize": 286,
+            "pixelUniqueContribution": 286,
+            "isBeingKept": true,
+            "roadId": 9023
+        },
+        {
+            "pixelSize": 286,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 8885
+        },
+        {
+            "pixelSize": 284,
+            "pixelUniqueContribution": 284,
+            "isBeingKept": true,
+            "roadId": 11842
+        },
+        {
+            "pixelSize": 279,
+            "pixelUniqueContribution": 270,
+            "isBeingKept": true,
+            "roadId": 10313
+        },
+        {
+            "pixelSize": 279,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 10982
+        },
+        {
+            "pixelSize": 278,
+            "pixelUniqueContribution": 272,
+            "isBeingKept": true,
+            "roadId": 9847
+        },
+        {
+            "pixelSize": 276,
+            "pixelUniqueContribution": 276,
+            "isBeingKept": true,
+            "roadId": 9864
+        },
+        {
+            "pixelSize": 272,
+            "pixelUniqueContribution": 256,
+            "isBeingKept": true,
+            "roadId": 8864
+        },
+        {
+            "pixelSize": 272,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9772
+        },
+        {
+            "pixelSize": 261,
+            "pixelUniqueContribution": 261,
+            "isBeingKept": true,
+            "roadId": 9928
+        },
+        {
+            "pixelSize": 252,
+            "pixelUniqueContribution": 31,
+            "isBeingKept": false,
+            "roadId": 9303
+        },
+        {
+            "pixelSize": 252,
+            "pixelUniqueContribution": 31,
+            "isBeingKept": false,
+            "roadId": 8828
+        },
+        {
+            "pixelSize": 250,
+            "pixelUniqueContribution": 250,
+            "isBeingKept": true,
+            "roadId": 18260
+        },
+        {
+            "pixelSize": 250,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 18755
+        },
+        {
+            "pixelSize": 247,
+            "pixelUniqueContribution": 247,
+            "isBeingKept": true,
+            "roadId": 10124
+        },
+        {
+            "pixelSize": 237,
+            "pixelUniqueContribution": 233,
+            "isBeingKept": true,
+            "roadId": 10450
+        },
+        {
+            "pixelSize": 237,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9961
+        },
+        {
+            "pixelSize": 233,
+            "pixelUniqueContribution": 233,
+            "isBeingKept": true,
+            "roadId": 21387
+        },
+        {
+            "pixelSize": 233,
+            "pixelUniqueContribution": 233,
+            "isBeingKept": true,
+            "roadId": 21325
+        },
+        {
+            "pixelSize": 233,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21156
+        },
+        {
+            "pixelSize": 233,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21611
+        },
+        {
+            "pixelSize": 232,
+            "pixelUniqueContribution": 206,
+            "isBeingKept": true,
+            "roadId": 9708
+        },
+        {
+            "pixelSize": 232,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9137
+        },
+        {
+            "pixelSize": 232,
+            "pixelUniqueContribution": 229,
+            "isBeingKept": true,
+            "roadId": 21746
+        },
+        {
+            "pixelSize": 232,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21391
+        },
+        {
+            "pixelSize": 225,
+            "pixelUniqueContribution": 221,
+            "isBeingKept": true,
+            "roadId": 10051
+        },
+        {
+            "pixelSize": 223,
+            "pixelUniqueContribution": 223,
+            "isBeingKept": true,
+            "roadId": 8858
+        },
+        {
+            "pixelSize": 223,
+            "pixelUniqueContribution": 223,
+            "isBeingKept": true,
+            "roadId": 14478
+        },
+        {
+            "pixelSize": 223,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 15436
+        },
+        {
+            "pixelSize": 218,
+            "pixelUniqueContribution": 198,
+            "isBeingKept": true,
+            "roadId": 10557
+        },
+        {
+            "pixelSize": 218,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 11195
+        },
+        {
+            "pixelSize": 217,
+            "pixelUniqueContribution": 201,
+            "isBeingKept": true,
+            "roadId": 9026
+        },
+        {
+            "pixelSize": 217,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 8769
+        },
+        {
+            "pixelSize": 213,
+            "pixelUniqueContribution": 199,
+            "isBeingKept": true,
+            "roadId": 9518
+        },
+        {
+            "pixelSize": 213,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9204
+        },
+        {
+            "pixelSize": 210,
+            "pixelUniqueContribution": 206,
+            "isBeingKept": true,
+            "roadId": 9018
+        },
+        {
+            "pixelSize": 208,
+            "pixelUniqueContribution": 207,
+            "isBeingKept": true,
+            "roadId": 20918
+        },
+        {
+            "pixelSize": 207,
+            "pixelUniqueContribution": 187,
+            "isBeingKept": true,
+            "roadId": 10651
+        },
+        {
+            "pixelSize": 207,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 10697
+        },
+        {
+            "pixelSize": 197,
+            "pixelUniqueContribution": 182,
+            "isBeingKept": true,
+            "roadId": 8568
+        },
+        {
+            "pixelSize": 194,
+            "pixelUniqueContribution": 194,
+            "isBeingKept": true,
+            "roadId": 9670
+        },
+        {
+            "pixelSize": 194,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9022
+        },
+        {
+            "pixelSize": 193,
+            "pixelUniqueContribution": 193,
+            "isBeingKept": true,
+            "roadId": 8996
+        },
+        {
+            "pixelSize": 193,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 8739
+        },
+        {
+            "pixelSize": 190,
+            "pixelUniqueContribution": 175,
+            "isBeingKept": true,
+            "roadId": 10861
+        },
+        {
+            "pixelSize": 190,
+            "pixelUniqueContribution": 186,
+            "isBeingKept": true,
+            "roadId": 21351
+        },
+        {
+            "pixelSize": 190,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 11381
+        },
+        {
+            "pixelSize": 190,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21041
+        },
+        {
+            "pixelSize": 189,
+            "pixelUniqueContribution": 189,
+            "isBeingKept": true,
+            "roadId": 10309
+        },
+        {
+            "pixelSize": 189,
+            "pixelUniqueContribution": 182,
+            "isBeingKept": true,
+            "roadId": 8783
+        },
+        {
+            "pixelSize": 189,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 10569
+        },
+        {
+            "pixelSize": 184,
+            "pixelUniqueContribution": 178,
+            "isBeingKept": true,
+            "roadId": 11545
+        },
+        {
+            "pixelSize": 182,
+            "pixelUniqueContribution": 176,
+            "isBeingKept": true,
+            "roadId": 21968
+        },
+        {
+            "pixelSize": 182,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 22599
+        },
+        {
+            "pixelSize": 178,
+            "pixelUniqueContribution": 171,
+            "isBeingKept": true,
+            "roadId": 11687
+        },
+        {
+            "pixelSize": 177,
+            "pixelUniqueContribution": 177,
+            "isBeingKept": true,
+            "roadId": 8842
+        },
+        {
+            "pixelSize": 175,
+            "pixelUniqueContribution": 171,
+            "isBeingKept": true,
+            "roadId": 11285
+        },
+        {
+            "pixelSize": 175,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9875
+        },
+        {
+            "pixelSize": 172,
+            "pixelUniqueContribution": 162,
+            "isBeingKept": true,
+            "roadId": 9154
+        },
+        {
+            "pixelSize": 170,
+            "pixelUniqueContribution": 168,
+            "isBeingKept": true,
+            "roadId": 8887
+        },
+        {
+            "pixelSize": 170,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9417
+        },
+        {
+            "pixelSize": 170,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 8838
+        },
+        {
+            "pixelSize": 170,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9356
+        },
+        {
+            "pixelSize": 169,
+            "pixelUniqueContribution": 152,
+            "isBeingKept": true,
+            "roadId": 21078
+        },
+        {
+            "pixelSize": 169,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21468
+        },
+        {
+            "pixelSize": 169,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21580
+        },
+        {
+            "pixelSize": 167,
+            "pixelUniqueContribution": 160,
+            "isBeingKept": true,
+            "roadId": 9236
+        },
+        {
+            "pixelSize": 166,
+            "pixelUniqueContribution": 160,
+            "isBeingKept": true,
+            "roadId": 10120
+        },
+        {
+            "pixelSize": 163,
+            "pixelUniqueContribution": 159,
+            "isBeingKept": true,
+            "roadId": 22624
+        },
+        {
+            "pixelSize": 163,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 23003
+        },
+        {
+            "pixelSize": 163,
+            "pixelUniqueContribution": 163,
+            "isBeingKept": true,
+            "roadId": 8672
+        },
+        {
+            "pixelSize": 160,
+            "pixelUniqueContribution": 160,
+            "isBeingKept": true,
+            "roadId": 9514
+        },
+        {
+            "pixelSize": 160,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 8510
+        },
+        {
+            "pixelSize": 159,
+            "pixelUniqueContribution": 148,
+            "isBeingKept": true,
+            "roadId": 8884
+        },
+        {
+            "pixelSize": 156,
+            "pixelUniqueContribution": 156,
+            "isBeingKept": true,
+            "roadId": 18762
+        },
+        {
+            "pixelSize": 151,
+            "pixelUniqueContribution": 151,
+            "isBeingKept": true,
+            "roadId": 21474
+        },
+        {
+            "pixelSize": 151,
+            "pixelUniqueContribution": 146,
+            "isBeingKept": true,
+            "roadId": 11594
+        },
+        {
+            "pixelSize": 148,
+            "pixelUniqueContribution": 148,
+            "isBeingKept": true,
+            "roadId": 9409
+        },
+        {
+            "pixelSize": 146,
+            "pixelUniqueContribution": 146,
+            "isBeingKept": true,
+            "roadId": 10356
+        },
+        {
+            "pixelSize": 146,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 11093
+        },
+        {
+            "pixelSize": 146,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 10953
+        },
+        {
+            "pixelSize": 145,
+            "pixelUniqueContribution": 113,
+            "isBeingKept": true,
+            "roadId": 9282
+        },
+        {
+            "pixelSize": 144,
+            "pixelUniqueContribution": 136,
+            "isBeingKept": true,
+            "roadId": 9001
+        },
+        {
+            "pixelSize": 144,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9528
+        },
+        {
+            "pixelSize": 142,
+            "pixelUniqueContribution": 139,
+            "isBeingKept": true,
+            "roadId": 11118
+        },
+        {
+            "pixelSize": 138,
+            "pixelUniqueContribution": 126,
+            "isBeingKept": true,
+            "roadId": 9483
+        },
+        {
+            "pixelSize": 138,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 8925
+        },
+        {
+            "pixelSize": 138,
+            "pixelUniqueContribution": 132,
+            "isBeingKept": true,
+            "roadId": 10967
+        },
+        {
+            "pixelSize": 137,
+            "pixelUniqueContribution": 131,
+            "isBeingKept": true,
+            "roadId": 11250
+        },
+        {
+            "pixelSize": 135,
+            "pixelUniqueContribution": 135,
+            "isBeingKept": true,
+            "roadId": 8743
+        },
+        {
+            "pixelSize": 129,
+            "pixelUniqueContribution": 120,
+            "isBeingKept": true,
+            "roadId": 11006
+        },
+        {
+            "pixelSize": 129,
+            "pixelUniqueContribution": 129,
+            "isBeingKept": true,
+            "roadId": 9618
+        },
+        {
+            "pixelSize": 128,
+            "pixelUniqueContribution": 112,
+            "isBeingKept": true,
+            "roadId": 8519
+        },
+        {
+            "pixelSize": 127,
+            "pixelUniqueContribution": 29,
+            "isBeingKept": false,
+            "roadId": 9116
+        },
+        {
+            "pixelSize": 123,
+            "pixelUniqueContribution": 105,
+            "isBeingKept": true,
+            "roadId": 9305
+        },
+        {
+            "pixelSize": 122,
+            "pixelUniqueContribution": 122,
+            "isBeingKept": true,
+            "roadId": 9629
+        },
+        {
+            "pixelSize": 120,
+            "pixelUniqueContribution": 92,
+            "isBeingKept": true,
+            "roadId": 8658
+        },
+        {
+            "pixelSize": 120,
+            "pixelUniqueContribution": 68,
+            "isBeingKept": true,
+            "roadId": 8890
+        },
+        {
+            "pixelSize": 120,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9419
+        },
+        {
+            "pixelSize": 119,
+            "pixelUniqueContribution": 117,
+            "isBeingKept": true,
+            "roadId": 10526
+        },
+        {
+            "pixelSize": 119,
+            "pixelUniqueContribution": 100,
+            "isBeingKept": true,
+            "roadId": 10022
+        },
+        {
+            "pixelSize": 118,
+            "pixelUniqueContribution": 114,
+            "isBeingKept": true,
+            "roadId": 11325
+        },
+        {
+            "pixelSize": 118,
+            "pixelUniqueContribution": 98,
+            "isBeingKept": true,
+            "roadId": 20890
+        },
+        {
+            "pixelSize": 118,
+            "pixelUniqueContribution": 109,
+            "isBeingKept": true,
+            "roadId": 10263
+        },
+        {
+            "pixelSize": 117,
+            "pixelUniqueContribution": 110,
+            "isBeingKept": true,
+            "roadId": 9133
+        },
+        {
+            "pixelSize": 113,
+            "pixelUniqueContribution": 107,
+            "isBeingKept": true,
+            "roadId": 11124
+        },
+        {
+            "pixelSize": 113,
+            "pixelUniqueContribution": 107,
+            "isBeingKept": true,
+            "roadId": 10921
+        },
+        {
+            "pixelSize": 113,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 11747
+        },
+        {
+            "pixelSize": 111,
+            "pixelUniqueContribution": 91,
+            "isBeingKept": true,
+            "roadId": 9184
+        },
+        {
+            "pixelSize": 111,
+            "pixelUniqueContribution": 108,
+            "isBeingKept": true,
+            "roadId": 9728
+        },
+        {
+            "pixelSize": 111,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9666
+        },
+        {
+            "pixelSize": 111,
+            "pixelUniqueContribution": 81,
+            "isBeingKept": true,
+            "roadId": 9521
+        },
+        {
+            "pixelSize": 110,
+            "pixelUniqueContribution": 110,
+            "isBeingKept": true,
+            "roadId": 21037
+        },
+        {
+            "pixelSize": 109,
+            "pixelUniqueContribution": 42,
+            "isBeingKept": false,
+            "roadId": 8557
+        },
+        {
+            "pixelSize": 109,
+            "pixelUniqueContribution": 108,
+            "isBeingKept": true,
+            "roadId": 11184
+        },
+        {
+            "pixelSize": 107,
+            "pixelUniqueContribution": 70,
+            "isBeingKept": true,
+            "roadId": 9294
+        },
+        {
+            "pixelSize": 107,
+            "pixelUniqueContribution": 107,
+            "isBeingKept": true,
+            "roadId": 8547
+        },
+        {
+            "pixelSize": 107,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 8752
+        },
+        {
+            "pixelSize": 106,
+            "pixelUniqueContribution": 98,
+            "isBeingKept": true,
+            "roadId": 9069
+        },
+        {
+            "pixelSize": 105,
+            "pixelUniqueContribution": 42,
+            "isBeingKept": false,
+            "roadId": 9126
+        },
+        {
+            "pixelSize": 105,
+            "pixelUniqueContribution": 94,
+            "isBeingKept": true,
+            "roadId": 9606
+        },
+        {
+            "pixelSize": 104,
+            "pixelUniqueContribution": 46,
+            "isBeingKept": false,
+            "roadId": 9439
+        },
+        {
+            "pixelSize": 103,
+            "pixelUniqueContribution": 74,
+            "isBeingKept": true,
+            "roadId": 9701
+        },
+        {
+            "pixelSize": 102,
+            "pixelUniqueContribution": 86,
+            "isBeingKept": true,
+            "roadId": 9124
+        },
+        {
+            "pixelSize": 102,
+            "pixelUniqueContribution": 102,
+            "isBeingKept": true,
+            "roadId": 8518
+        },
+        {
+            "pixelSize": 101,
+            "pixelUniqueContribution": 89,
+            "isBeingKept": true,
+            "roadId": 21086
+        },
+        {
+            "pixelSize": 101,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21477
+        },
+        {
+            "pixelSize": 100,
+            "pixelUniqueContribution": 77,
+            "isBeingKept": true,
+            "roadId": 21347
+        },
+        {
+            "pixelSize": 100,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21465
+        },
+        {
+            "pixelSize": 99,
+            "pixelUniqueContribution": 80,
+            "isBeingKept": true,
+            "roadId": 8808
+        },
+        {
+            "pixelSize": 99,
+            "pixelUniqueContribution": 91,
+            "isBeingKept": true,
+            "roadId": 10854
+        },
+        {
+            "pixelSize": 98,
+            "pixelUniqueContribution": 90,
+            "isBeingKept": true,
+            "roadId": 9764
+        },
+        {
+            "pixelSize": 95,
+            "pixelUniqueContribution": 46,
+            "isBeingKept": false,
+            "roadId": 9202
+        },
+        {
+            "pixelSize": 95,
+            "pixelUniqueContribution": 83,
+            "isBeingKept": true,
+            "roadId": 8605
+        },
+        {
+            "pixelSize": 95,
+            "pixelUniqueContribution": 55,
+            "isBeingKept": true,
+            "roadId": 9077
+        },
+        {
+            "pixelSize": 93,
+            "pixelUniqueContribution": 82,
+            "isBeingKept": true,
+            "roadId": 9704
+        },
+        {
+            "pixelSize": 93,
+            "pixelUniqueContribution": 82,
+            "isBeingKept": true,
+            "roadId": 10213
+        },
+        {
+            "pixelSize": 93,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 11584
+        },
+        {
+            "pixelSize": 91,
+            "pixelUniqueContribution": 91,
+            "isBeingKept": true,
+            "roadId": 9451
+        },
+        {
+            "pixelSize": 90,
+            "pixelUniqueContribution": 10,
+            "isBeingKept": false,
+            "roadId": 8857
+        },
+        {
+            "pixelSize": 89,
+            "pixelUniqueContribution": 80,
+            "isBeingKept": true,
+            "roadId": 9319
+        },
+        {
+            "pixelSize": 88,
+            "pixelUniqueContribution": 35,
+            "isBeingKept": false,
+            "roadId": 9396
+        },
+        {
+            "pixelSize": 88,
+            "pixelUniqueContribution": 35,
+            "isBeingKept": false,
+            "roadId": 9501
+        },
+        {
+            "pixelSize": 88,
+            "pixelUniqueContribution": 49,
+            "isBeingKept": true,
+            "roadId": 8731
+        },
+        {
+            "pixelSize": 87,
+            "pixelUniqueContribution": 87,
+            "isBeingKept": true,
+            "roadId": 8494
+        },
+        {
+            "pixelSize": 87,
+            "pixelUniqueContribution": 67,
+            "isBeingKept": true,
+            "roadId": 9263
+        },
+        {
+            "pixelSize": 86,
+            "pixelUniqueContribution": 86,
+            "isBeingKept": true,
+            "roadId": 8956
+        },
+        {
+            "pixelSize": 85,
+            "pixelUniqueContribution": 68,
+            "isBeingKept": true,
+            "roadId": 20883
+        },
+        {
+            "pixelSize": 85,
+            "pixelUniqueContribution": 19,
+            "isBeingKept": false,
+            "roadId": 8719
+        },
+        {
+            "pixelSize": 84,
+            "pixelUniqueContribution": 10,
+            "isBeingKept": false,
+            "roadId": 8682
+        },
+        {
+            "pixelSize": 84,
+            "pixelUniqueContribution": 10,
+            "isBeingKept": false,
+            "roadId": 8772
+        },
+        {
+            "pixelSize": 83,
+            "pixelUniqueContribution": 62,
+            "isBeingKept": true,
+            "roadId": 10364
+        },
+        {
+            "pixelSize": 83,
+            "pixelUniqueContribution": 57,
+            "isBeingKept": true,
+            "roadId": 20969
+        },
+        {
+            "pixelSize": 83,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 11353
+        },
+        {
+            "pixelSize": 82,
+            "pixelUniqueContribution": 65,
+            "isBeingKept": true,
+            "roadId": 21743
+        },
+        {
+            "pixelSize": 82,
+            "pixelUniqueContribution": 78,
+            "isBeingKept": true,
+            "roadId": 9312
+        },
+        {
+            "pixelSize": 81,
+            "pixelUniqueContribution": 75,
+            "isBeingKept": true,
+            "roadId": 9063
+        },
+        {
+            "pixelSize": 81,
+            "pixelUniqueContribution": 63,
+            "isBeingKept": true,
+            "roadId": 8999
+        },
+        {
+            "pixelSize": 80,
+            "pixelUniqueContribution": 74,
+            "isBeingKept": true,
+            "roadId": 9592
+        },
+        {
+            "pixelSize": 76,
+            "pixelUniqueContribution": 69,
+            "isBeingKept": true,
+            "roadId": 21531
+        },
+        {
+            "pixelSize": 76,
+            "pixelUniqueContribution": 42,
+            "isBeingKept": true,
+            "roadId": 8964
+        },
+        {
+            "pixelSize": 75,
+            "pixelUniqueContribution": 51,
+            "isBeingKept": true,
+            "roadId": 9664
+        },
+        {
+            "pixelSize": 75,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9447
+        },
+        {
+            "pixelSize": 75,
+            "pixelUniqueContribution": 69,
+            "isBeingKept": true,
+            "roadId": 9768
+        },
+        {
+            "pixelSize": 73,
+            "pixelUniqueContribution": 58,
+            "isBeingKept": true,
+            "roadId": 21650
+        },
+        {
+            "pixelSize": 72,
+            "pixelUniqueContribution": 68,
+            "isBeingKept": true,
+            "roadId": 9387
+        },
+        {
+            "pixelSize": 72,
+            "pixelUniqueContribution": 39,
+            "isBeingKept": true,
+            "roadId": 9594
+        },
+        {
+            "pixelSize": 71,
+            "pixelUniqueContribution": 67,
+            "isBeingKept": true,
+            "roadId": 20159
+        },
+        {
+            "pixelSize": 67,
+            "pixelUniqueContribution": 63,
+            "isBeingKept": true,
+            "roadId": 21528
+        },
+        {
+            "pixelSize": 66,
+            "pixelUniqueContribution": 42,
+            "isBeingKept": true,
+            "roadId": 9438
+        },
+        {
+            "pixelSize": 66,
+            "pixelUniqueContribution": 20,
+            "isBeingKept": false,
+            "roadId": 9579
+        },
+        {
+            "pixelSize": 66,
+            "pixelUniqueContribution": 66,
+            "isBeingKept": true,
+            "roadId": 8916
+        },
+        {
+            "pixelSize": 66,
+            "pixelUniqueContribution": 39,
+            "isBeingKept": true,
+            "roadId": 9243
+        },
+        {
+            "pixelSize": 65,
+            "pixelUniqueContribution": 55,
+            "isBeingKept": true,
+            "roadId": 8794
+        },
+        {
+            "pixelSize": 64,
+            "pixelUniqueContribution": 60,
+            "isBeingKept": true,
+            "roadId": 9041
+        },
+        {
+            "pixelSize": 64,
+            "pixelUniqueContribution": 63,
+            "isBeingKept": true,
+            "roadId": 8707
+        },
+        {
+            "pixelSize": 64,
+            "pixelUniqueContribution": 29,
+            "isBeingKept": false,
+            "roadId": 9201
+        },
+        {
+            "pixelSize": 63,
+            "pixelUniqueContribution": 57,
+            "isBeingKept": true,
+            "roadId": 8801
+        },
+        {
+            "pixelSize": 63,
+            "pixelUniqueContribution": 55,
+            "isBeingKept": true,
+            "roadId": 8984
+        },
+        {
+            "pixelSize": 63,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9510
+        },
+        {
+            "pixelSize": 62,
+            "pixelUniqueContribution": 55,
+            "isBeingKept": true,
+            "roadId": 9164
+        },
+        {
+            "pixelSize": 62,
+            "pixelUniqueContribution": 62,
+            "isBeingKept": true,
+            "roadId": 11719
+        },
+        {
+            "pixelSize": 62,
+            "pixelUniqueContribution": 55,
+            "isBeingKept": true,
+            "roadId": 8975
+        },
+        {
+            "pixelSize": 62,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 8805
+        },
+        {
+            "pixelSize": 61,
+            "pixelUniqueContribution": 61,
+            "isBeingKept": true,
+            "roadId": 9421
+        },
+        {
+            "pixelSize": 61,
+            "pixelUniqueContribution": 36,
+            "isBeingKept": true,
+            "roadId": 9611
+        },
+        {
+            "pixelSize": 61,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 8980
+        },
+        {
+            "pixelSize": 61,
+            "pixelUniqueContribution": 55,
+            "isBeingKept": true,
+            "roadId": 9094
+        },
+        {
+            "pixelSize": 60,
+            "pixelUniqueContribution": 50,
+            "isBeingKept": true,
+            "roadId": 8588
+        },
+        {
+            "pixelSize": 59,
+            "pixelUniqueContribution": 50,
+            "isBeingKept": true,
+            "roadId": 9148
+        },
+        {
+            "pixelSize": 59,
+            "pixelUniqueContribution": 59,
+            "isBeingKept": true,
+            "roadId": 8505
+        },
+        {
+            "pixelSize": 59,
+            "pixelUniqueContribution": 38,
+            "isBeingKept": true,
+            "roadId": 8733
+        },
+        {
+            "pixelSize": 59,
+            "pixelUniqueContribution": 51,
+            "isBeingKept": true,
+            "roadId": 8530
+        },
+        {
+            "pixelSize": 58,
+            "pixelUniqueContribution": 44,
+            "isBeingKept": true,
+            "roadId": 9465
+        },
+        {
+            "pixelSize": 58,
+            "pixelUniqueContribution": 45,
+            "isBeingKept": true,
+            "roadId": 10242
+        },
+        {
+            "pixelSize": 57,
+            "pixelUniqueContribution": 45,
+            "isBeingKept": true,
+            "roadId": 9631
+        },
+        {
+            "pixelSize": 56,
+            "pixelUniqueContribution": 56,
+            "isBeingKept": true,
+            "roadId": 8690
+        },
+        {
+            "pixelSize": 56,
+            "pixelUniqueContribution": 50,
+            "isBeingKept": true,
+            "roadId": 10812
+        },
+        {
+            "pixelSize": 55,
+            "pixelUniqueContribution": 22,
+            "isBeingKept": false,
+            "roadId": 10686
+        },
+        {
+            "pixelSize": 55,
+            "pixelUniqueContribution": 23,
+            "isBeingKept": false,
+            "roadId": 8679
+        },
+        {
+            "pixelSize": 54,
+            "pixelUniqueContribution": 38,
+            "isBeingKept": true,
+            "roadId": 8654
+        },
+        {
+            "pixelSize": 54,
+            "pixelUniqueContribution": 45,
+            "isBeingKept": true,
+            "roadId": 9639
+        },
+        {
+            "pixelSize": 54,
+            "pixelUniqueContribution": 48,
+            "isBeingKept": true,
+            "roadId": 10352
+        },
+        {
+            "pixelSize": 53,
+            "pixelUniqueContribution": 41,
+            "isBeingKept": true,
+            "roadId": 20967
+        },
+        {
+            "pixelSize": 53,
+            "pixelUniqueContribution": 33,
+            "isBeingKept": true,
+            "roadId": 9120
+        },
+        {
+            "pixelSize": 53,
+            "pixelUniqueContribution": 46,
+            "isBeingKept": true,
+            "roadId": 21416
+        },
+        {
+            "pixelSize": 52,
+            "pixelUniqueContribution": 44,
+            "isBeingKept": true,
+            "roadId": 9117
+        },
+        {
+            "pixelSize": 52,
+            "pixelUniqueContribution": 9,
+            "isBeingKept": false,
+            "roadId": 8684
+        },
+        {
+            "pixelSize": 52,
+            "pixelUniqueContribution": 13,
+            "isBeingKept": false,
+            "roadId": 9446
+        },
+        {
+            "pixelSize": 51,
+            "pixelUniqueContribution": 45,
+            "isBeingKept": true,
+            "roadId": 21116
+        },
+        {
+            "pixelSize": 51,
+            "pixelUniqueContribution": 40,
+            "isBeingKept": true,
+            "roadId": 9685
+        },
+        {
+            "pixelSize": 50,
+            "pixelUniqueContribution": 25,
+            "isBeingKept": false,
+            "roadId": 9005
+        },
+        {
+            "pixelSize": 50,
+            "pixelUniqueContribution": 45,
+            "isBeingKept": true,
+            "roadId": 8671
+        },
+        {
+            "pixelSize": 50,
+            "pixelUniqueContribution": 40,
+            "isBeingKept": true,
+            "roadId": 9715
+        },
+        {
+            "pixelSize": 49,
+            "pixelUniqueContribution": 24,
+            "isBeingKept": false,
+            "roadId": 21094
+        },
+        {
+            "pixelSize": 49,
+            "pixelUniqueContribution": 49,
+            "isBeingKept": true,
+            "roadId": 9255
+        },
+        {
+            "pixelSize": 48,
+            "pixelUniqueContribution": 40,
+            "isBeingKept": true,
+            "roadId": 8750
+        },
+        {
+            "pixelSize": 48,
+            "pixelUniqueContribution": 36,
+            "isBeingKept": true,
+            "roadId": 9679
+        },
+        {
+            "pixelSize": 48,
+            "pixelUniqueContribution": 22,
+            "isBeingKept": false,
+            "roadId": 9070
+        },
+        {
+            "pixelSize": 48,
+            "pixelUniqueContribution": 13,
+            "isBeingKept": false,
+            "roadId": 9329
+        },
+        {
+            "pixelSize": 47,
+            "pixelUniqueContribution": 38,
+            "isBeingKept": true,
+            "roadId": 9072
+        },
+        {
+            "pixelSize": 46,
+            "pixelUniqueContribution": 42,
+            "isBeingKept": true,
+            "roadId": 8756
+        },
+        {
+            "pixelSize": 46,
+            "pixelUniqueContribution": 38,
+            "isBeingKept": true,
+            "roadId": 9059
+        },
+        {
+            "pixelSize": 46,
+            "pixelUniqueContribution": 23,
+            "isBeingKept": false,
+            "roadId": 9418
+        },
+        {
+            "pixelSize": 45,
+            "pixelUniqueContribution": 39,
+            "isBeingKept": true,
+            "roadId": 8817
+        },
+        {
+            "pixelSize": 45,
+            "pixelUniqueContribution": 36,
+            "isBeingKept": true,
+            "roadId": 9734
+        },
+        {
+            "pixelSize": 45,
+            "pixelUniqueContribution": 27,
+            "isBeingKept": true,
+            "roadId": 8522
+        },
+        {
+            "pixelSize": 45,
+            "pixelUniqueContribution": 36,
+            "isBeingKept": true,
+            "roadId": 9695
+        },
+        {
+            "pixelSize": 44,
+            "pixelUniqueContribution": 14,
+            "isBeingKept": false,
+            "roadId": 9399
+        },
+        {
+            "pixelSize": 44,
+            "pixelUniqueContribution": 26,
+            "isBeingKept": true,
+            "roadId": 21731
+        },
+        {
+            "pixelSize": 43,
+            "pixelUniqueContribution": 36,
+            "isBeingKept": true,
+            "roadId": 11614
+        },
+        {
+            "pixelSize": 43,
+            "pixelUniqueContribution": 43,
+            "isBeingKept": true,
+            "roadId": 10383
+        },
+        {
+            "pixelSize": 43,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 10550
+        },
+        {
+            "pixelSize": 42,
+            "pixelUniqueContribution": 42,
+            "isBeingKept": true,
+            "roadId": 8774
+        },
+        {
+            "pixelSize": 42,
+            "pixelUniqueContribution": 37,
+            "isBeingKept": true,
+            "roadId": 8552
+        },
+        {
+            "pixelSize": 42,
+            "pixelUniqueContribution": 16,
+            "isBeingKept": false,
+            "roadId": 9790
+        },
+        {
+            "pixelSize": 41,
+            "pixelUniqueContribution": 32,
+            "isBeingKept": true,
+            "roadId": 8728
+        },
+        {
+            "pixelSize": 41,
+            "pixelUniqueContribution": 7,
+            "isBeingKept": false,
+            "roadId": 8498
+        },
+        {
+            "pixelSize": 41,
+            "pixelUniqueContribution": 19,
+            "isBeingKept": false,
+            "roadId": 11707
+        },
+        {
+            "pixelSize": 40,
+            "pixelUniqueContribution": 40,
+            "isBeingKept": true,
+            "roadId": 9743
+        },
+        {
+            "pixelSize": 40,
+            "pixelUniqueContribution": 34,
+            "isBeingKept": true,
+            "roadId": 8840
+        },
+        {
+            "pixelSize": 40,
+            "pixelUniqueContribution": 17,
+            "isBeingKept": false,
+            "roadId": 8622
+        },
+        {
+            "pixelSize": 40,
+            "pixelUniqueContribution": 32,
+            "isBeingKept": true,
+            "roadId": 9428
+        },
+        {
+            "pixelSize": 40,
+            "pixelUniqueContribution": 25,
+            "isBeingKept": true,
+            "roadId": 9048
+        },
+        {
+            "pixelSize": 40,
+            "pixelUniqueContribution": 31,
+            "isBeingKept": true,
+            "roadId": 9477
+        },
+        {
+            "pixelSize": 39,
+            "pixelUniqueContribution": 35,
+            "isBeingKept": true,
+            "roadId": 9614
+        },
+        {
+            "pixelSize": 38,
+            "pixelUniqueContribution": 17,
+            "isBeingKept": false,
+            "roadId": 8537
+        },
+        {
+            "pixelSize": 38,
+            "pixelUniqueContribution": 28,
+            "isBeingKept": true,
+            "roadId": 9333
+        },
+        {
+            "pixelSize": 37,
+            "pixelUniqueContribution": 17,
+            "isBeingKept": false,
+            "roadId": 9467
+        },
+        {
+            "pixelSize": 37,
+            "pixelUniqueContribution": 32,
+            "isBeingKept": true,
+            "roadId": 9649
+        },
+        {
+            "pixelSize": 37,
+            "pixelUniqueContribution": 35,
+            "isBeingKept": true,
+            "roadId": 13734
+        },
+        {
+            "pixelSize": 37,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 13846
+        },
+        {
+            "pixelSize": 37,
+            "pixelUniqueContribution": 26,
+            "isBeingKept": true,
+            "roadId": 9401
+        },
+        {
+            "pixelSize": 37,
+            "pixelUniqueContribution": 19,
+            "isBeingKept": true,
+            "roadId": 20925
+        },
+        {
+            "pixelSize": 37,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21360
+        },
+        {
+            "pixelSize": 36,
+            "pixelUniqueContribution": 31,
+            "isBeingKept": true,
+            "roadId": 8611
+        },
+        {
+            "pixelSize": 36,
+            "pixelUniqueContribution": 17,
+            "isBeingKept": false,
+            "roadId": 9223
+        },
+        {
+            "pixelSize": 35,
+            "pixelUniqueContribution": 27,
+            "isBeingKept": true,
+            "roadId": 21567
+        },
+        {
+            "pixelSize": 35,
+            "pixelUniqueContribution": 26,
+            "isBeingKept": true,
+            "roadId": 11343
+        },
+        {
+            "pixelSize": 35,
+            "pixelUniqueContribution": 29,
+            "isBeingKept": true,
+            "roadId": 8790
+        },
+        {
+            "pixelSize": 35,
+            "pixelUniqueContribution": 28,
+            "isBeingKept": true,
+            "roadId": 21245
+        },
+        {
+            "pixelSize": 34,
+            "pixelUniqueContribution": 16,
+            "isBeingKept": false,
+            "roadId": 9677
+        },
+        {
+            "pixelSize": 34,
+            "pixelUniqueContribution": 24,
+            "isBeingKept": true,
+            "roadId": 8987
+        },
+        {
+            "pixelSize": 34,
+            "pixelUniqueContribution": 24,
+            "isBeingKept": true,
+            "roadId": 9390
+        },
+        {
+            "pixelSize": 34,
+            "pixelUniqueContribution": 27,
+            "isBeingKept": true,
+            "roadId": 9043
+        },
+        {
+            "pixelSize": 33,
+            "pixelUniqueContribution": 19,
+            "isBeingKept": true,
+            "roadId": 9271
+        },
+        {
+            "pixelSize": 33,
+            "pixelUniqueContribution": 18,
+            "isBeingKept": true,
+            "roadId": 9195
+        },
+        {
+            "pixelSize": 33,
+            "pixelUniqueContribution": 28,
+            "isBeingKept": true,
+            "roadId": 8951
+        },
+        {
+            "pixelSize": 33,
+            "pixelUniqueContribution": 17,
+            "isBeingKept": true,
+            "roadId": 8492
+        },
+        {
+            "pixelSize": 32,
+            "pixelUniqueContribution": 9,
+            "isBeingKept": false,
+            "roadId": 9786
+        },
+        {
+            "pixelSize": 32,
+            "pixelUniqueContribution": 28,
+            "isBeingKept": true,
+            "roadId": 9526
+        },
+        {
+            "pixelSize": 32,
+            "pixelUniqueContribution": 32,
+            "isBeingKept": true,
+            "roadId": 8902
+        },
+        {
+            "pixelSize": 32,
+            "pixelUniqueContribution": 28,
+            "isBeingKept": true,
+            "roadId": 11543
+        },
+        {
+            "pixelSize": 32,
+            "pixelUniqueContribution": 20,
+            "isBeingKept": true,
+            "roadId": 9712
+        },
+        {
+            "pixelSize": 32,
+            "pixelUniqueContribution": 20,
+            "isBeingKept": true,
+            "roadId": 11683
+        },
+        {
+            "pixelSize": 32,
+            "pixelUniqueContribution": 13,
+            "isBeingKept": false,
+            "roadId": 8755
+        },
+        {
+            "pixelSize": 32,
+            "pixelUniqueContribution": 9,
+            "isBeingKept": false,
+            "roadId": 17596
+        },
+        {
+            "pixelSize": 32,
+            "pixelUniqueContribution": 28,
+            "isBeingKept": true,
+            "roadId": 8830
+        },
+        {
+            "pixelSize": 31,
+            "pixelUniqueContribution": 31,
+            "isBeingKept": true,
+            "roadId": 21381
+        },
+        {
+            "pixelSize": 31,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21242
+        },
+        {
+            "pixelSize": 31,
+            "pixelUniqueContribution": 22,
+            "isBeingKept": true,
+            "roadId": 8714
+        },
+        {
+            "pixelSize": 31,
+            "pixelUniqueContribution": 11,
+            "isBeingKept": false,
+            "roadId": 21668
+        },
+        {
+            "pixelSize": 31,
+            "pixelUniqueContribution": 18,
+            "isBeingKept": true,
+            "roadId": 9228
+        },
+        {
+            "pixelSize": 30,
+            "pixelUniqueContribution": 9,
+            "isBeingKept": false,
+            "roadId": 8556
+        },
+        {
+            "pixelSize": 30,
+            "pixelUniqueContribution": 21,
+            "isBeingKept": true,
+            "roadId": 8625
+        },
+        {
+            "pixelSize": 30,
+            "pixelUniqueContribution": 17,
+            "isBeingKept": true,
+            "roadId": 9754
+        },
+        {
+            "pixelSize": 30,
+            "pixelUniqueContribution": 24,
+            "isBeingKept": true,
+            "roadId": 8771
+        },
+        {
+            "pixelSize": 30,
+            "pixelUniqueContribution": 24,
+            "isBeingKept": true,
+            "roadId": 8940
+        },
+        {
+            "pixelSize": 30,
+            "pixelUniqueContribution": 23,
+            "isBeingKept": true,
+            "roadId": 8648
+        },
+        {
+            "pixelSize": 30,
+            "pixelUniqueContribution": 10,
+            "isBeingKept": false,
+            "roadId": 9287
+        },
+        {
+            "pixelSize": 30,
+            "pixelUniqueContribution": 22,
+            "isBeingKept": true,
+            "roadId": 9141
+        },
+        {
+            "pixelSize": 29,
+            "pixelUniqueContribution": 23,
+            "isBeingKept": true,
+            "roadId": 9834
+        },
+        {
+            "pixelSize": 29,
+            "pixelUniqueContribution": 17,
+            "isBeingKept": true,
+            "roadId": 8874
+        },
+        {
+            "pixelSize": 29,
+            "pixelUniqueContribution": 9,
+            "isBeingKept": false,
+            "roadId": 11304
+        },
+        {
+            "pixelSize": 29,
+            "pixelUniqueContribution": 6,
+            "isBeingKept": false,
+            "roadId": 9035
+        },
+        {
+            "pixelSize": 29,
+            "pixelUniqueContribution": 19,
+            "isBeingKept": true,
+            "roadId": 8702
+        },
+        {
+            "pixelSize": 29,
+            "pixelUniqueContribution": 25,
+            "isBeingKept": true,
+            "roadId": 10219
+        },
+        {
+            "pixelSize": 29,
+            "pixelUniqueContribution": 16,
+            "isBeingKept": true,
+            "roadId": 9054
+        },
+        {
+            "pixelSize": 29,
+            "pixelUniqueContribution": 25,
+            "isBeingKept": true,
+            "roadId": 9673
+        },
+        {
+            "pixelSize": 29,
+            "pixelUniqueContribution": 12,
+            "isBeingKept": false,
+            "roadId": 9321
+        },
+        {
+            "pixelSize": 29,
+            "pixelUniqueContribution": 12,
+            "isBeingKept": false,
+            "roadId": 9187
+        },
+        {
+            "pixelSize": 28,
+            "pixelUniqueContribution": 20,
+            "isBeingKept": true,
+            "roadId": 8938
+        },
+        {
+            "pixelSize": 28,
+            "pixelUniqueContribution": 20,
+            "isBeingKept": true,
+            "roadId": 22888
+        },
+        {
+            "pixelSize": 28,
+            "pixelUniqueContribution": 20,
+            "isBeingKept": true,
+            "roadId": 9074
+        },
+        {
+            "pixelSize": 28,
+            "pixelUniqueContribution": 20,
+            "isBeingKept": true,
+            "roadId": 9032
+        },
+        {
+            "pixelSize": 28,
+            "pixelUniqueContribution": 23,
+            "isBeingKept": true,
+            "roadId": 9352
+        },
+        {
+            "pixelSize": 28,
+            "pixelUniqueContribution": 21,
+            "isBeingKept": true,
+            "roadId": 9377
+        },
+        {
+            "pixelSize": 27,
+            "pixelUniqueContribution": 4,
+            "isBeingKept": false,
+            "roadId": 8883
+        },
+        {
+            "pixelSize": 27,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9301
+        },
+        {
+            "pixelSize": 27,
+            "pixelUniqueContribution": 24,
+            "isBeingKept": true,
+            "roadId": 8637
+        },
+        {
+            "pixelSize": 27,
+            "pixelUniqueContribution": 3,
+            "isBeingKept": false,
+            "roadId": 10293
+        },
+        {
+            "pixelSize": 26,
+            "pixelUniqueContribution": 21,
+            "isBeingKept": true,
+            "roadId": 9273
+        },
+        {
+            "pixelSize": 26,
+            "pixelUniqueContribution": 16,
+            "isBeingKept": true,
+            "roadId": 10092
+        },
+        {
+            "pixelSize": 25,
+            "pixelUniqueContribution": 13,
+            "isBeingKept": true,
+            "roadId": 9434
+        },
+        {
+            "pixelSize": 25,
+            "pixelUniqueContribution": 1,
+            "isBeingKept": false,
+            "roadId": 9111
+        },
+        {
+            "pixelSize": 25,
+            "pixelUniqueContribution": 16,
+            "isBeingKept": true,
+            "roadId": 11774
+        },
+        {
+            "pixelSize": 25,
+            "pixelUniqueContribution": 15,
+            "isBeingKept": true,
+            "roadId": 8726
+        },
+        {
+            "pixelSize": 25,
+            "pixelUniqueContribution": 23,
+            "isBeingKept": true,
+            "roadId": 8709
+        },
+        {
+            "pixelSize": 25,
+            "pixelUniqueContribution": 19,
+            "isBeingKept": true,
+            "roadId": 21895
+        },
+        {
+            "pixelSize": 24,
+            "pixelUniqueContribution": 18,
+            "isBeingKept": true,
+            "roadId": 17931
+        },
+        {
+            "pixelSize": 24,
+            "pixelUniqueContribution": 14,
+            "isBeingKept": true,
+            "roadId": 9395
+        },
+        {
+            "pixelSize": 24,
+            "pixelUniqueContribution": 16,
+            "isBeingKept": true,
+            "roadId": 9336
+        },
+        {
+            "pixelSize": 23,
+            "pixelUniqueContribution": 14,
+            "isBeingKept": true,
+            "roadId": 22761
+        },
+        {
+            "pixelSize": 23,
+            "pixelUniqueContribution": 7,
+            "isBeingKept": false,
+            "roadId": 9653
+        },
+        {
+            "pixelSize": 23,
+            "pixelUniqueContribution": 12,
+            "isBeingKept": true,
+            "roadId": 9088
+        },
+        {
+            "pixelSize": 22,
+            "pixelUniqueContribution": 13,
+            "isBeingKept": true,
+            "roadId": 9907
+        },
+        {
+            "pixelSize": 22,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 8646
+        },
+        {
+            "pixelSize": 22,
+            "pixelUniqueContribution": 17,
+            "isBeingKept": true,
+            "roadId": 9644
+        },
+        {
+            "pixelSize": 22,
+            "pixelUniqueContribution": 15,
+            "isBeingKept": true,
+            "roadId": 10149
+        },
+        {
+            "pixelSize": 22,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 11073
+        },
+        {
+            "pixelSize": 22,
+            "pixelUniqueContribution": 3,
+            "isBeingKept": false,
+            "roadId": 8791
+        },
+        {
+            "pixelSize": 21,
+            "pixelUniqueContribution": 4,
+            "isBeingKept": false,
+            "roadId": 10564
+        },
+        {
+            "pixelSize": 20,
+            "pixelUniqueContribution": 7,
+            "isBeingKept": false,
+            "roadId": 20944
+        },
+        {
+            "pixelSize": 20,
+            "pixelUniqueContribution": 3,
+            "isBeingKept": false,
+            "roadId": 9626
+        },
+        {
+            "pixelSize": 20,
+            "pixelUniqueContribution": 1,
+            "isBeingKept": false,
+            "roadId": 8971
+        },
+        {
+            "pixelSize": 20,
+            "pixelUniqueContribution": 13,
+            "isBeingKept": true,
+            "roadId": 9547
+        },
+        {
+            "pixelSize": 20,
+            "pixelUniqueContribution": 7,
+            "isBeingKept": false,
+            "roadId": 21364
+        },
+        {
+            "pixelSize": 20,
+            "pixelUniqueContribution": 7,
+            "isBeingKept": false,
+            "roadId": 21720
+        },
+        {
+            "pixelSize": 20,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21057
+        },
+        {
+            "pixelSize": 19,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 20955
+        },
+        {
+            "pixelSize": 19,
+            "pixelUniqueContribution": 10,
+            "isBeingKept": true,
+            "roadId": 8737
+        },
+        {
+            "pixelSize": 18,
+            "pixelUniqueContribution": 4,
+            "isBeingKept": false,
+            "roadId": 11163
+        },
+        {
+            "pixelSize": 18,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9584
+        },
+        {
+            "pixelSize": 18,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 8795
+        },
+        {
+            "pixelSize": 18,
+            "pixelUniqueContribution": 7,
+            "isBeingKept": false,
+            "roadId": 8549
+        },
+        {
+            "pixelSize": 18,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 11052
+        },
+        {
+            "pixelSize": 17,
+            "pixelUniqueContribution": 12,
+            "isBeingKept": true,
+            "roadId": 9570
+        },
+        {
+            "pixelSize": 17,
+            "pixelUniqueContribution": 7,
+            "isBeingKept": false,
+            "roadId": 9345
+        },
+        {
+            "pixelSize": 17,
+            "pixelUniqueContribution": 7,
+            "isBeingKept": false,
+            "roadId": 8615
+        },
+        {
+            "pixelSize": 17,
+            "pixelUniqueContribution": 10,
+            "isBeingKept": true,
+            "roadId": 9538
+        },
+        {
+            "pixelSize": 17,
+            "pixelUniqueContribution": 8,
+            "isBeingKept": false,
+            "roadId": 9610
+        },
+        {
+            "pixelSize": 16,
+            "pixelUniqueContribution": 7,
+            "isBeingKept": false,
+            "roadId": 9276
+        },
+        {
+            "pixelSize": 16,
+            "pixelUniqueContribution": 3,
+            "isBeingKept": false,
+            "roadId": 9553
+        },
+        {
+            "pixelSize": 16,
+            "pixelUniqueContribution": 1,
+            "isBeingKept": false,
+            "roadId": 21437
+        },
+        {
+            "pixelSize": 16,
+            "pixelUniqueContribution": 2,
+            "isBeingKept": false,
+            "roadId": 9796
+        },
+        {
+            "pixelSize": 16,
+            "pixelUniqueContribution": 9,
+            "isBeingKept": true,
+            "roadId": 8910
+        },
+        {
+            "pixelSize": 16,
+            "pixelUniqueContribution": 1,
+            "isBeingKept": false,
+            "roadId": 8551
+        },
+        {
+            "pixelSize": 15,
+            "pixelUniqueContribution": 12,
+            "isBeingKept": true,
+            "roadId": 17551
+        },
+        {
+            "pixelSize": 15,
+            "pixelUniqueContribution": 4,
+            "isBeingKept": false,
+            "roadId": 8981
+        },
+        {
+            "pixelSize": 15,
+            "pixelUniqueContribution": 11,
+            "isBeingKept": true,
+            "roadId": 8761
+        },
+        {
+            "pixelSize": 15,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9544
+        },
+        {
+            "pixelSize": 14,
+            "pixelUniqueContribution": 8,
+            "isBeingKept": true,
+            "roadId": 21021
+        },
+        {
+            "pixelSize": 14,
+            "pixelUniqueContribution": 1,
+            "isBeingKept": false,
+            "roadId": 10615
+        },
+        {
+            "pixelSize": 14,
+            "pixelUniqueContribution": 2,
+            "isBeingKept": false,
+            "roadId": 9030
+        },
+        {
+            "pixelSize": 14,
+            "pixelUniqueContribution": 9,
+            "isBeingKept": true,
+            "roadId": 10536
+        },
+        {
+            "pixelSize": 14,
+            "pixelUniqueContribution": 7,
+            "isBeingKept": false,
+            "roadId": 18428
+        },
+        {
+            "pixelSize": 14,
+            "pixelUniqueContribution": 6,
+            "isBeingKept": false,
+            "roadId": 10001
+        },
+        {
+            "pixelSize": 13,
+            "pixelUniqueContribution": 2,
+            "isBeingKept": false,
+            "roadId": 11279
+        },
+        {
+            "pixelSize": 13,
+            "pixelUniqueContribution": 4,
+            "isBeingKept": false,
+            "roadId": 21154
+        },
+        {
+            "pixelSize": 13,
+            "pixelUniqueContribution": 4,
+            "isBeingKept": false,
+            "roadId": 8711
+        },
+        {
+            "pixelSize": 12,
+            "pixelUniqueContribution": 5,
+            "isBeingKept": false,
+            "roadId": 9331
+        },
+        {
+            "pixelSize": 12,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 8921
+        },
+        {
+            "pixelSize": 11,
+            "pixelUniqueContribution": 4,
+            "isBeingKept": false,
+            "roadId": 8539
+        },
+        {
+            "pixelSize": 11,
+            "pixelUniqueContribution": 4,
+            "isBeingKept": false,
+            "roadId": 20898
+        },
+        {
+            "pixelSize": 11,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 8664
+        },
+        {
+            "pixelSize": 11,
+            "pixelUniqueContribution": 5,
+            "isBeingKept": false,
+            "roadId": 17476
+        },
+        {
+            "pixelSize": 10,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 8988
+        },
+        {
+            "pixelSize": 10,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 22818
+        },
+        {
+            "pixelSize": 10,
+            "pixelUniqueContribution": 7,
+            "isBeingKept": true,
+            "roadId": 11422
+        },
+        {
+            "pixelSize": 10,
+            "pixelUniqueContribution": 1,
+            "isBeingKept": false,
+            "roadId": 8720
+        },
+        {
+            "pixelSize": 10,
+            "pixelUniqueContribution": 1,
+            "isBeingKept": false,
+            "roadId": 8512
+        },
+        {
+            "pixelSize": 10,
+            "pixelUniqueContribution": 1,
+            "isBeingKept": false,
+            "roadId": 8825
+        },
+        {
+            "pixelSize": 9,
+            "pixelUniqueContribution": 3,
+            "isBeingKept": false,
+            "roadId": 9406
+        },
+        {
+            "pixelSize": 9,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 8600
+        },
+        {
+            "pixelSize": 9,
+            "pixelUniqueContribution": 1,
+            "isBeingKept": false,
+            "roadId": 22391
+        },
+        {
+            "pixelSize": 8,
+            "pixelUniqueContribution": 1,
+            "isBeingKept": false,
+            "roadId": 21076
+        },
+        {
+            "pixelSize": 7,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21423
+        },
+        {
+            "pixelSize": 7,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 22664
+        },
+        {
+            "pixelSize": 7,
+            "pixelUniqueContribution": 1,
+            "isBeingKept": false,
+            "roadId": 21445
+        },
+        {
+            "pixelSize": 7,
+            "pixelUniqueContribution": 1,
+            "isBeingKept": false,
+            "roadId": 21299
+        },
+        {
+            "pixelSize": 7,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9552
+        },
+        {
+            "pixelSize": 7,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 8575
+        },
+        {
+            "pixelSize": 7,
+            "pixelUniqueContribution": 1,
+            "isBeingKept": false,
+            "roadId": 21196
+        },
+        {
+            "pixelSize": 7,
+            "pixelUniqueContribution": 3,
+            "isBeingKept": false,
+            "roadId": 8934
+        },
+        {
+            "pixelSize": 6,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9349
+        },
+        {
+            "pixelSize": 6,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9651
+        },
+        {
+            "pixelSize": 6,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9784
+        },
+        {
+            "pixelSize": 6,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 9178
+        },
+        {
+            "pixelSize": 5,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 23258
+        },
+        {
+            "pixelSize": 5,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 22907
+        },
+        {
+            "pixelSize": 1,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 18348
+        },
+        {
+            "pixelSize": 1,
+            "pixelUniqueContribution": 0,
+            "isBeingKept": false,
+            "roadId": 21565
+        }
+    ]
+}
