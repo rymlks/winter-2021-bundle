@@ -69,6 +69,8 @@ public class PotholeController : MonoBehaviour
         }
         roadEnumerator = null;
         yield return null;
+
+        SortAndSumRoads();
     }
 
     private IEnumerator AgeExistingPotholes()
@@ -151,7 +153,7 @@ public class PotholeController : MonoBehaviour
             }
         }
         // Finding none, find any road that isn't under construction, starting with the busiest roads
-        for (int i=roads.Count-1; i<=0; i++)
+        for (int i=roads.Count-1; i>=0; i--)
         {
             Road road = roads[i];
             if (!road.underConstruction)

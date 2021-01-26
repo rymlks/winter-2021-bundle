@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public Button nextButton;
 
     public GameObject canvasCover;
-    private int fadeInFrames = 60;
+    private int fadeInFrames = 30;
 
     private static string titleScene = "TitleScreen";
     private string losingScene = "LosingScreen";
@@ -84,30 +84,13 @@ public class GameManager : MonoBehaviour
             playthroughStatistics.currentBudget += balanceParameters.budgetPerYear;
         }
 
-        // Adjust anger
-        float roundAnger = potholeController.GetTotalAngerFromRound();
-        if (roundAnger > balanceParameters.angerIncreaseThreshold)
-        {
-            playthroughStatistics.currentAnger += roundAnger;
-        } else
-        {
-            playthroughStatistics.currentAnger = Mathf.Max(playthroughStatistics.currentAnger - balanceParameters.angerDecayPerRound, 0);
-        }
-
         playthroughStatistics.currentLabor = playthroughStatistics.maxLabor;
-
-        // Lose if people are too angry
-        if (playthroughStatistics.currentAnger > playthroughStatistics.maxAnger)
-        {
-            Lose();
-            return;
-        }
-
         StartCoroutine(TransitionRounds());
     }
 
     private IEnumerator TransitionRounds()
     {
+        canvasCover.GetComponent<Image>().raycastTarget = true;
         nextButton.interactable = false;
         potholeController.AdvanceRound();
 
@@ -115,7 +98,28 @@ public class GameManager : MonoBehaviour
         while (potholeController.IsRoundAdvancing())
             yield return null;
 
-        nextButton.interactable = true;
+
+
+        // Adjust anger
+        float roundAnger = potholeController.GetTotalAngerFromRound();
+        if (roundAnger > balanceParameters.angerIncreaseThreshold)
+        {
+            playthroughStatistics.currentAnger += roundAnger;
+        }
+        else
+        {
+            playthroughStatistics.currentAnger = Mathf.Max(playthroughStatistics.currentAnger - balanceParameters.angerDecayPerRound, 0);
+        }
+
+        // Lose if people are too angry
+        if (playthroughStatistics.currentAnger > playthroughStatistics.maxAnger)
+        {
+            Lose();
+        } else
+        {
+            nextButton.interactable = true;
+            canvasCover.GetComponent<Image>().raycastTarget = false;
+        }
     }
     public void LoadDemoScene()
     {
@@ -203,6 +207,7 @@ public class GameManager : MonoBehaviour
                 yield return null;
             }
             canvasCover.SetActive(false);
+            canvasCover.GetComponent<Image>().raycastTarget = true;
         }
         yield return null;
     }
