@@ -46,6 +46,8 @@ public class Road : MonoBehaviour
     public BalanceParameters balanceParameters;
     [HideInInspector]
     public PlaythroughStatistics playthroughStatistics;
+    [HideInInspector]
+    public PotholeController potholeController;
 
     protected Bounds bounds;
     
@@ -74,16 +76,16 @@ public class Road : MonoBehaviour
 
     public enum Condition
     {
-        GOOD = 1,
+        GOOD = 10,
         FAIR = 5,
-        POOR = 10
+        POOR = 1
     }
 
     public enum Material
     {
-        ASPHALT,
-        CONCRETE,
-        GRAVEL,
+        ASPHALT = 2,
+        CONCRETE = 10,
+        GRAVEL = 1,
     }
 
     public void Update()
@@ -128,8 +130,23 @@ public class Road : MonoBehaviour
                 playthroughStatistics.currentLabor -= _currentLaborCost;
                 _particleSystem.Play();
             }
+        } else
+        {
+            GeneratePotholes();
         }
     }
+
+    private void GeneratePotholes()
+    {
+        double weight = (int)condition * (int)material * balanceParameters.potholeGenerationConditionWeight + balanceParameters.potholeGenerationPerTrafficWeight / trafficSum;
+
+        double value = potholeController.RNG.NextDouble() * weight;
+        if (value < balanceParameters.potholeGenerationFactor)
+        {
+            potholeController.GeneratePothole(this);
+        }
+    }
+
     public float getAngerCausedPerRound()
     {
         return this.underConstruction ? _angerPerRound : 0;
@@ -182,7 +199,7 @@ public class Road : MonoBehaviour
         message += roadName;
         message += "\nSegment ID: " + ID;
         message += "\nMaterial: " + material.ToString();
-        //message += "\nCondition: " + condition.ToString();
+        message += "\nCondition: " + condition.ToString();
         message += "\nLanes: " + lanes;
         if (underConstruction)
         {

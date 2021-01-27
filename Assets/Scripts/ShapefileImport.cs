@@ -126,6 +126,7 @@ public class ShapefileImport : MonoBehaviour
             road.balanceParameters = balanceParameters;
             road.contextMenuController = contextMenuController;
             road.playthroughStatistics = playthroughStatistics;
+            road.potholeController = potholeController;
         }
         else
         {

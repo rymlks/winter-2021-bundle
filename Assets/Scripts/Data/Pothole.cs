@@ -132,9 +132,15 @@ public class Pothole : MonoBehaviour
 
     private void ApplyPotholeAnger()
     {
+        _angerPerRound += Random.Range(0, balanceParameters.potholeAngerPerCar) * (float)roadSegment.trafficRate;
+
+        if (_particleSystemRenderer == null || _particleSystem == null)
+        {
+            _particleSystem = GetComponent<ParticleSystem>();
+            _particleSystemRenderer = GetComponent<ParticleSystemRenderer>();
+        }
         _particleSystemRenderer.material = angerParticle;
         _particleSystem.Play();
-        _angerPerRound += Random.Range(0, balanceParameters.potholeAngerPerCar) * (float)roadSegment.trafficRate;
     }
 
     private void ApplyConstructionAnger()

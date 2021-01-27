@@ -10,6 +10,8 @@ public class PotholeController : MonoBehaviour
     public List<Road> roads;
     public ContextMenuController contextMenuControler;
 
+    public Random RNG;
+
     private IEnumerator ageEnumerator;
     private IEnumerator createEnumerator;
     private IEnumerator roadEnumerator;
@@ -22,6 +24,7 @@ public class PotholeController : MonoBehaviour
     void Start()
     {
         roads = new List<Road>();
+        RNG = new Random();
         if (potholePrefab == null)
         {
             potholePrefab = Resources.Load<GameObject>("Prefabs/Pothole");
@@ -61,11 +64,12 @@ public class PotholeController : MonoBehaviour
 
     private IEnumerator AgeRoads()
     {
-        //int i = 0;
+        int i = 0;
         foreach (Road road in roads)
         {
             road.NotifyRoundEnded();
-            //if (i % 100 == 0) yield return null;
+            if (++i % (roads.Count / 10) == 0) yield return null;
+            //yield return null;
         }
         roadEnumerator = null;
         yield return null;
@@ -116,24 +120,30 @@ public class PotholeController : MonoBehaviour
         for (int i = 0; i < newPotholesThisRound; i++)
         {
             Road randomRoad = GetRandomRoad(random);
-            Vector2 candidateLocation = generateCandidateLocation(randomRoad);
-            Pothole intersect = GetIntersectingPothole(candidateLocation);
-            if (intersect == null)
-            {
-                GameObject pothole = GameObject.Instantiate(potholePrefab, candidateLocation, Quaternion.identity, _potholeParent.transform);
-                pothole.GetComponent<Pothole>().contextMenuControler = contextMenuControler;
-                pothole.GetComponent<Pothole>().roadSegment = randomRoad;
-                pothole.GetComponent<Pothole>().balanceParameters = _parameters;
-                randomRoad.potholes.Add(pothole);
-            } else
-            {
-                intersect.Degrade();
-            }
+            GeneratePothole(randomRoad);
 
             //if (i % 10 == 0) yield return null;
             yield return null;
         }
         createEnumerator = null;
+    }
+
+    public void GeneratePothole(Road road)
+    {
+        Vector2 candidateLocation = generateCandidateLocation(road);
+        Pothole intersect = GetIntersectingPothole(candidateLocation);
+        if (intersect == null)
+        {
+            GameObject pothole = GameObject.Instantiate(potholePrefab, candidateLocation, Quaternion.identity, _potholeParent.transform);
+            pothole.GetComponent<Pothole>().contextMenuControler = contextMenuControler;
+            pothole.GetComponent<Pothole>().roadSegment = road;
+            pothole.GetComponent<Pothole>().balanceParameters = _parameters;
+            road.potholes.Add(pothole);
+        }
+        else
+        {
+            intersect.Degrade();
+        }
     }
 
     /**

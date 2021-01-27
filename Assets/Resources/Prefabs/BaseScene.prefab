@@ -134,6 +134,9 @@ MonoBehaviour:
   maxYears: 11
   minimumNewPotholesPerRound: 3
   maximumNewPotholesPerRound: 6
+  potholeGenerationPerTrafficWeight: 0.0001
+  potholeGenerationConditionWeight: 1
+  potholeGenerationFactor: 1
   maximumPotholeAngerPerRound: 3
   minimumPotholePatchDuration: 1
   maximumPotholePatchDuration: 8
@@ -152,62 +155,62 @@ MonoBehaviour:
     labor: 1
     durability: 1
     time: 0
-    compatibleRoadMaterials: 0000000001000000
+    compatibleRoadMaterials: 020000000a000000
   - description: Throw 'n' Roll
     cost: 155
     labor: 2
     durability: 3
     time: 0
-    compatibleRoadMaterials: 0000000001000000
+    compatibleRoadMaterials: 020000000a000000
   - description: Asphalt Patch
     cost: 300
     labor: 5
     durability: 7
     time: 1
-    compatibleRoadMaterials: 0000000001000000
+    compatibleRoadMaterials: 020000000a000000
   - description: Concrete Patch
     cost: 500
     labor: 7
     durability: 12
     time: 2
-    compatibleRoadMaterials: 01000000
+    compatibleRoadMaterials: 0a000000
   - description: More Gravel
     cost: 25
     labor: 1
     durability: 1
     time: 0
-    compatibleRoadMaterials: 02000000
+    compatibleRoadMaterials: 01000000
   roadRepairs:
-  - description: Shit Asphalt
+  - description: Cheap Asphalt
     cost: 7
     labor: 0.005
     time: 0.001
-    material: 0
+    material: 2
     condition: 5
   - description: Good Asphalt
     cost: 12
     labor: 0.005
     time: 0.001
-    material: 0
+    material: 2
     condition: 1
-  - description: Shit Concrete
+  - description: Cheap Concrete
     cost: 10
     labor: 0.01
     time: 0.002
-    material: 1
+    material: 10
     condition: 5
   - description: Good Concrete
     cost: 15
     labor: 0.01
     time: 0.002
-    material: 1
+    material: 10
     condition: 1
   - description: Gravel
     cost: 1
     labor: 0.003
     time: 0.0003
-    material: 2
-    condition: 1
+    material: 1
+    condition: 5
 --- !u!1 &6318903299560662670
 GameObject:
   m_ObjectHideFlags: 0
