@@ -76,16 +76,16 @@ public class Road : MonoBehaviour
 
     public enum Condition
     {
-        GOOD = 10,
+        GOOD = 1,
         FAIR = 5,
-        POOR = 1
+        POOR = 10
     }
 
     public enum Material
     {
         ASPHALT = 2,
-        CONCRETE = 10,
-        GRAVEL = 1,
+        CONCRETE = 1,
+        GRAVEL = 10,
     }
 
     public void Update()
@@ -138,7 +138,8 @@ public class Road : MonoBehaviour
 
     private void GeneratePotholes()
     {
-        double weight = (int)condition * (int)material * balanceParameters.potholeGenerationConditionWeight + balanceParameters.potholeGenerationPerTrafficWeight / trafficSum;
+        double weight =  ((int)condition * (int)material * balanceParameters.potholeGenerationConditionWeight) + (balanceParameters.potholeGenerationPerTrafficWeight * trafficSum);
+        weight = 1.0 / weight;
 
         double value = potholeController.RNG.NextDouble() * weight;
         if (value < balanceParameters.potholeGenerationFactor)

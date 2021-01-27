@@ -155,31 +155,31 @@ MonoBehaviour:
     labor: 1
     durability: 1
     time: 0
-    compatibleRoadMaterials: 020000000a000000
+    compatibleRoadMaterials: 0200000001000000
   - description: Throw 'n' Roll
     cost: 155
     labor: 2
     durability: 3
     time: 0
-    compatibleRoadMaterials: 020000000a000000
+    compatibleRoadMaterials: 0200000001000000
   - description: Asphalt Patch
     cost: 300
     labor: 5
     durability: 7
     time: 1
-    compatibleRoadMaterials: 020000000a000000
+    compatibleRoadMaterials: 0200000001000000
   - description: Concrete Patch
     cost: 500
     labor: 7
     durability: 12
     time: 2
-    compatibleRoadMaterials: 0a000000
+    compatibleRoadMaterials: 01000000
   - description: More Gravel
     cost: 25
     labor: 1
     durability: 1
     time: 0
-    compatibleRoadMaterials: 01000000
+    compatibleRoadMaterials: 0a000000
   roadRepairs:
   - description: Cheap Asphalt
     cost: 7
@@ -197,19 +197,19 @@ MonoBehaviour:
     cost: 10
     labor: 0.01
     time: 0.002
-    material: 10
+    material: 1
     condition: 5
   - description: Good Concrete
     cost: 15
     labor: 0.01
     time: 0.002
-    material: 10
+    material: 1
     condition: 1
   - description: Gravel
     cost: 1
     labor: 0.003
     time: 0.0003
-    material: 1
+    material: 10
     condition: 5
 --- !u!1 &6318903299560662670
 GameObject:
