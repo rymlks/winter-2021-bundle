@@ -27,6 +27,8 @@ public class ShapefileImport : MonoBehaviour
     public ContextMenuController contextMenuController;
     public PlaythroughStatistics playthroughStatistics;
 
+    public float roadScale;
+
     private int linesPerFrame = 100;
     private Assets.ShxFile shapeFile;
     private List<int> _roadIdWhiteList;
@@ -41,6 +43,8 @@ public class ShapefileImport : MonoBehaviour
         CreateNonDuplicateRoadWhitelist();
         // -83.2f, 42.6f, 0.0f
         //StartCoroutine(ReadGIS());
+
+        Road.positionScale = roadScale;
         ReadGIS();
     }
 
@@ -78,8 +82,8 @@ public class ShapefileImport : MonoBehaviour
         for (int i=0; i<shapeFile.RecordSet.Count; i++)
         {
             Assets.GISRecord record = shapeFile.GetData(i);
-            Assets.DBCharacter community = (Assets.DBCharacter)record.DbfRecord.Record[8];
-            if (community.Value.ToLower().Contains(city.ToLower()))
+            Assets.DBCharacter mcdname = (Assets.DBCharacter)record.DbfRecord.Record[17];
+            if (mcdname.Value.ToLower().Contains(city.ToLower()))
             {
                 // Some records aren't polyline and I don't know what they're for
                 if (record.ShpRecord.Header.Type == Assets.ShapeType.PolyLine)
@@ -98,6 +102,8 @@ public class ShapefileImport : MonoBehaviour
         configureMainCamera();
         potholeController.SortAndSumRoads();
         Debug.Log("Done.");
+
+        Debug.Log("Number of roads: " + potholeController.roads.Count);
     }
 
     private void configureMainCamera()

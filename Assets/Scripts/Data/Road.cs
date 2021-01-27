@@ -60,7 +60,7 @@ public class Road : MonoBehaviour
     public static float MaxY = float.MinValue;
     public static float MinX = float.MaxValue;
     public static float MinY = float.MaxValue;
-    private static int positionScale = 50;
+    public static float positionScale = 50;
 
     // Useful indices in DbfRecord objects
     private const int I_FID = 0;  // DBNumeric

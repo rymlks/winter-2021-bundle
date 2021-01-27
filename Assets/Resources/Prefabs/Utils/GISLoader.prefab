@@ -46,8 +46,13 @@ MonoBehaviour:
   city: Ann Arbor
   cameraMargin: 0.25
   cityNameLabel: {fileID: 0}
+  roadParent: {fileID: 0}
   roadWidthMultiplier: 0.01
   shxPath: Resources/GIS/Traffic_Volume-shp/Traffic_Volume.shx
   roadPrefab: {fileID: 1081882395379551179, guid: 4f8f69915dd55c841b087f1d21878a14,
     type: 3}
   potholeController: {fileID: 0}
+  balanceParameters: {fileID: 0}
+  contextMenuController: {fileID: 0}
+  playthroughStatistics: {fileID: 0}
+  roadScale: 50
