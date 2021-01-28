@@ -7,13 +7,13 @@ public class CameraController : MonoBehaviour
 {
     [Range(0.0f, 1.0f)]
     public float speed;
+    public float minZoom = 0.1f;
+    public float maxZoom = 10.0f;
 
     private Vector3 targetPosition;
     private Vector3 prevMousePosition;
     private Camera cameraComponent;
 
-    private float minZoom = 0.1f;
-    private float maxZoom = 10.0f;
 
     private bool panning = false;
 

@@ -52,9 +52,9 @@ public class ShapefileImport : MonoBehaviour
             _roadIdWhiteList = JsonHelper.FromJson<RoadDedupingPotholeController.RoadDeduplicationWrittenData>(dedupeJson)
                 .Where(data => data.isBeingKept).Select(data => data.roadId).ToList();
         }
-        catch (FileNotFoundException fnfe)
+        catch (Exception e)
         {
-            Debug.Log("Dedupe file not found for level! More info: "+ fnfe.Message);
+            Debug.Log("Dedupe file not found for level! More info: "+ e.Message);
             _roadIdWhiteList = new List<int>();
         }
     }
@@ -79,8 +79,9 @@ public class ShapefileImport : MonoBehaviour
         {
             Assets.GISRecord record = shapeFile.GetData(i);
             Assets.DBCharacter community = (Assets.DBCharacter)record.DbfRecord.Record[8];
-            if (community.Value.ToLower().Contains(city.ToLower()))
+            if (community.Value.ToLower().Contains(city.ToLower()) || city == "*")
             {
+                Debug.Log("|"+city+"|");
                 // Some records aren't polyline and I don't know what they're for
                 if (record.ShpRecord.Header.Type == Assets.ShapeType.PolyLine)
                 {
