@@ -216,7 +216,7 @@ PrefabInstance:
     - target: {fileID: 7423155611331881599, guid: 556312a751231af4d95c9c3871b56aa9,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadDemoScene
+      value: LoadCitySelectScene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 556312a751231af4d95c9c3871b56aa9, type: 3}
