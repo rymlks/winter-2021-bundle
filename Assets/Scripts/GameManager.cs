@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
         while (potholeController.IsRoundAdvancing())
             yield return null;
 
-
+        yield return new WaitForSeconds(1);
 
         // Adjust anger
         float roundAnger = potholeController.GetTotalAngerFromRound();

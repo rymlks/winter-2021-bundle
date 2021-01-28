@@ -60,6 +60,8 @@ MonoBehaviour:
     type: 2}
   constructionMaterialSelected: {fileID: 2100000, guid: bccef423f00821d4eb474c8aed119f69,
     type: 2}
+  angerParticle: {fileID: 2100000, guid: 718d751cabbcf2745be0875a0d381885, type: 2}
+  laborParticle: {fileID: 2100000, guid: eb28e6166f23f8547a770efeba358c07, type: 2}
   lowTrafficAsphalt: {r: 0, g: 0, b: 0, a: 0}
   highTrafficAsphalt: {r: 1, g: 0, b: 0, a: 0}
   lowTrafficConcrete: {r: 0.6431373, g: 0.61960787, b: 0.5568628, a: 0}
@@ -75,6 +77,7 @@ MonoBehaviour:
   contextMenuController: {fileID: 0}
   balanceParameters: {fileID: 0}
   playthroughStatistics: {fileID: 0}
+  potholeController: {fileID: 0}
 --- !u!120 &3114658325036330241
 LineRenderer:
   m_ObjectHideFlags: 0

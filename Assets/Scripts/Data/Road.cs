@@ -19,6 +19,9 @@ public class Road : MonoBehaviour
     public UnityEngine.Material constructionMaterial;
     public UnityEngine.Material constructionMaterialSelected;
 
+    public UnityEngine.Material angerParticle;
+    public UnityEngine.Material laborParticle;
+
     public Color lowTrafficAsphalt;
     public Color highTrafficAsphalt;
 
@@ -52,7 +55,9 @@ public class Road : MonoBehaviour
     protected Bounds bounds;
     
     private LineRenderer lineRenderer;
+
     private ParticleSystem _particleSystem;
+    private ParticleSystemRenderer _particleSystemRenderer;
     private bool _selected = false;
     private int _constructionTime = -1;
     private float _currentLaborCost = -1;
@@ -128,7 +133,7 @@ public class Road : MonoBehaviour
             } else
             {
                 playthroughStatistics.currentLabor -= _currentLaborCost;
-                _particleSystem.Play();
+                PlayLaborParticle();
             }
         } else
         {
@@ -150,7 +155,14 @@ public class Road : MonoBehaviour
 
     public float getAngerCausedPerRound()
     {
-        return this.underConstruction ? _angerPerRound : 0;
+        if (this.underConstruction)
+        {
+            PlayAngerParticle();
+            return _angerPerRound;
+        } else
+        {
+            return 0;
+        }
     }
 
     public void DoClick()
@@ -338,6 +350,28 @@ public class Road : MonoBehaviour
         lineRenderer.endColor = color;
     }
 
+    private void PlayAngerParticle()
+    {
+        if (_particleSystemRenderer == null || _particleSystem == null)
+        {
+            _particleSystem = GetComponent<ParticleSystem>();
+            _particleSystemRenderer = GetComponent<ParticleSystemRenderer>();
+        }
+        _particleSystemRenderer.material = angerParticle;
+        _particleSystem.Play();
+    }
+
+    private void PlayLaborParticle()
+    {
+        if (_particleSystemRenderer == null || _particleSystem == null)
+        {
+            _particleSystem = GetComponent<ParticleSystem>();
+            _particleSystemRenderer = GetComponent<ParticleSystemRenderer>();
+        }
+        _particleSystemRenderer.material = laborParticle;
+        _particleSystem.Play();
+    }
+
     /**
      * Load data from a GISRecord to represent this road. Update visuals
      */
@@ -439,6 +473,7 @@ public class Road : MonoBehaviour
 
         potholes = new List<GameObject>();
         _particleSystem = GetComponent<ParticleSystem>();
+        _particleSystemRenderer = GetComponent<ParticleSystemRenderer>();
         ParticleSystem.ShapeModule _editableShape = _particleSystem.shape;
         //_editableShape.position = MidPoint();
         _editableShape.mesh = mesh;
