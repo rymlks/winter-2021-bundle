@@ -212,7 +212,6 @@ public class GameManager : MonoBehaviour
                 canvasCover.GetComponent<Image>().color = new Color(0, 0, 0, i / (float)fadeInFrames);
                 yield return null;
             }
-            canvasCover.GetComponent<Image>().raycastTarget = true;
         }
         yield return null;
     }
