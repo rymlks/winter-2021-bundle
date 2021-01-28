@@ -120,12 +120,14 @@ public class Pothole : MonoBehaviour
     {
         if (underConstruction)
         {
+            PlayAngerParticle();
             return GetConstructionAnger();
         } else if (isPatched)
         {
             return 0;
         } else
         {
+            PlayAngerParticle();
             return _angerPerRound;
         }
     }
@@ -134,12 +136,27 @@ public class Pothole : MonoBehaviour
     {
         _angerPerRound += Random.Range(0, balanceParameters.potholeAngerPerCar) * (float)roadSegment.trafficRate;
 
+    }
+
+    private void PlayAngerParticle()
+    {
         if (_particleSystemRenderer == null || _particleSystem == null)
         {
             _particleSystem = GetComponent<ParticleSystem>();
             _particleSystemRenderer = GetComponent<ParticleSystemRenderer>();
         }
         _particleSystemRenderer.material = angerParticle;
+        _particleSystem.Play();
+    }
+
+    private void PlayLaborParticle()
+    {
+        if (_particleSystemRenderer == null || _particleSystem == null)
+        {
+            _particleSystem = GetComponent<ParticleSystem>();
+            _particleSystemRenderer = GetComponent<ParticleSystemRenderer>();
+        }
+        _particleSystemRenderer.material = laborParticle;
         _particleSystem.Play();
     }
 
@@ -225,8 +242,7 @@ public class Pothole : MonoBehaviour
                 RenderConstruction();
                 _stats.currentLabor -= _currentLaborCost;
 
-                _particleSystemRenderer.material = laborParticle;
-                _particleSystem.Play();
+                PlayLaborParticle();
             }
 
         } 
