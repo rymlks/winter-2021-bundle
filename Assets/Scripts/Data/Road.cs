@@ -19,6 +19,9 @@ public class Road : MonoBehaviour
     public UnityEngine.Material constructionMaterial;
     public UnityEngine.Material constructionMaterialSelected;
 
+    public UnityEngine.Material angerParticle;
+    public UnityEngine.Material laborParticle;
+
     public Color lowTrafficAsphalt;
     public Color highTrafficAsphalt;
 
@@ -46,11 +49,15 @@ public class Road : MonoBehaviour
     public BalanceParameters balanceParameters;
     [HideInInspector]
     public PlaythroughStatistics playthroughStatistics;
+    [HideInInspector]
+    public PotholeController potholeController;
 
     protected Bounds bounds;
     
     private LineRenderer lineRenderer;
+
     private ParticleSystem _particleSystem;
+    private ParticleSystemRenderer _particleSystemRenderer;
     private bool _selected = false;
     private int _constructionTime = -1;
     private float _currentLaborCost = -1;
@@ -60,7 +67,7 @@ public class Road : MonoBehaviour
     public static float MaxY = float.MinValue;
     public static float MinX = float.MaxValue;
     public static float MinY = float.MaxValue;
-    private static int positionScale = 50;
+    public static float positionScale = 50;
 
     // Useful indices in DbfRecord objects
     private const int I_FID = 0;  // DBNumeric
@@ -81,9 +88,9 @@ public class Road : MonoBehaviour
 
     public enum Material
     {
-        ASPHALT,
-        CONCRETE,
-        GRAVEL,
+        ASPHALT = 2,
+        CONCRETE = 1,
+        GRAVEL = 10,
     }
 
     public void Update()
@@ -126,13 +133,36 @@ public class Road : MonoBehaviour
             } else
             {
                 playthroughStatistics.currentLabor -= _currentLaborCost;
-                _particleSystem.Play();
+                PlayLaborParticle();
             }
+        } else
+        {
+            GeneratePotholes();
         }
     }
+
+    private void GeneratePotholes()
+    {
+        double weight =  ((int)condition * (int)material * balanceParameters.potholeGenerationConditionWeight) + (balanceParameters.potholeGenerationPerTrafficWeight * trafficSum);
+        weight = 1.0 / weight;
+
+        double value = potholeController.RNG.NextDouble() * weight;
+        if (value < balanceParameters.potholeGenerationFactor)
+        {
+            potholeController.GeneratePothole(this);
+        }
+    }
+
     public float getAngerCausedPerRound()
     {
-        return this.underConstruction ? _angerPerRound : 0;
+        if (this.underConstruction)
+        {
+            PlayAngerParticle();
+            return _angerPerRound;
+        } else
+        {
+            return 0;
+        }
     }
 
     public void DoClick()
@@ -182,7 +212,7 @@ public class Road : MonoBehaviour
         message += roadName;
         message += "\nSegment ID: " + ID;
         message += "\nMaterial: " + material.ToString();
-        //message += "\nCondition: " + condition.ToString();
+        message += "\nCondition: " + condition.ToString();
         message += "\nLanes: " + lanes;
         if (underConstruction)
         {
@@ -320,6 +350,28 @@ public class Road : MonoBehaviour
         lineRenderer.endColor = color;
     }
 
+    private void PlayAngerParticle()
+    {
+        if (_particleSystemRenderer == null || _particleSystem == null)
+        {
+            _particleSystem = GetComponent<ParticleSystem>();
+            _particleSystemRenderer = GetComponent<ParticleSystemRenderer>();
+        }
+        _particleSystemRenderer.material = angerParticle;
+        _particleSystem.Play();
+    }
+
+    private void PlayLaborParticle()
+    {
+        if (_particleSystemRenderer == null || _particleSystem == null)
+        {
+            _particleSystem = GetComponent<ParticleSystem>();
+            _particleSystemRenderer = GetComponent<ParticleSystemRenderer>();
+        }
+        _particleSystemRenderer.material = laborParticle;
+        _particleSystem.Play();
+    }
+
     /**
      * Load data from a GISRecord to represent this road. Update visuals
      */
@@ -421,6 +473,7 @@ public class Road : MonoBehaviour
 
         potholes = new List<GameObject>();
         _particleSystem = GetComponent<ParticleSystem>();
+        _particleSystemRenderer = GetComponent<ParticleSystemRenderer>();
         ParticleSystem.ShapeModule _editableShape = _particleSystem.shape;
         //_editableShape.position = MidPoint();
         _editableShape.mesh = mesh;

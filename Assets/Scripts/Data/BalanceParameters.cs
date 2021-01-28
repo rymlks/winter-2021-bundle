@@ -33,6 +33,9 @@ public class BalanceParameters : MonoBehaviour
 
     public int minimumNewPotholesPerRound;
     public int maximumNewPotholesPerRound;
+    public float potholeGenerationPerTrafficWeight;
+    public float potholeGenerationConditionWeight;
+    public float potholeGenerationFactor;
     public float maximumPotholeAngerPerRound;
 
     public int minimumPotholePatchDuration;
