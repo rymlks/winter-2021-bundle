@@ -46,6 +46,8 @@ public class Road : MonoBehaviour
     public BalanceParameters balanceParameters;
     [HideInInspector]
     public PlaythroughStatistics playthroughStatistics;
+    [HideInInspector]
+    public PotholeController potholeController;
 
     protected Bounds bounds;
     
@@ -60,7 +62,7 @@ public class Road : MonoBehaviour
     public static float MaxY = float.MinValue;
     public static float MinX = float.MaxValue;
     public static float MinY = float.MaxValue;
-    private static int positionScale = 50;
+    public static float positionScale = 50;
 
     // Useful indices in DbfRecord objects
     private const int I_FID = 0;  // DBNumeric
@@ -81,9 +83,9 @@ public class Road : MonoBehaviour
 
     public enum Material
     {
-        ASPHALT,
-        CONCRETE,
-        GRAVEL,
+        ASPHALT = 2,
+        CONCRETE = 1,
+        GRAVEL = 10,
     }
 
     public void Update()
@@ -128,8 +130,24 @@ public class Road : MonoBehaviour
                 playthroughStatistics.currentLabor -= _currentLaborCost;
                 _particleSystem.Play();
             }
+        } else
+        {
+            GeneratePotholes();
         }
     }
+
+    private void GeneratePotholes()
+    {
+        double weight =  ((int)condition * (int)material * balanceParameters.potholeGenerationConditionWeight) + (balanceParameters.potholeGenerationPerTrafficWeight * trafficSum);
+        weight = 1.0 / weight;
+
+        double value = potholeController.RNG.NextDouble() * weight;
+        if (value < balanceParameters.potholeGenerationFactor)
+        {
+            potholeController.GeneratePothole(this);
+        }
+    }
+
     public float getAngerCausedPerRound()
     {
         return this.underConstruction ? _angerPerRound : 0;
@@ -182,7 +200,7 @@ public class Road : MonoBehaviour
         message += roadName;
         message += "\nSegment ID: " + ID;
         message += "\nMaterial: " + material.ToString();
-        //message += "\nCondition: " + condition.ToString();
+        message += "\nCondition: " + condition.ToString();
         message += "\nLanes: " + lanes;
         if (underConstruction)
         {

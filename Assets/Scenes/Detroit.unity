@@ -191,12 +191,22 @@ PrefabInstance:
     - target: {fileID: 1271797628247567618, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: city
-      value: Walled Lak
+      value: Detroit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1271797628247567618, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: shxPath
+      value: Resources/GIS/Detroit/Detroit.shx
+      objectReference: {fileID: 0}
+    - target: {fileID: 1271797628247567618, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: roadScale
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1271797628247567618, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: roadWidthMultiplier
-      value: 0.0246
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 2045570438879295814, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
@@ -261,12 +271,12 @@ PrefabInstance:
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: maxAnger
-      value: 1000
+      value: 10000000
       objectReference: {fileID: 0}
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: maxYears
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
@@ -296,17 +306,7 @@ PrefabInstance:
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: potholeGenerationFactor
-      value: 0.001
-      objectReference: {fileID: 0}
-    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
-        type: 3}
-      propertyPath: maximumNewPotholesPerRound
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
-        type: 3}
-      propertyPath: minimumNewPotholesPerRound
-      value: 0
+      value: 0.003
       objectReference: {fileID: 0}
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}

@@ -132,9 +132,15 @@ public class Pothole : MonoBehaviour
 
     private void ApplyPotholeAnger()
     {
+        _angerPerRound += Random.Range(0, balanceParameters.potholeAngerPerCar) * (float)roadSegment.trafficRate;
+
+        if (_particleSystemRenderer == null || _particleSystem == null)
+        {
+            _particleSystem = GetComponent<ParticleSystem>();
+            _particleSystemRenderer = GetComponent<ParticleSystemRenderer>();
+        }
         _particleSystemRenderer.material = angerParticle;
         _particleSystem.Play();
-        _angerPerRound += Random.Range(0, balanceParameters.potholeAngerPerCar);// * (float)roadSegment.trafficRate;
     }
 
     private void ApplyConstructionAnger()
@@ -223,7 +229,8 @@ public class Pothole : MonoBehaviour
                 _particleSystem.Play();
             }
 
-        } else if (this.isPatched)
+        } 
+        else if (this.isPatched && Random.value < 0.5f)
         {
             this._durability--;
             if(this._durability <= 0){
@@ -247,7 +254,7 @@ public class Pothole : MonoBehaviour
 
     private void RenderNormal()
     {
-        Texture2D tex = Colorize(potholeSprite, _angerPerRound / (balanceParameters.maxAnger * 0.001f));
+        Texture2D tex = Colorize(potholeSprite, _angerPerRound / (balanceParameters.maxAnger * 0.1f));
         Sprite s = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), potholeSprite.pixelsPerUnit);
         Render(s);
     }
