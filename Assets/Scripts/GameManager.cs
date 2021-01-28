@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     private string badEndScene = "BadEnd";
 
     private string demoScene = "RickDev";
+    private string citySelectScene = "CitySelect";
 
     private string loadingScene = "Loading";
 
@@ -124,6 +125,11 @@ public class GameManager : MonoBehaviour
     public void LoadDemoScene()
     {
         LoadingScreenTransition(demoScene);
+    }
+
+    public void LoadCitySelectScene()
+    {
+        LoadingScreenTransition(citySelectScene);
     }
 
     public void Retire()
