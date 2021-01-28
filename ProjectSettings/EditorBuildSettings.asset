@@ -26,4 +26,25 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Loading.unity
     guid: 596e4c85c4c4e1644b405e1c6be4aff4
+  - enabled: 1
+    path: Assets/Scenes/CitySelect.unity
+    guid: edc6519d294bb804590dccf848fa493e
+  - enabled: 1
+    path: Assets/Scenes/Cities/Detroit.unity
+    guid: fe3349a0bce2cb848aa37889d2df0dec
+  - enabled: 1
+    path: Assets/Scenes/Cities/Ypsilanti.unity
+    guid: b3d476a8383515d42b5e3f2d42cbc365
+  - enabled: 1
+    path: Assets/Scenes/Cities/Ann Arbor.unity
+    guid: 95ebd6265a57de144b7eec13cdf1d28e
+  - enabled: 1
+    path: Assets/Scenes/Cities/Walled Lake.unity
+    guid: 8db46b06dd1e272459fe4bfa09578ae8
+  - enabled: 1
+    path: Assets/Scenes/Cities/Hamtramck.unity
+    guid: 462cfc93c94c74c478b36f5a4682c434
+  - enabled: 1
+    path: Assets/Scenes/Cities/Livonia.unity
+    guid: 85ce704cf4605444cafa407bbfa8ddca
   m_configObjects: {}
