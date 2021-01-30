@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
 
     public void NextRound()
     {
+        playthroughStatistics.currentAnger = Mathf.Max(playthroughStatistics.currentAnger - balanceParameters.angerDecayPerRound, 0);
+
         if (contextMenu != null)
             contextMenu.Close();
 
@@ -104,14 +106,7 @@ public class GameManager : MonoBehaviour
 
         // Adjust anger
         float roundAnger = potholeController.GetTotalAngerFromRound();
-        if (roundAnger > balanceParameters.angerIncreaseThreshold)
-        {
-            playthroughStatistics.currentAnger += roundAnger;
-        }
-        else
-        {
-            playthroughStatistics.currentAnger = Mathf.Max(playthroughStatistics.currentAnger - balanceParameters.angerDecayPerRound, 0);
-        }
+        playthroughStatistics.currentAnger += roundAnger;
 
         // Lose if people are too angry
         if (playthroughStatistics.currentAnger > playthroughStatistics.maxAnger)
