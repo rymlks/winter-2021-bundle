@@ -65,6 +65,12 @@ public class ShapefileImport : MonoBehaviour
 
     void ReadGIS()
     {
+        Road.MinX = float.MaxValue;
+        Road.MaxX = float.MinValue;
+
+        Road.MinY = float.MaxValue;
+        Road.MaxY = float.MinValue;
+
         // Load all the GIS data from file
         shapeFile.Load();
         //yield return null;

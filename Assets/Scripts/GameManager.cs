@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator TransitionRounds()
     {
+        canvasCover.GetComponent<Image>().color = new Color(0, 0, 0, 0.1f);
         canvasCover.GetComponent<Image>().raycastTarget = true;
         nextButton.interactable = false;
         potholeController.AdvanceRound();
@@ -120,6 +121,7 @@ public class GameManager : MonoBehaviour
         {
             nextButton.interactable = true;
             canvasCover.GetComponent<Image>().raycastTarget = false;
+            canvasCover.GetComponent<Image>().color = new Color(0, 0, 0, 0);
         }
     }
     public void LoadDemoScene()
