@@ -523,19 +523,5 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9030515009485454238, guid: 21166c92722572a4894703f716e61b8c,
-        type: 3}
-      propertyPath: tutorialText
-      value: "Why Don't They Fix The D@&n Roads!?\n\nWelcome to {playthroughStatistics.cityName}.\nYou
-        are a city beurocrat whose job is to use a yearly budget to \nfix roads and
-        potholes that show up every month. Potholes and \nconstruction are annoying,
-        but some potholes can be really \nannoying, like ones on busy or poor quality
-        roads, so be sure to \nfind the ones that cause the most anger. There are
-        also limits to \nhow much construction you can do in a single month, so plan
-        \nahead. Spending more on roads and potholes gives you higher \nquality materials,
-        which means longer lasting repairs. You win if \nyou can last 5 years without
-        an uprising or cash out with leftover \nfunds and retire to your favorite
-        sandy beachfront location\r."
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21166c92722572a4894703f716e61b8c, type: 3}
