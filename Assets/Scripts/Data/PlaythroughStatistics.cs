@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlaythroughStatistics : MonoBehaviour
 {
+    public string cityName;
+
     public float currentAnger;
     public float currentBudget;
     public float currentLabor;

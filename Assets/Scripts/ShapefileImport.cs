@@ -26,6 +26,7 @@ public class ShapefileImport : MonoBehaviour
     public BalanceParameters balanceParameters;
     public ContextMenuController contextMenuController;
     public PlaythroughStatistics playthroughStatistics;
+    public GameManager gameManager;
 
     public float roadScale;
 
@@ -65,6 +66,8 @@ public class ShapefileImport : MonoBehaviour
 
     void ReadGIS()
     {
+        playthroughStatistics.cityName = city;
+
         Road.MinX = float.MaxValue;
         Road.MaxX = float.MinValue;
 
@@ -110,6 +113,8 @@ public class ShapefileImport : MonoBehaviour
         Debug.Log("Done.");
 
         Debug.Log("Number of roads: " + potholeController.roads.Count);
+
+        gameManager.ShowTutorialText();
     }
 
     private void configureMainCamera()

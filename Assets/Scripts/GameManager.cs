@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Localization.SmartFormat;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class GameManager : MonoBehaviour
     public Button nextButton;
 
     public GameObject canvasCover;
+
+    [TextArea(15, 20)]
+    public string tutorialText;
+
     private int fadeInFrames = 30;
 
     private static string titleScene = "TitleScreen";
@@ -31,6 +36,8 @@ public class GameManager : MonoBehaviour
     public int currentRound;
     [HideInInspector]
     public int currentYear;
+
+    private bool _firstRound = true;
 
     void Start()
     {
@@ -60,6 +67,15 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         StartCoroutine(FadeIn());
+    }
+
+    public void ShowTutorialText()
+    {
+        if (_firstRound)
+        {
+            _firstRound = false;
+            contextMenu.Open(Smart.Format(tutorialText, this), new Vector3((Road.MaxX + Road.MinX) * 0.5f, (Road.MaxY + Road.MinY) * 0.5f, 0.0f));
+        }
     }
 
     public void NextRound()
