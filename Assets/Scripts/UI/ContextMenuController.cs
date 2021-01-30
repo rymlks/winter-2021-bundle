@@ -149,6 +149,22 @@ public class ContextMenuController : MonoBehaviour
         SetScale();
     }
 
+    public void Open(string text, Vector3 position)
+    {
+        gameObject.SetActive(true);
+        Deselect();
+
+        selectRoadButton.SetActive(false);
+        targetRoad = null;
+        targetPothole = null;
+        worldPosition = position;
+        message = text;
+        messageBox.text = message;
+        buttonsPanel.SetActive(false);
+
+        SetScale();
+    }
+
     private void InstantiateOption(ContextMenuOption option)
     {
         // Create a button, a cost label, and a labor label.
