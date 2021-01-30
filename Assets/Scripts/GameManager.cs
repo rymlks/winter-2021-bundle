@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Localization.SmartFormat;
 
 public class GameManager : MonoBehaviour
 {
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
         if (_firstRound)
         {
             _firstRound = false;
-            contextMenu.Open(string.Format(tutorialText, playthroughStatistics.cityName), new Vector3((Road.MaxX + Road.MinX) * 0.5f, (Road.MaxY + Road.MinY) * 0.5f, 0.0f));
+            contextMenu.Open(Smart.Format(tutorialText, this), new Vector3((Road.MaxX + Road.MinX) * 0.5f, (Road.MaxY + Road.MinY) * 0.5f, 0.0f));
         }
     }
 

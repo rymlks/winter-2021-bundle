@@ -49,8 +49,8 @@ MonoBehaviour:
   contextMenu: {fileID: 0}
   nextButton: {fileID: 0}
   canvasCover: {fileID: 0}
-  tutorialText: "Why Don't They Fix The D@&n Roads!?\n\nWelcome to {0}.\nYou are
-    a city beurocrat whose job is to use a yearly budget to \nfix roads and potholes
+  tutorialText: "Why Don't They Fix The D@&n Roads!?\n\nWelcome to {playthroughStatistics.cityName}.\nYou
+    are a city beurocrat whose job is to use a yearly budget to \nfix roads and potholes
     that show up every month. Potholes and \nconstruction are annoying, but some
     potholes can be really \nannoying, like ones on busy or poor quality roads, so
     be sure to \nfind the ones that cause the most anger. There are also limits to
