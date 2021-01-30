@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 682dd3e7feca9f14d998bdb70c192a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cityName: 
   currentAnger: 0
   currentBudget: 100
   currentLabor: 0
@@ -925,21 +926,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 81.90953
-      objectReference: {fileID: 0}
-    - target: {fileID: 5880015937774854629, guid: 110178f597f51c54e99ecc8dbed8db23,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 67.30493
-      objectReference: {fileID: 0}
-    - target: {fileID: 5880015937774854629, guid: 110178f597f51c54e99ecc8dbed8db23,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -7.470474
-      objectReference: {fileID: 0}
-    - target: {fileID: 5880015937774854629, guid: 110178f597f51c54e99ecc8dbed8db23,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6078221371805664511, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
