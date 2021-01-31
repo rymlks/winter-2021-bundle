@@ -2384,49 +2384,52 @@ MonoBehaviour:
     Again to dismiss forever, or click here to read the note)'
   tutorialHowToWinText: "Kid,\n\nI don't know how they convinced you to be my replacement,
     but I'm sorry for you already.  \n\nThere are only two ways out of this job:
-    survive five years of public ire until your pension vests, or the crooked way.\n\nI'm
-    not here to teach you about the crooked way.  Figure that out yourself, if you
-    want.  It's not exactly rocket surgery."
+    survive {balanceParameters.maxYears} years of public ire until your pension vests,
+    or the crooked way.\n\nI'm not here to teach you about the crooked way.  Figure
+    that out yourself, if you want.  It's not exactly rocket surgery."
   tutorialAngerText: '(the letter continues...)
 
 
     By ''public ire'', I mean the
     way native Michiganders feel towards their beloved hardworking public servants
-    whenever they drive over a pothole.  The color of anger is RED.
+    whenever they drive over a pothole.  The color of <color=''red''><b>anger</b></color>
+    is <color=''red''><b>RED</b></color>.
 
 
-    Potholes
-    cause anger at the end of each month.  Construction causes anger, too, so there''s
-    no silver bullet.  In general, potholes cause more than construction, and potholes
-    on busy or already-crummy roads cause the most.  Check the annoyance factor on
-    your potholes and the traffic/quality level of your roads by clicking them.
+    Potholes cause <color=''red''><b>anger</b></color>
+    at the end of each month.  Construction causes anger, too, so there''s no silver
+    bullet.  In general, potholes cause more than construction, and potholes on busy
+    or already-crummy roads cause the most.  Check the annoyance factor on your potholes
+    and the traffic/quality level of your roads by clicking them.
 
 
-    To
-    keep the public happy, you want to be fixing the problems and you want to do
-    the most annoying ones first.  If the public anger level reaches 1,000, the mayor
+    To keep the
+    public happy, you want to be fixing the problems and you want to do the most
+    annoying ones first.  If the public <color=''red''><b>anger</b></color> level
+    reaches<color=''red''><b> {balanceParameters.maxAnger:#,0}</b></color>, the mayor
     will fire you!'
   tutorialBudgetText: '(the letter continues...)
 
 
     The good news is, our department
     has a budget.  At the beginning of every year in January, you''ll receive the
-    year''s budget in a lump sum.  Don''t spend it all in one place!  The color of
-    money is GREEN.
+    year''s <color=''green''><b>budget</b></color> in a lump sum.  Don''t spend it
+    all in one place!  The color of <color=''green''><b>money</b></color> is <color=''green''><b>GREEN</b></color>.
 
 
-    Nobody really asks questions about where it goes, so you
-    can spend as much as you want as long as you don''t run out.  If you run out,
-    you''ll stop being able to pay for repairs until next January.  That can make
-    people mad! '
+    Nobody
+    really asks questions about where it goes, so you can spend as much as you want
+    as long as you don''t run out.  If you run out, you''ll stop being able to pay
+    for repairs until next January.  That can make people <color=''red''><b>mad</b></color>! '
   tutorialLaborAndOutroText: "(the letter continues...)\n\nFinally, we're limited
-    to 100 man-hours of labor per day maximum, so you'll sometimes need to wait for
-    big construction projects to end in order to begin new ones.  Sticking to small
-    patch jobs avoids this, but usually costs more in money and anger in the long
-    run, so try to balance the three.  The color of labor is BLUE.\n\nGood luck,
-    kid.  If you ever make it to one of the bigger cities, you're gonna need it!\n\n-Margie
-    \n\n(X to dismiss, Never Again to dismiss forever, or click here to re-read the
-    note)"
+    to <color='#007EEF'><b>{balanceParameters.maxLabor} hours of labor</b></color>
+    per day maximum, so you'll sometimes need to wait for big construction projects
+    to end in order to begin new ones.  Sticking to small patch jobs avoids this,
+    but usually costs more in <color='green'><b>money</b></color> and <color='red'><b>anger</b></color>
+    in the long run, so try to balance the three.  The color of <color='#007EEF'><b>labor</b></color>
+    is <color='#007EEF'><b>BLUE</b></color>.\n\nGood luck, kid.  If you ever make
+    it to one of the bigger cities, you're gonna need it!\n\n-Margie \n\n(X to dismiss,
+    Never Again to dismiss forever, or click here to re-read the note)"
 --- !u!1 &4262837061511732711
 GameObject:
   m_ObjectHideFlags: 0
