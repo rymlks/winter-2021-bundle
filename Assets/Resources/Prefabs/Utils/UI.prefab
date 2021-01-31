@@ -2159,6 +2159,59 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &4215436310631764159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6228899662569300932}
+  - component: {fileID: 838451223828662161}
+  m_Layer: 0
+  m_Name: TutorialController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6228899662569300932
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215436310631764159}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6969042721401055904}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &838451223828662161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215436310631764159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e85e948217ffb4685ad5d82053eb3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialText: "Why Don't They Fix The D@&n Roads!?\n\nWelcome to {playthroughStatistics.cityName}.\nYou
+    are a city beurocrat whose job is to use a yearly budget to \nfix roads and potholes
+    that show up every month. Potholes and \nconstruction are annoying, but some
+    potholes can be really \nannoying, like ones on busy or poor quality roads, so
+    be sure to \nfind the ones that cause the most anger. There are also limits to
+    \nhow much construction you can do in a single month, so plan \nahead. Spending
+    more on roads and potholes gives you higher \nquality materials, which means
+    longer lasting repairs. You win if \nyou can last 5 years without an uprising
+    or cash out with leftover \nfunds and retire to your favorite sandy beachfront
+    location\r."
 --- !u!1 &4283733271224044556
 GameObject:
   m_ObjectHideFlags: 0
@@ -3529,7 +3582,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 20.619198, y: -10.193747, z: 218.3236}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6228899662569300932}
   m_Father: {fileID: 4360537588092576173}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
