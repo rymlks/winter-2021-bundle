@@ -114,7 +114,7 @@ public class ShapefileImport : MonoBehaviour
 
         Debug.Log("Number of roads: " + potholeController.roads.Count);
 
-        gameManager.ShowTutorialText();
+        gameManager.NotifyRoadsLoaded();
     }
 
     private void configureMainCamera()

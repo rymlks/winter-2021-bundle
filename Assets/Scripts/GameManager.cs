@@ -15,9 +15,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject canvasCover;
 
-    [TextArea(15, 20)]
-    public string tutorialText;
-
     private int fadeInFrames = 30;
 
     private static string titleScene = "TitleScreen";
@@ -37,10 +34,11 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public int currentYear;
 
-    private bool _firstRound = true;
+    private TutorialController _tutorialController;
 
     void Start()
     {
+        _tutorialController = FindObjectOfType<TutorialController>();
         GameObject[] objs = GameObject.FindGameObjectsWithTag("GameController");
         if (objs.Length > 1)
         {
@@ -69,13 +67,9 @@ public class GameManager : MonoBehaviour
         StartCoroutine(FadeIn());
     }
 
-    public void ShowTutorialText()
+    public void NotifyRoadsLoaded()
     {
-        if (_firstRound)
-        {
-            _firstRound = false;
-            contextMenu.Open(Smart.Format(tutorialText, this), new Vector3((Road.MaxX + Road.MinX) * 0.5f, (Road.MaxY + Road.MinY) * 0.5f, 0.0f));
-        }
+        _tutorialController.NotifyGameBeginning(this);
     }
 
     public void NextRound()
