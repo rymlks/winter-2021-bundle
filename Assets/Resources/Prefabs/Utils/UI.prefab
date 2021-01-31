@@ -2384,30 +2384,31 @@ MonoBehaviour:
     Again to dismiss forever, or click here to read the note)'
   tutorialHowToWinText: "Kid,\n\nI don't know how they convinced you to be my replacement,
     but I'm sorry for you already.  \n\nThere are only two ways out of this job:
-    survive {balanceParameters.maxYears} years of public ire until your pension vests,
-    or the crooked way.\n\nI'm not here to teach you about the crooked way.  Figure
+    survive {balanceParameters.maxYears} years of <color='red'><b>public ire</b></color>
+    until your pension vests, or the <color='green'><b>crooked</b></color> way.\n\nI'm
+    not here to teach you about the <color='green'><b>crooked</b></color> way.  Figure
     that out yourself, if you want.  It's not exactly rocket surgery."
   tutorialAngerText: '(the letter continues...)
 
 
-    By ''public ire'', I mean the
-    way native Michiganders feel towards their beloved hardworking public servants
-    whenever they drive over a pothole.  The color of <color=''red''><b>anger</b></color>
-    is <color=''red''><b>RED</b></color>.
+    By <color=''red''><b>''public
+    ire''</b></color>, I mean the way native Michiganders feel towards their beloved
+    hardworking public servants whenever they drive over a pothole.  The color of
+    <color=''red''><b>anger</b></color> is <color=''red''><b>RED</b></color>.
 
 
-    Potholes cause <color=''red''><b>anger</b></color>
-    at the end of each month.  Construction causes anger, too, so there''s no silver
-    bullet.  In general, potholes cause more than construction, and potholes on busy
-    or already-crummy roads cause the most.  Check the annoyance factor on your potholes
-    and the traffic/quality level of your roads by clicking them.
+    Potholes
+    cause <color=''red''><b>anger</b></color> at the end of each month.  Construction
+    causes anger, too, so there''s no silver bullet.  In general, potholes cause
+    more than construction, and potholes on busy or already-crummy roads cause the
+    most.  Check the annoyance factor on your potholes and the traffic/quality level
+    of your roads by clicking them.
 
 
-    To keep the
-    public happy, you want to be fixing the problems and you want to do the most
-    annoying ones first.  If the public <color=''red''><b>anger</b></color> level
-    reaches<color=''red''><b> {balanceParameters.maxAnger:#,0}</b></color>, the mayor
-    will fire you!'
+    To keep the public happy, you want to be
+    fixing the problems and you want to do the most annoying ones first.  If the
+    public <color=''red''><b>anger</b></color> level reaches<color=''red''><b> {balanceParameters.maxAnger:#,0}</b></color>,
+    the mayor will fire you!'
   tutorialBudgetText: '(the letter continues...)
 
 
