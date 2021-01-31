@@ -2382,12 +2382,12 @@ MonoBehaviour:
 
     (X to dismiss, Never
     Again to dismiss forever, or click here to read the note)'
-  tutorialHowToWinText: "Kid,\n\nI don't know how they convinced you to be my replacement,
-    but I'm sorry for you already.  \n\nThere are only two ways out of this job:
-    survive {balanceParameters.maxYears} years of <color='red'><b>public ire</b></color>
-    until your pension vests, or the <color='green'><b>crooked</b></color> way.\n\nI'm
-    not here to teach you about the <color='green'><b>crooked</b></color> way.  Figure
-    that out yourself, if you want.  It's not exactly rocket surgery."
+  tutorialHowToWinText: "To my replacement,\n\nI don't know how they convinced you
+    to be my replacement, but I'm sorry for you already.  \n\nThere are only two
+    ways out of this job: survive {balanceParameters.maxYears} years of <color='red'><b>public
+    ire</b></color> until your pension vests, or the <color='green'><b>crooked</b></color>
+    way.\n\nI'm not here to teach you about the <color='green'><b>crooked</b></color>
+    way.  Figure that out yourself, if you want.  It's not exactly rocket surgery."
   tutorialAngerText: '(the letter continues...)
 
 
@@ -2926,7 +2926,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Never Again
+  m_Text: Don't Show Again
 --- !u!1 &4898796230717694459
 GameObject:
   m_ObjectHideFlags: 0
@@ -3225,8 +3225,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -13}
-  m_SizeDelta: {x: 0, y: -26}
+  m_AnchoredPosition: {x: -0.0014648438, y: -13}
+  m_SizeDelta: {x: -3.9971313, y: -26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5921896812838580870
 CanvasRenderer:
