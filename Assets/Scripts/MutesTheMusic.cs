@@ -10,12 +10,13 @@ public class MutesTheMusic : MonoBehaviour
     private AudioSource AudioSource;
     public void Awake() {
         AudioSourceObj = GameObject.FindGameObjectWithTag("Music");
-        if (AudioSourceObj.GetComponent<AudioSource>()) {
+        if (AudioSourceObj != null && AudioSourceObj.GetComponent<AudioSource>()) {
             AudioSource = AudioSourceObj.GetComponent<AudioSource>();
         }
     }
     public void ToggleMuteBoolean() {
         muteIsActive = !muteIsActive;
-        AudioSource.mute = muteIsActive;
+        if (AudioSource != null)
+           AudioSource.mute = muteIsActive;
     }
 }

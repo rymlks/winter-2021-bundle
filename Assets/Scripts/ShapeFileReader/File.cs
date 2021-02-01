@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace Assets
 {
@@ -23,15 +24,52 @@ namespace Assets
         public int ContentLength { get; set; }
         public List<ShpRecord> RecordSet { get; set; }
 
+        private string path;
+
         public ShpFile(string path)
         {
-            fs = File.OpenRead(path);
-            br = new BinaryReader(fs);
+            this.path = path;
         }
 
         ~ShpFile() // the finalizer
         {
             Dispose(false);
+        }
+
+        public IEnumerator OpenFile()
+        {
+            if (File.Exists(path))
+            {
+                yield return new WaitForSeconds(2);
+                fs = File.OpenRead(path);
+                br = new BinaryReader(fs);
+            }
+            else
+            {
+                using (UnityWebRequest request = UnityWebRequest.Get(path))
+                {
+                    Debug.Log("Downloading file from Web: " + path);
+                    request.downloadHandler = new DownloadHandlerBuffer();
+                    request.useHttpContinue = false;
+                    yield return request.SendWebRequest();
+
+                    if (request.isNetworkError || request.isHttpError)
+                    {
+                        Debug.LogError(request.error);
+                    }
+                    else
+                    {
+                        // Or retrieve results as binary data
+                        byte[] results = request.downloadHandler.data;
+                        Debug.Log("Downloaded file from Web. numbytes: " + results.Length + "Progress: " + request.downloadProgress);
+
+                        Stream stream = new MemoryStream(results);
+                        br = new BinaryReader(stream);
+                        Debug.Log("Done.");
+                    }
+
+                }
+            }
         }
 
         public void Load()
@@ -108,6 +146,7 @@ namespace Assets
         private bool disposed;
         private FileStream fs;
         private BinaryReader br;
+        private string shxPath;
         private string shpPath;
         private string dbfPath;
 
@@ -125,8 +164,7 @@ namespace Assets
 
         public ShxFile(string path)
         {
-            fs = File.OpenRead(path);
-            br = new BinaryReader(fs);
+            shxPath = path;
             shpPath = path.Replace(".shx", ".shp");
             dbfPath = path.Replace(".shx", ".dbf");
         }
@@ -134,6 +172,40 @@ namespace Assets
         ~ShxFile() // the finalizer
         {
             Dispose(false);
+        }
+
+        public IEnumerator OpenFile()
+        {
+            if (File.Exists(shxPath))
+            {
+                fs = File.OpenRead(shxPath);
+                br = new BinaryReader(fs);
+            } else
+            {
+                using (UnityWebRequest request = UnityWebRequest.Get(shxPath))
+                {
+                    Debug.Log("Downloading file from Web: " + shxPath);
+                    request.downloadHandler = new DownloadHandlerBuffer();
+                    request.useHttpContinue = false;
+                    yield return request.SendWebRequest();
+
+                    if (request.isNetworkError || request.isHttpError)
+                    {
+                        Debug.LogError(request.error);
+                    }
+                    else
+                    {
+                        // Or retrieve results as binary data
+                        byte[] results = request.downloadHandler.data;
+                        Debug.Log("Downloaded file from Web. numbytes: " + results.Length + "Progress: " + request.downloadProgress);
+
+                        Stream stream = new MemoryStream(results);
+                        br = new BinaryReader(stream);
+                        Debug.Log("Done.");
+                    }
+
+                }
+            }
         }
 
         public void Load()
@@ -175,7 +247,7 @@ namespace Assets
             try
             {
                 DatabseFile = (DbfFile)FileFactory.CreateInstance(dbfPath);
-                DatabseFile.Load();
+                //DatabseFile.Load();
             }
             catch (Exception e)
             {
@@ -217,7 +289,8 @@ namespace Assets
             if (disposing)
             {
                 br.Dispose();
-                fs.Dispose();
+                if (fs != null)
+                    fs.Dispose();
                 ContentsFile.Dispose();
             }
             disposed = true;
@@ -247,12 +320,49 @@ namespace Assets
         public List<DbfFieldDiscriptor> FieldList { get; set; }
         public List<DbfRecord> RecordSet { get; set; }
 
+        private string path;
+
         public DbfFile(string path)
         {
-            fs = File.OpenRead(path);
-            br = new BinaryReader(fs);
+            this.path = path;
         }
-        
+
+        public IEnumerator OpenFile()
+        {
+            if (File.Exists(path))
+            {
+                yield return new WaitForSeconds(2);
+                fs = File.OpenRead(path);
+                br = new BinaryReader(fs);
+            }
+            else
+            {
+                using (UnityWebRequest request = UnityWebRequest.Get(path))
+                {
+                    Debug.Log("Downloading file from Web: " + path);
+                    request.downloadHandler = new DownloadHandlerBuffer();
+                    request.useHttpContinue = false;
+                    yield return request.SendWebRequest();
+
+                    if (request.isNetworkError || request.isHttpError)
+                    {
+                        Debug.LogError(request.error);
+                    }
+                    else
+                    {
+                        // Or retrieve results as binary data
+                        byte[] results = request.downloadHandler.data;
+                        Debug.Log("Downloaded file from Web. numbytes: " + results.Length + "Progress: " + request.downloadProgress);
+
+                        Stream stream = new MemoryStream(results);
+                        br = new BinaryReader(stream);
+                        Debug.Log("Done.");
+                    }
+
+                }
+            }
+        }
+
         public void Load()
         {   
             Version = (DBFVersion)br.ReadByte();

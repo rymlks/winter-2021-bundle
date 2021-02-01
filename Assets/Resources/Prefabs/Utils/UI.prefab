@@ -2399,16 +2399,16 @@ MonoBehaviour:
 
     Potholes
     cause <color=''red''><b>anger</b></color> at the end of each month.  Construction
-    causes anger, too, so there''s no silver bullet.  In general, potholes cause
-    more than construction, and potholes on busy or already-crummy roads cause the
-    most.  Check the annoyance factor on your potholes and the traffic/quality level
-    of your roads by clicking them.
+    causes <color=''red''><b>anger</b></color>, too, so there''s no silver bullet. 
+    In general, potholes cause more than construction, and potholes on busy or already-crummy
+    roads cause the most.  Check the annoyance factor on your potholes and the traffic/quality
+    level of your roads by clicking them.
 
 
-    To keep the public happy, you want to be
-    fixing the problems and you want to do the most annoying ones first.  If the
-    public <color=''red''><b>anger</b></color> level reaches<color=''red''><b> {balanceParameters.maxAnger:#,0}</b></color>,
-    the mayor will fire you!'
+    To keep the public happy, you want
+    to be fixing the problems and you want to do the most annoying ones first.  If
+    the public <color=''red''><b>anger</b></color> level reaches<color=''red''><b>
+    {balanceParameters.maxAnger:#,0}</b></color>, the mayor will fire you!'
   tutorialBudgetText: '(the letter continues...)
 
 

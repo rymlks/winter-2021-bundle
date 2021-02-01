@@ -33,6 +33,7 @@ public class PotholeController : MonoBehaviour
         if (_potholeParent == null)
         {
             _potholeParent = new GameObject("Potholes");
+            _potholeParent.transform.parent = transform;
         }
 
         if (_parameters == null)

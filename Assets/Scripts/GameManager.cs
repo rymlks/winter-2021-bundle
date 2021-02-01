@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject canvasCover;
 
-    private int fadeInFrames = 30;
+    private int fadeInFrames = 60;
 
     private static string titleScene = "TitleScreen";
     private string losingScene = "LosingScreen";
@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
     public int currentRound;
     [HideInInspector]
     public int currentYear;
+
+    public static bool delayLoading = false;
+    public static string loadingRoadName = "";
 
     private TutorialController _tutorialController;
 
@@ -70,6 +73,8 @@ public class GameManager : MonoBehaviour
     public void NotifyRoadsLoaded()
     {
         _tutorialController.NotifyGameBeginning(this);
+        delayLoading = false;
+        StartCoroutine(FadeIn());
     }
 
     public void NextRound()
@@ -216,6 +221,7 @@ public class GameManager : MonoBehaviour
 
             for (int i = fadeInFrames; i >= 0; i--)
             {
+                if (delayLoading) break;
                 canvasCover.GetComponent<Image>().color = new Color(0, 0, 0, i / (float)fadeInFrames);
                 yield return null;
             }

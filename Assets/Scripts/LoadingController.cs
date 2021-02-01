@@ -10,21 +10,27 @@ public class LoadingController : MonoBehaviour
     public GameObject abortButton;
 
     private AsyncOperation sceneLoading;
+    private bool oneOff = true;
 
     void Start()
     {
-        GameObject[] found = GameObject.FindGameObjectsWithTag("GameController");
-        if (found.Length > 0)
+        if (oneOff)
         {
-            abortButton.SetActive(false);
-            GameManager gameManager = found[0].GetComponent<GameManager>();
-            string scene = gameManager.nextScene;
-            Destroy(found[0]);
+            oneOff = false;
+            GameObject[] found = GameObject.FindGameObjectsWithTag("GameController");
+            if (found.Length > 0)
+            {
+                abortButton.SetActive(false);
+                GameManager gameManager = found[0].GetComponent<GameManager>();
+                string scene = gameManager.nextScene;
+                Destroy(found[0]);
 
-            StartCoroutine(BeginLoading(scene));
-        } else
-        {
-            ShowError();
+                StartCoroutine(BeginLoading(scene));
+            }
+            else
+            {
+                ShowError();
+            }
         }
     }
 
@@ -46,23 +52,31 @@ public class LoadingController : MonoBehaviour
 
     private IEnumerator BeginLoading(string scene)
     {
-        sceneLoading = SceneManager.LoadSceneAsync(scene);
+        Scene thisScene = SceneManager.GetActiveScene();
         yield return new WaitForSeconds(0.1f);
+        sceneLoading = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+        //sceneLoading.allowSceneActivation = !GameManager.delayLoading;
+        yield return null;
         while (true)
         {
-            string message = "Loading";
+            string dots = ".";
             for (int i = 1; i <= 3; i++)
             {
-                message += '.';
-                if (!sceneLoading.isDone)
+                string message = "Loading";
+                if (GameManager.loadingRoadName != "")
                 {
-                    loadingText.text = message;
-                    yield return new WaitForSeconds(0.1f);
+                    message += " " + GameManager.loadingRoadName;
+                }
+                dots += '.';
+                
+                if (!sceneLoading.isDone || GameManager.delayLoading)
+                {
+                    loadingText.text = message + dots;
+                    yield return new WaitForSeconds(0.2f);
                 }
                 else
                 {
-                    yield return new WaitForSeconds(2);
-                    ShowError();
+                    yield return SceneManager.UnloadSceneAsync(thisScene);
                 }
             }
         }
