@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
     {
         _tutorialController.NotifyGameBeginning(this);
         delayLoading = false;
+        loadingRoadName = "";
         StartCoroutine(FadeIn());
     }
 
