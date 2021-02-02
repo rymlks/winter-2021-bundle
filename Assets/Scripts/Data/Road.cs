@@ -9,7 +9,7 @@ public class Road : MonoBehaviour
     public string roadName;
     public double trafficRate; // cars/day aka "aadt"
     public double trafficSum;  // cars/day * length aka "vmt"
-    public double length;
+    public float length;
     public int lanes;
     public int ID;
     public Material material;
@@ -288,7 +288,7 @@ public class Road : MonoBehaviour
 
     public int GetRePaveTime(float baseTime)
     {
-        return (int)(baseTime * length * lanes);
+        return (int)Mathf.Min(baseTime * length * lanes, balanceParameters.roadConstructionTimeCap);
     }
 
     public List<ContextMenuController.ContextMenuOption> GetRepairOptions()
@@ -391,7 +391,7 @@ public class Road : MonoBehaviour
         roadName = roadname.Value.Trim();
         trafficSum = double.Parse(new string(vmt.Value).Trim());
         trafficRate = double.Parse(new string(aadt.Value).Trim());
-        length = double.Parse(new string(shapelen.Value).Trim());
+        length = float.Parse(new string(shapelen.Value).Trim());
         lanes = int.Parse(new string(_lanes.Value));
         ID = int.Parse(new string(FID.Value));
         try

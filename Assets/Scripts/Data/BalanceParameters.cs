@@ -51,6 +51,7 @@ public class BalanceParameters : MonoBehaviour
     public float potholeAngerPerCar;
     public float potholeConstructionAngerPerCar;
     public float roadConstructionAngerPerCar;
+    public float roadConstructionTimeCap; 
 
     public float maxLabor;
 
