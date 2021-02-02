@@ -26,15 +26,17 @@ public class ShapefileImport : MonoBehaviour
     public BalanceParameters balanceParameters;
     public ContextMenuController contextMenuController;
     public PlaythroughStatistics playthroughStatistics;
+    public GameManager gameManager;
 
     public float roadScale;
 
-    private int linesPerFrame = 100;
+    private int linesPerFrame = 1;
     private Assets.ShxFile shapeFile;
     private List<int> _roadIdWhiteList;
     
-    void Start()
+    public void Start()
     {
+        GameManager.delayLoading = true;
         Debug.Log("Reading " + shxPath);
         shapeFile = new Assets.ShxFile(Application.dataPath + "/" + shxPath);
 
@@ -45,7 +47,7 @@ public class ShapefileImport : MonoBehaviour
         //StartCoroutine(ReadGIS());
 
         Road.positionScale = roadScale;
-        ReadGIS();
+        StartCoroutine(ReadGIS());
     }
 
     private void CreateNonDuplicateRoadWhitelist()
@@ -63,13 +65,25 @@ public class ShapefileImport : MonoBehaviour
         }
     }
 
-    void ReadGIS()
+    IEnumerator ReadGIS()
     {
+        yield return StartCoroutine(shapeFile.OpenFile());
+
+        playthroughStatistics.cityName = city;
+
+        Road.MinX = float.MaxValue;
+        Road.MaxX = float.MinValue;
+
+        Road.MinY = float.MaxValue;
+        Road.MaxY = float.MinValue;
+
         // Load all the GIS data from file
         shapeFile.Load();
-        //yield return null;
+        yield return StartCoroutine(shapeFile.ContentsFile.OpenFile());
+        yield return StartCoroutine(shapeFile.DatabseFile.OpenFile());
+        shapeFile.DatabseFile.Load();
 
-        
+
         Assets.GISRecord record1 = shapeFile.GetData(0);
         for (int i=0; i< record1.DbfRecord.Record.Count; i++)
         {
@@ -93,7 +107,7 @@ public class ShapefileImport : MonoBehaviour
                 if (count > linesPerFrame)
                 {
                     count = 0;
-                    //yield return null;
+                    yield return null;
                 }
                 count++;
             }
@@ -104,6 +118,8 @@ public class ShapefileImport : MonoBehaviour
         Debug.Log("Done.");
 
         Debug.Log("Number of roads: " + potholeController.roads.Count);
+
+        gameManager.NotifyRoadsLoaded();
     }
 
     private void configureMainCamera()
@@ -127,6 +143,8 @@ public class ShapefileImport : MonoBehaviour
             road.contextMenuController = contextMenuController;
             road.playthroughStatistics = playthroughStatistics;
             road.potholeController = potholeController;
+
+            GameManager.loadingRoadName = road.roadName;
         }
         else
         {

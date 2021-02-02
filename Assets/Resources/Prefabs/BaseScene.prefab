@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 682dd3e7feca9f14d998bdb70c192a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cityName: 
   currentAnger: 0
   currentBudget: 100
   currentLabor: 0
@@ -334,6 +335,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  minZoom: 0.1
+  maxZoom: 10
 --- !u!20 &8259893182675192528
 Camera:
   m_ObjectHideFlags: 0
@@ -924,21 +927,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 81.90953
       objectReference: {fileID: 0}
-    - target: {fileID: 5880015937774854629, guid: 110178f597f51c54e99ecc8dbed8db23,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 67.30493
-      objectReference: {fileID: 0}
-    - target: {fileID: 5880015937774854629, guid: 110178f597f51c54e99ecc8dbed8db23,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -7.470474
-      objectReference: {fileID: 0}
-    - target: {fileID: 5880015937774854629, guid: 110178f597f51c54e99ecc8dbed8db23,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6078221371805664511, guid: 110178f597f51c54e99ecc8dbed8db23,
         type: 3}
       propertyPath: m_Name
@@ -1211,6 +1199,11 @@ PrefabInstance:
       propertyPath: roadParent
       value: 
       objectReference: {fileID: 6987987128440792458}
+    - target: {fileID: 8043583785313486277, guid: 4f19583599bf0af47b0ab50834809294,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 9030515009485454238}
     - target: {fileID: 8043583785313486277, guid: 4f19583599bf0af47b0ab50834809294,
         type: 3}
       propertyPath: toolTipPanel

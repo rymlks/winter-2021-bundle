@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Localization.SmartFormat;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class GameManager : MonoBehaviour
     public Button nextButton;
 
     public GameObject canvasCover;
-    private int fadeInFrames = 30;
+
+    private int fadeInFrames = 60;
 
     private static string titleScene = "TitleScreen";
     private string losingScene = "LosingScreen";
@@ -32,8 +34,14 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public int currentYear;
 
+    public static bool delayLoading = false;
+    public static string loadingRoadName = "";
+
+    private TutorialController _tutorialController;
+
     void Start()
     {
+        _tutorialController = FindObjectOfType<TutorialController>();
         GameObject[] objs = GameObject.FindGameObjectsWithTag("GameController");
         if (objs.Length > 1)
         {
@@ -62,8 +70,18 @@ public class GameManager : MonoBehaviour
         StartCoroutine(FadeIn());
     }
 
+    public void NotifyRoadsLoaded()
+    {
+        _tutorialController.NotifyGameBeginning(this);
+        delayLoading = false;
+        loadingRoadName = "";
+        StartCoroutine(FadeIn());
+    }
+
     public void NextRound()
     {
+        playthroughStatistics.currentAnger = Mathf.Max(playthroughStatistics.currentAnger - balanceParameters.angerDecayPerRound, 0);
+
         if (contextMenu != null)
             contextMenu.Close();
 
@@ -91,6 +109,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator TransitionRounds()
     {
+        canvasCover.GetComponent<Image>().color = new Color(0, 0, 0, 0.1f);
         canvasCover.GetComponent<Image>().raycastTarget = true;
         nextButton.interactable = false;
         potholeController.AdvanceRound();
@@ -103,14 +122,7 @@ public class GameManager : MonoBehaviour
 
         // Adjust anger
         float roundAnger = potholeController.GetTotalAngerFromRound();
-        if (roundAnger > balanceParameters.angerIncreaseThreshold)
-        {
-            playthroughStatistics.currentAnger += roundAnger;
-        }
-        else
-        {
-            playthroughStatistics.currentAnger = Mathf.Max(playthroughStatistics.currentAnger - balanceParameters.angerDecayPerRound, 0);
-        }
+        playthroughStatistics.currentAnger += roundAnger;
 
         // Lose if people are too angry
         if (playthroughStatistics.currentAnger > playthroughStatistics.maxAnger)
@@ -120,6 +132,7 @@ public class GameManager : MonoBehaviour
         {
             nextButton.interactable = true;
             canvasCover.GetComponent<Image>().raycastTarget = false;
+            canvasCover.GetComponent<Image>().color = new Color(0, 0, 0, 0);
         }
     }
     public void LoadDemoScene()
@@ -209,6 +222,7 @@ public class GameManager : MonoBehaviour
 
             for (int i = fadeInFrames; i >= 0; i--)
             {
+                if (delayLoading) break;
                 canvasCover.GetComponent<Image>().color = new Color(0, 0, 0, i / (float)fadeInFrames);
                 yield return null;
             }

@@ -25,6 +25,8 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.delayLoading) return;
+
         bool isHoveringOverMenu = EventSystem.current.IsPointerOverGameObject();
         if (Input.GetMouseButtonDown(0) && !isHoveringOverMenu)
         {
