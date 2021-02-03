@@ -30,7 +30,7 @@ public class ShapefileImport : MonoBehaviour
 
     public float roadScale;
 
-    private int linesPerFrame = 1;
+    private int linesPerFrame = 15;
     private Assets.ShxFile shapeFile;
     private List<int> _roadIdWhiteList;
     
