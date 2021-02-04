@@ -53,6 +53,7 @@ public class BalanceParameters : MonoBehaviour
     public float roadConstructionAngerPerCar;
     [Range(0, 1)]
     public float randomChanceToDegrade;
+    public float roadConstructionTimeCap; 
 
     public float maxLabor;
 
