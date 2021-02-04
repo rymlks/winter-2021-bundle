@@ -246,7 +246,7 @@ public class Pothole : MonoBehaviour
             }
 
         } 
-        else if (this.isPatched && Random.value < 0.5f)
+        else if (this.isPatched && Random.value < balanceParameters.randomChanceToDegrade)
         {
             this._durability--;
             if(this._durability <= 0){

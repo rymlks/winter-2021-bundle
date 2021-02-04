@@ -59,7 +59,7 @@ public class LoadingController : MonoBehaviour
         yield return null;
         while (true)
         {
-            string dots = ".";
+            string dots = "";
             for (int i = 1; i <= 3; i++)
             {
                 string message = "Loading";
