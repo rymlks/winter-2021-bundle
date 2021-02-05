@@ -283,12 +283,12 @@ public class Road : MonoBehaviour
 
     public float GetRePaveLabor(float baseLabor)
     {
-        return Mathf.Min(baseLabor * (float)length * lanes, balanceParameters.maxLabor);
+        return Mathf.Max(1f,Mathf.Min(baseLabor * (float)length * lanes, balanceParameters.maxLabor));
     }
 
     public int GetRePaveTime(float baseTime)
     {
-        return (int)Mathf.Min(baseTime * length * lanes, balanceParameters.roadConstructionTimeCap);
+        return (int)Mathf.Max(2f,Mathf.Min(baseTime * length * lanes, balanceParameters.roadConstructionTimeCap));
     }
 
     public List<ContextMenuController.ContextMenuOption> GetRepairOptions()
