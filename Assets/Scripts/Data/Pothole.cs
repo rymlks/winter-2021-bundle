@@ -270,7 +270,7 @@ public class Pothole : MonoBehaviour
 
     private void RenderNormal()
     {
-        Texture2D tex = Colorize(potholeSprite, _angerPerRound / balanceParameters.angerDecayPerRound);
+        Texture2D tex = Colorize(potholeSprite, 2.0f * _angerPerRound / balanceParameters.angerDecayPerRound);
         Sprite s = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f), potholeSprite.pixelsPerUnit);
         Render(s);
     }
