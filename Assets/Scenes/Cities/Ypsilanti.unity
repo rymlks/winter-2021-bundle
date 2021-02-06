@@ -261,7 +261,12 @@ PrefabInstance:
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: maxAnger
-      value: 1000
+      value: 750
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: maxLabor
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
@@ -271,7 +276,7 @@ PrefabInstance:
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: moneyToWin
-      value: 300000
+      value: 150000
       objectReference: {fileID: 0}
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
@@ -281,12 +286,12 @@ PrefabInstance:
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: angerDecayPerRound
-      value: 25
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: potholeAngerPerCar
-      value: 0.001
+      value: 0.0003
       objectReference: {fileID: 0}
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
@@ -297,6 +302,11 @@ PrefabInstance:
         type: 3}
       propertyPath: potholeGenerationFactor
       value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: roadConstructionTimeCap
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
@@ -311,12 +321,72 @@ PrefabInstance:
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: roadConstructionAngerPerCar
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: potholeConstructionAngerPerCar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: roadRepairs.Array.data[0].cost
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: roadRepairs.Array.data[0].time
+      value: 0.0005
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: roadRepairs.Array.data[1].cost
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: roadRepairs.Array.data[1].time
+      value: 0.0005
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: roadRepairs.Array.data[2].cost
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: roadRepairs.Array.data[2].time
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: roadRepairs.Array.data[3].cost
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: roadRepairs.Array.data[3].time
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: roadRepairs.Array.data[0].labor
+      value: 0.003
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: roadRepairs.Array.data[1].labor
+      value: 0.003
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: roadRepairs.Array.data[2].labor
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
+        type: 3}
+      propertyPath: roadRepairs.Array.data[3].labor
+      value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
@@ -341,7 +411,7 @@ PrefabInstance:
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: potholeRepairs.Array.data[2].cost
-      value: 1000
+      value: 750
       objectReference: {fileID: 0}
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
@@ -351,7 +421,7 @@ PrefabInstance:
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
       propertyPath: potholeRepairs.Array.data[3].cost
-      value: 1250
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 5101476513431392859, guid: 21166c92722572a4894703f716e61b8c,
         type: 3}
