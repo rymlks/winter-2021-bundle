@@ -150,6 +150,7 @@ MonoBehaviour:
   potholeConstructionAngerPerCar: 3
   roadConstructionAngerPerCar: 2
   randomChanceToDegrade: 0.5
+  roadConstructionTimeCap: 12
   maxLabor: 100
   potholeRepairs:
   - description: Throw 'n' Go
