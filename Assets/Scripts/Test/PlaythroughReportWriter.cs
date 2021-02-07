@@ -25,9 +25,14 @@ namespace Test
             toWrite.finalYear = manager.currentYear + 1;
             toWrite.gameResult = reason.ToString();
             toWrite.strategyUsed = autoPlayer.GetStrategyDescription();
-            System.IO.File.WriteAllText("Assets/Autoplaythroughs/"+manager.playthroughStatistics.cityName+Guid.NewGuid()+".json",
+            System.IO.File.WriteAllText("Assets/Autoplaythroughs/"+buildFilename(manager),
                 JsonUtility.ToJson(toWrite,
                     true));
+        }
+
+        private static string buildFilename(GameManager manager)
+        {
+            return manager.playthroughStatistics.cityName + "-" + Guid.NewGuid() + ".json";
         }
 
         private static PlaythroughReport FromStatistics(PlaythroughStatistics statistics)

@@ -1,9 +1,9 @@
 {
-    "finalMonth": 8,
+    "finalMonth": 6,
     "finalYear": 2,
     "gameResult": "LOSS",
     "strategyUsed": "Throw 'n' Roll every open pothole until out of money.  Never resurface roads, ever",
-    "finalAnger": 1054.6207275390625,
-    "finalBudget": 222665.0,
-    "finalLabor": 100.0
+    "finalAnger": 971.0692138671875,
+    "finalBudget": 245.0,
+    "finalLabor": 200.0
 }
