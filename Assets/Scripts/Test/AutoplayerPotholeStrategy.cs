@@ -6,6 +6,8 @@ namespace Test
     {
         public abstract void execute(GameManager manager);
 
+        public abstract string getDescription();
+        
         protected void fillPothole(Pothole toFill, PlaythroughStatistics stats, string methodToUse)
         {
             ContextMenuController.ContextMenuOption optionToUse =

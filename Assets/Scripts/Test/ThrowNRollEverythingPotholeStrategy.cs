@@ -13,5 +13,10 @@ namespace Test
                 base.fillPothole(pothole, manager.playthroughStatistics, "Throw 'n' Roll");
             });
         }
+
+        public override string getDescription()
+        {
+            return "Throw 'n' Roll every open pothole until out of money";
+        }
     }
 }

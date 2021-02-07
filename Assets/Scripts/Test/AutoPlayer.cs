@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
 using Test;
 using UnityEngine;
 
@@ -9,6 +8,7 @@ public class AutoPlayer : MonoBehaviour, GameManagerObserver
 
     private AutoplayerPotholeStrategy potholeStrategy;
     public bool autoEndRounds = true;
+    public bool recordEndGameStats = true;
     public void Start()
     {
         potholeStrategy = new ThrowNRollEverythingPotholeStrategy();
@@ -21,8 +21,21 @@ public class AutoPlayer : MonoBehaviour, GameManagerObserver
         if(autoEndRounds){endRound(manager);}
     }
 
+    public void NotifyGameEnding(GameManager manager, GameEndingReason reason)
+    {
+        if (recordEndGameStats)
+        {
+            PlaythroughReportWriter.WriteToFile(manager, reason, this);
+        }
+    }
+
     protected void endRound(GameManager manager)
     {
         manager.NextRound();
+    }
+
+    public string GetStrategyDescription()
+    {
+        return this.potholeStrategy.getDescription();
     }
 }

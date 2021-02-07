@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -163,16 +162,19 @@ public class GameManager : MonoBehaviour
 
     public void Lose()
     {
+        notifyObserversGameEnding(GameEndingReason.LOSS);
         LoadingScreenTransition(losingScene);
     }
 
     public void WinGood()
     {
+        notifyObserversGameEnding(GameEndingReason.GOOD_WIN);
         LoadingScreenTransition(goodEndScene);
     }
 
     public void WinBad()
     {
+        notifyObserversGameEnding(GameEndingReason.BAD_WIN);
         LoadingScreenTransition(badEndScene);
     }
 
@@ -238,6 +240,11 @@ public class GameManager : MonoBehaviour
     private void notifyObserversRoundBegun()
     {
         this._observers.ForEach(obs => obs.NotifyRoundBeginning(this));
+    }
+    
+    private void notifyObserversGameEnding(GameEndingReason reason)
+    {
+        _observers.ForEach(obs => obs.NotifyGameEnding(this, reason));
     }
 
     public void RegisterObserver(GameManagerObserver observer)
