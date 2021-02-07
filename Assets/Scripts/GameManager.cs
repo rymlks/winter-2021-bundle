@@ -36,9 +36,11 @@ public class GameManager : MonoBehaviour
 
     public static bool delayLoading = false;
     public static string loadingRoadName = "";
-
+    
     private TutorialController _tutorialController;
 
+    private List<GameManagerObserver> _observers;
+    
     void Start()
     {
         _tutorialController = FindObjectOfType<TutorialController>();
@@ -67,15 +69,16 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        _observers = new List<GameManagerObserver>();
         StartCoroutine(FadeIn());
     }
 
     public void NotifyRoadsLoaded()
     {
-        _tutorialController.NotifyGameBeginning(this);
         delayLoading = false;
         loadingRoadName = "";
         StartCoroutine(FadeIn());
+        _tutorialController.NotifyGameBeginning(this);
     }
 
     public void NextRound()
@@ -133,6 +136,7 @@ public class GameManager : MonoBehaviour
             nextButton.interactable = true;
             canvasCover.GetComponent<Image>().raycastTarget = false;
             canvasCover.GetComponent<Image>().color = new Color(0, 0, 0, 0);
+            notifyObserversRoundBegun();
         }
     }
     public void LoadDemoScene()
@@ -158,16 +162,19 @@ public class GameManager : MonoBehaviour
 
     public void Lose()
     {
+        notifyObserversGameEnding(GameEndingReason.LOSS);
         LoadingScreenTransition(losingScene);
     }
 
     public void WinGood()
     {
+        notifyObserversGameEnding(GameEndingReason.GOOD_WIN);
         LoadingScreenTransition(goodEndScene);
     }
 
     public void WinBad()
     {
+        notifyObserversGameEnding(GameEndingReason.BAD_WIN);
         LoadingScreenTransition(badEndScene);
     }
 
@@ -228,5 +235,20 @@ public class GameManager : MonoBehaviour
             }
         }
         yield return null;
+    }
+
+    private void notifyObserversRoundBegun()
+    {
+        this._observers.ForEach(obs => obs.NotifyRoundBeginning(this));
+    }
+    
+    private void notifyObserversGameEnding(GameEndingReason reason)
+    {
+        _observers.ForEach(obs => obs.NotifyGameEnding(this, reason));
+    }
+
+    public void RegisterObserver(GameManagerObserver observer)
+    {
+        this._observers.Add(observer);
     }
 }
