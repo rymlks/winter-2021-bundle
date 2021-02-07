@@ -147,6 +147,11 @@ public class PotholeController : MonoBehaviour
         }
     }
 
+    public List<Pothole> GetOpenPotholes()
+    {
+        return _potholeParent.GetComponentsInChildren<Pothole>().Where(ph => ph.isPatched == false).ToList();
+    }
+
     /**
      * Get a random road, weighted by trafficSum
      */

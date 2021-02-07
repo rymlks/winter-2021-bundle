@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -36,9 +37,11 @@ public class GameManager : MonoBehaviour
 
     public static bool delayLoading = false;
     public static string loadingRoadName = "";
-
+    
     private TutorialController _tutorialController;
 
+    private List<GameManagerObserver> _observers;
+    
     void Start()
     {
         _tutorialController = FindObjectOfType<TutorialController>();
@@ -67,15 +70,16 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        _observers = new List<GameManagerObserver>();
         StartCoroutine(FadeIn());
     }
 
     public void NotifyRoadsLoaded()
     {
-        _tutorialController.NotifyGameBeginning(this);
         delayLoading = false;
         loadingRoadName = "";
         StartCoroutine(FadeIn());
+        _tutorialController.NotifyGameBeginning(this);
     }
 
     public void NextRound()
@@ -133,6 +137,7 @@ public class GameManager : MonoBehaviour
             nextButton.interactable = true;
             canvasCover.GetComponent<Image>().raycastTarget = false;
             canvasCover.GetComponent<Image>().color = new Color(0, 0, 0, 0);
+            notifyObserversRoundBegun();
         }
     }
     public void LoadDemoScene()
@@ -228,5 +233,15 @@ public class GameManager : MonoBehaviour
             }
         }
         yield return null;
+    }
+
+    private void notifyObserversRoundBegun()
+    {
+        this._observers.ForEach(obs => obs.NotifyRoundBeginning(this));
+    }
+
+    public void RegisterObserver(GameManagerObserver observer)
+    {
+        this._observers.Add(observer);
     }
 }
