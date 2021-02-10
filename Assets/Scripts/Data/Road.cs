@@ -238,7 +238,7 @@ public class Road : MonoBehaviour
         }
         else
         {
-            Debug.Log("Cannot patch pothole: insufficient funds.  Have " + this.playthroughStatistics.currentBudget + ", need " + cost);
+            Debug.Log("Cannot repave road: insufficient funds.  Have " + this.playthroughStatistics.currentBudget + ", need " + cost);
         }
     }
 
