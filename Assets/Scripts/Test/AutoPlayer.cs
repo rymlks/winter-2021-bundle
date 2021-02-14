@@ -1,44 +1,47 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Test;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class AutoPlayer : MonoBehaviour, GameManagerObserver
+namespace Test
 {
-
-    private AutoplayerPotholeStrategy _potholeStrategy;
-    private AutoplayerRoadStrategy _roadStrategy;
-    public bool autoEndRounds = true;
-    public bool recordEndGameStats = true;
-    public void Start()
+    public class AutoPlayer : MonoBehaviour, GameManagerObserver
     {
-        _potholeStrategy = new AlwaysRepairPotholeStrategy("Throw 'n' Roll");
-        _roadStrategy = new NeverResurfaceRoadStrategy();
-        FindObjectOfType<GameManager>().RegisterObserver(this);
-    }
+        private AutoplayerPotholeStrategy _potholeStrategy;
+        private AutoplayerRoadStrategy _roadStrategy;
+        public bool autoEndRounds = true;
+        public bool recordEndGameStats = true;
 
-    public void NotifyRoundBeginning(GameManager manager)
-    {
-        _roadStrategy.execute(manager);
-        _potholeStrategy.execute(manager);
-        if(autoEndRounds){endRound(manager);}
-    }
-
-    public void NotifyGameEnding(GameManager manager, GameEndingReason reason)
-    {
-        if (recordEndGameStats)
+        public void Start()
         {
-            PlaythroughReportWriter.WriteToFile(manager, reason, this);
+            _potholeStrategy = new AlwaysRepairPotholeStrategy("More Gravel");
+            _roadStrategy = new ResurfaceRoadByPotholeCountStrategy("Gravel", 1);
+            FindObjectOfType<GameManager>().RegisterObserver(this);
         }
-    }
 
-    protected void endRound(GameManager manager)
-    {
-        manager.NextRound();
-    }
+        public void NotifyRoundBeginning(GameManager manager)
+        {
+            _roadStrategy.execute(manager);
+            _potholeStrategy.execute(manager);
+            if (autoEndRounds)
+            {
+                endRound(manager);
+            }
+        }
 
-    public string GetStrategyDescription()
-    {
-        return this._potholeStrategy.getDescription() + ".  " + this._roadStrategy.getDescription();
+        public void NotifyGameEnding(GameManager manager, GameEndingReason reason)
+        {
+            if (recordEndGameStats)
+            {
+                PlaythroughReportWriter.WriteToFile(manager, reason, this);
+            }
+        }
+
+        protected void endRound(GameManager manager)
+        {
+            manager.NextRound();
+        }
+
+        public string GetStrategyDescription()
+        {
+            return this._roadStrategy.getDescription() + ".  Then, " + this._potholeStrategy.getDescription();
+        }
     }
 }
