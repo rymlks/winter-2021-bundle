@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Test
 {
@@ -11,17 +12,25 @@ namespace Test
 
         public void Start()
         {
-            _potholeStrategy = new AlwaysRepairPotholeStrategy("More Gravel");
-            _roadStrategy = new ResurfaceRoadByPotholeCountStrategy("Gravel", 1);
+            _potholeStrategy = new AlwaysRepairPotholeStrategy("Asphalt Patch");
+            _roadStrategy = new ResurfaceRoadByPotholeCountStrategy("Gravel", 3);
             FindObjectOfType<GameManager>().RegisterObserver(this);
         }
 
         public void NotifyRoundBeginning(GameManager manager)
         {
+            StartCoroutine(ExecuteStrategy(manager));
+        }
+
+        protected IEnumerator ExecuteStrategy(GameManager manager)
+        {
             _roadStrategy.execute(manager);
+            yield return new WaitForSeconds(1);
             _potholeStrategy.execute(manager);
+            yield return new WaitForSeconds(1);
             if (autoEndRounds)
             {
+                
                 endRound(manager);
             }
         }

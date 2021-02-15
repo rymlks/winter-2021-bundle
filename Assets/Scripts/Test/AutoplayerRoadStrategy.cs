@@ -13,7 +13,7 @@ namespace Test
         {
             ContextMenuController.ContextMenuOption optionToUse =
                 toResurface.GetRepairOptions().First(option => option.label == methodToUse);
-            if (stats.currentBudget >= optionToUse.cost || stats.currentLabor >= optionToUse.labor)
+            if (stats.currentBudget >= optionToUse.cost && stats.currentLabor >= optionToUse.labor)
             {
                 optionToUse.callback();
             }
