@@ -11,8 +11,8 @@ namespace Test
         protected void fillPothole(Pothole toFill, PlaythroughStatistics stats, string methodToUse)
         {
             ContextMenuController.ContextMenuOption optionToUse =
-                toFill.GetRepairOptions().First(option => option.label == methodToUse);
-            if (stats.currentBudget >= optionToUse.cost || stats.currentLabor >= optionToUse.labor)
+                toFill.GetRepairOptions().FirstOrDefault(option => option.label == methodToUse);
+            if (optionToUse != null && stats.currentBudget >= optionToUse.cost && stats.currentLabor >= optionToUse.labor)
             {
                 optionToUse.callback();
             }
